@@ -1,5 +1,4 @@
 local info = {}
-local names = {}
 local enabled = false
 local fling = false
 local mouse = false
@@ -165,9 +164,11 @@ uis.InputEnded:Connect(function(pp)
 	if pp.KeyCode == Enum.KeyCode.F1 then
 		if enabled == false then
 			for _, v in pairs(game:GetService("Workspace").Grabable:GetChildren()) do
-				if v ~= nil and v:FindFirstChild("Part") ~= nil and (v.Part.Position - head.Position).magnitude < 30 and v.Name ~= "USED PART" then
-					
-							if v.Part:FindFirstChild("BodyPosition") ~= nil then
+				if v ~= nil and v:FindFirstChild("Part") ~= nil and (v.Part.Position - head.Position).magnitude < 30 then
+					for _, m in pairs(info) do
+						if m ~= nil then
+							if m ~= v then
+								if v.Part:FindFirstChild("BodyPosition") ~= nil then
 									v.Part.BodyPosition:Destroy()
 								end
 								if v.Part:FindFirstChild("BodyGyro") ~= nil then
@@ -180,10 +181,25 @@ uis.InputEnded:Connect(function(pp)
 								local p = Instance.new("BodyGyro")
 								p.Parent = v.Part
 								p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
-					table.insert(info, v.Part)
-					table.insert(names, v.Name)
-					v.Name = "USED PART"
-					
+								table.insert(info, v.Part)
+							end
+						else
+							if v.Part:FindFirstChild("BodyPosition") ~= nil then
+								v.Part.BodyPosition:Destroy()
+							end
+							if v.Part:FindFirstChild("BodyGyro") ~= nil then
+								v.Part.BodyGyro:Destroy()
+							end
+							local bp = Instance.new("BodyPosition")
+							bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+							bp.Position = v.Part.Position
+							bp.Parent = v.Part
+							local p = Instance.new("BodyGyro")
+							p.Parent = v.Part
+							p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+							table.insert(info, v.Part)
+						end
+					end
 				end
 			end
 			enabled = true
@@ -191,20 +207,14 @@ uis.InputEnded:Connect(function(pp)
 			main()
 		else
 			for _, v in pairs(info) do
-				if v ~= nil then
-					if v:FindFirstChild("BodyPosition") ~= nil then
-						v.BodyPosition:Destroy()
-						v.BodyGyro:Destroy()
-						v.CanCollide = true
-						v.Parent.Name = names[1]
-						table.remove(names, 1)
-						table.remove(info, 1)
-						wait(.1)
-					end
-				else
-					table.remove(names, 1)
+				if v ~= nil and v:FindFirstChild("BodyPosition") ~= nil then
+					v.BodyPosition:Destroy()
+					v.BodyGyro:Destroy()
+					v.CanCollide = true
+					wait(.1)
 				end
 			end
+			table.clear(info)
 			print("Ended!")
 			enabled = false
 		end
@@ -337,9 +347,10 @@ end)
 m.KeyDown:Connect(function(k)
 	if k == "f" and m.Hit and enabled then
 		for _, v in pairs(game:GetService("Workspace").Grabable:GetChildren()) do
-			if v ~= nil and v:FindFirstChild("Part") ~= nil and (v.Part.Position - m.Hit.Position).magnitude < 10 and v.Name ~= "USED PART" then
-
-
+			if v ~= nil and v:FindFirstChild("Part") ~= nil and (v.Part.Position - m.Hit.Position).magnitude < 10 then
+				for _, m in pairs(info) do
+					if m ~= nil then
+						if m ~= v then
 							if v.Part:FindFirstChild("BodyPosition") ~= nil then
 								v.Part.BodyPosition:Destroy()
 							end
@@ -353,19 +364,32 @@ m.KeyDown:Connect(function(k)
 							local p = Instance.new("BodyGyro")
 							p.Parent = v.Part
 							p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
-				table.insert(info, v.Part)
-				table.insert(names, v.Name)
-				v.Name = "USED PART"
-
+							table.insert(info, v.Part)
+						end
+					else
+						if v.Part:FindFirstChild("BodyPosition") ~= nil then
+							v.Part.BodyPosition:Destroy()
+						end
+						if v.Part:FindFirstChild("BodyGyro") ~= nil then
+							v.Part.BodyGyro:Destroy()
+						end
+						local bp = Instance.new("BodyPosition")
+						bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+						bp.Position = v.Part.Position
+						bp.Parent = v.Part
+						local p = Instance.new("BodyGyro")
+						p.Parent = v.Part
+						p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+						table.insert(info, v.Part)
+					end
+				end
 			end
 		end
 	end
 	if k == "g" and m.Hit and enabled then
 		if info[1] ~= nil then
 			local target = info[1]
-			info[1].Parent.Name = names[1]
 			table.remove(info, 1)
-			table.remove(names, 1)
 			target.BodyPosition.P = target.BodyPosition.P * throwstre
 			target.BodyPosition.Position = Vector3.new(m.Hit.X, m.Hit.Y, m.Hit.Z)
 			target.CanCollide = true
@@ -374,8 +398,6 @@ m.KeyDown:Connect(function(k)
 				target:FindFirstChild("BodyPosition"):Destroy()
 				target:FindFirstChild("BodyGyro"):Destroy()
 			end
-		else
-			table.remove(names, 1)
 		end
 	end
 end)
