@@ -18,7 +18,6 @@ local Magic = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
 local TextBox = Instance.new("TextBox")
 local dm = 50
-local noclip = false
 if game.CoreGui:FindFirstChild("Magic") then
 	game.CoreGui["Magic"]:Destroy()
 end
@@ -91,15 +90,6 @@ local function main()
 		if mouse ~= true then
 			for _, v in pairs(info) do
 				if v ~= nil and v:FindFirstChild("BodyPosition") ~= nil then
-					if noclip == true then
-						for _, nc in pairs(info) do
-							nc.CanCollide = false
-						end
-					else
-						for _, nc in pairs(info) do
-							nc.CanCollide = true
-						end
-					end
 					if spinmode == false then
 						local target1 = v.BodyPosition
 						local target2 = v.BodyGyro
@@ -165,41 +155,36 @@ uis.InputEnded:Connect(function(pp)
 		if enabled == false then
 			for _, v in pairs(game:GetService("Workspace").Grabable:GetChildren()) do
 				if v ~= nil and v:FindFirstChild("Part") ~= nil and (v.Part.Position - head.Position).magnitude < 30 then
-					for _, m in pairs(info) do
-						if m ~= nil then
-							if m ~= v then
-								if v.Part:FindFirstChild("BodyPosition") ~= nil then
-									v.Part.BodyPosition:Destroy()
-								end
-								if v.Part:FindFirstChild("BodyGyro") ~= nil then
-									v.Part.BodyGyro:Destroy()
-								end
-								local bp = Instance.new("BodyPosition")
-								bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-								bp.Position = v.Part.Position
-								bp.Parent = v.Part
-								local p = Instance.new("BodyGyro")
-								p.Parent = v.Part
-								p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
-								table.insert(info, v.Part)
-							end
-						else
-							if v.Part:FindFirstChild("BodyPosition") ~= nil then
-								v.Part.BodyPosition:Destroy()
-							end
-							if v.Part:FindFirstChild("BodyGyro") ~= nil then
-								v.Part.BodyGyro:Destroy()
-							end
-							local bp = Instance.new("BodyPosition")
-							bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-							bp.Position = v.Part.Position
-							bp.Parent = v.Part
-							local p = Instance.new("BodyGyro")
-							p.Parent = v.Part
-							p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
-							table.insert(info, v.Part)
-						end
+					if v.Part:FindFirstChild("BodyPosition") ~= nil then
+						v.Part.BodyPosition:Destroy()
 					end
+					if v.Part:FindFirstChild("BodyGyro") ~= nil then
+						v.Part.BodyGyro:Destroy()
+					end
+					local bp = Instance.new("BodyPosition")
+					bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+					bp.Position = v.Part.Position
+					bp.Parent = v.Part
+					local p = Instance.new("BodyGyro")
+					p.Parent = v.Part
+					p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+					table.insert(info, v.Part)
+				end
+				if v ~= nil and v:FindFirstChild("Ball") ~= nil and (v.Ball.Position - head.Position).magnitude < 30 then
+					if v.Ball:FindFirstChild("BodyPosition") ~= nil then
+						v.Ball.BodyPosition:Destroy()
+					end
+					if v.Ball:FindFirstChild("BodyGyro") ~= nil then
+						v.Ball.BodyGyro:Destroy()
+					end
+					local bp = Instance.new("BodyPosition")
+					bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+					bp.Position = v.Ball.Position
+					bp.Parent = v.Ball
+					local p = Instance.new("BodyGyro")
+					p.Parent = v.Ball
+					p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+					table.insert(info, v.Ball)
 				end
 			end
 			enabled = true
@@ -325,10 +310,18 @@ uis.InputEnded:Connect(function(pp)
 				print("Spin diameter set: "..dm)
 			end
 			if string.lower(text) == "noclip" then
-				noclip = true
+				for _, v in pairs(info) do
+					if v ~= nil then
+						v.CanCollide = false
+					end
+				end
 			end
 			if string.lower(text) == "clip" then
-				noclip = false
+				for _, v in pairs(info) do
+					if v ~= nil then
+						v.CanCollide = true
+					end
+				end
 			end
 			if string.lower(text) == "uranium value" then
 				local val = 0
@@ -348,41 +341,36 @@ m.KeyDown:Connect(function(k)
 	if k == "f" and m.Hit and enabled then
 		for _, v in pairs(game:GetService("Workspace").Grabable:GetChildren()) do
 			if v ~= nil and v:FindFirstChild("Part") ~= nil and (v.Part.Position - m.Hit.Position).magnitude < 10 then
-				for _, m in pairs(info) do
-					if m ~= nil then
-						if m ~= v then
-							if v.Part:FindFirstChild("BodyPosition") ~= nil then
-								v.Part.BodyPosition:Destroy()
-							end
-							if v.Part:FindFirstChild("BodyGyro") ~= nil then
-								v.Part.BodyGyro:Destroy()
-							end
-							local bp = Instance.new("BodyPosition")
-							bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-							bp.Position = v.Part.Position
-							bp.Parent = v.Part
-							local p = Instance.new("BodyGyro")
-							p.Parent = v.Part
-							p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
-							table.insert(info, v.Part)
-						end
-					else
-						if v.Part:FindFirstChild("BodyPosition") ~= nil then
-							v.Part.BodyPosition:Destroy()
-						end
-						if v.Part:FindFirstChild("BodyGyro") ~= nil then
-							v.Part.BodyGyro:Destroy()
-						end
-						local bp = Instance.new("BodyPosition")
-						bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-						bp.Position = v.Part.Position
-						bp.Parent = v.Part
-						local p = Instance.new("BodyGyro")
-						p.Parent = v.Part
-						p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
-						table.insert(info, v.Part)
-					end
+				if v.Part:FindFirstChild("BodyPosition") ~= nil then
+					v.Part.BodyPosition:Destroy()
 				end
+				if v.Part:FindFirstChild("BodyGyro") ~= nil then
+					v.Part.BodyGyro:Destroy()
+				end
+				local bp = Instance.new("BodyPosition")
+				bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+				bp.Position = v.Part.Position
+				bp.Parent = v.Part
+				local p = Instance.new("BodyGyro")
+				p.Parent = v.Part
+				p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+				table.insert(info, v.Part)
+			end
+			if v ~= nil and v:FindFirstChild("Ball") ~= nil and (v.Ball.Position - head.Position).magnitude < 10 then
+				if v.Ball:FindFirstChild("BodyPosition") ~= nil then
+					v.Ball.BodyPosition:Destroy()
+				end
+				if v.Ball:FindFirstChild("BodyGyro") ~= nil then
+					v.Ball.BodyGyro:Destroy()
+				end
+				local bp = Instance.new("BodyPosition")
+				bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+				bp.Position = v.Ball.Position
+				bp.Parent = v.Ball
+				local p = Instance.new("BodyGyro")
+				p.Parent = v.Ball
+				p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+				table.insert(info, v.Ball)
 			end
 		end
 	end
