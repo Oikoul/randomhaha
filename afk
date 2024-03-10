@@ -1,3 +1,4 @@
+print("Executed afk script")
 local running = false
 local cam = game.Workspace.CurrentCamera
 local UIS = game:GetService("UserInputService")
