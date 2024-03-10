@@ -1,1 +1,36 @@
+local running = false
+local cam = game.Workspace.CurrentCamera
+local UIS = game:GetService("UserInputService")
+local plr = game.Players.LocalPlayer
+while true do
+	if running then
+		for _, v in pairs(workspace.WorldSpawn:GetChildren()) do
+			if v.Name == 'MineableRock' and v:FindFirstChild("RockString") and v.RockString.Value == "Sandstone" and v.Rock:FindFirstChild("Stage3") then
+				print("FOUND "..v)
+				for _, n in pairs(v.Rock.Stage3:GetChildren()) do
+					if n and n.Name == "Part" then
+						plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame
+						repeat
+							wait(1)
+							cam.CFrame = CFrame.new(cam.CFrame.Position, n.Position)
+							wait(2)
+						until n == nil or not n.Parent 
+					end
+				end
+			end
+		end
+	end
+	wait(1)
+end
+UIS.InputEnded:Connect(function(k)
+	if k.KeyCode == Enum.KeyCode.F1 then
+		if running then
+			running = false
+			print("Stopped")
+		else
+			running = true
+			print("Started")
+		end
+	end
+end)
 
