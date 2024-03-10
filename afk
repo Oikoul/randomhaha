@@ -47,7 +47,7 @@ spawn(function()
 						if n and n.Name == "Part" and running and humanoid and humanoid.Health == 100 then
 							repeat
 								if v:FindFirstChild("Part") ~= nil then
-									plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame + Vector.new(0, 2, 0)
+									plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame + Vector3.new(0, 2, 0)
 									wait(.1)
 									cam.CFrame = CFrame.new(cam.CFrame.Position, n.Position)
 									wait(.1)
@@ -84,9 +84,9 @@ spawn(function()
 				if v.Name == "SAND1" then
 					if v.Part:FindFirstChild("BodyPosition") ~= nil then
 						local bp = v.Part.BodyPosition
-						local xx = workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker").Hitbox.CFrame * CFrame.new(0, 0.6, 0)
-						local zz = workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker").Hitbox.CFrame * CFrame.new(0, 0.6, 0)
-						bp.Position = Vector3.new(xx.x, workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker").Hitbox.Position.Y, zz.z)
+						local xx = workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker"):FindFirstChild("Hitbox").CFrame * CFrame.new(0, 0.6, 0)
+						local zz = workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker"):FindFirstChild("Hitbox").CFrame * CFrame.new(0, 0.6, 0)
+						bp.Position = Vector3.new(xx.x, workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker"):FindFirstChild("Hitbox").Position.Y, zz.z)
 					end
 				end
 			end
