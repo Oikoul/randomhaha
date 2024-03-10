@@ -2,6 +2,17 @@ local running = false
 local cam = game.Workspace.CurrentCamera
 local UIS = game:GetService("UserInputService")
 local plr = game.Players.LocalPlayer
+UIS.InputEnded:Connect(function(k)
+	if k.KeyCode == Enum.KeyCode.F1 then
+		if running then
+			running = false
+			print("Stopped")
+		else
+			running = true
+			print("Started")
+		end
+	end
+end)
 while true do
 	if running then
 		for _, v in pairs(workspace.WorldSpawn:GetChildren()) do
@@ -22,15 +33,3 @@ while true do
 	end
 	wait(1)
 end
-UIS.InputEnded:Connect(function(k)
-	if k.KeyCode == Enum.KeyCode.F1 then
-		if running then
-			running = false
-			print("Stopped")
-		else
-			running = true
-			print("Started")
-		end
-	end
-end)
-
