@@ -1,5 +1,6 @@
 print("Executed afk script")
 local running = false
+local transporting = false
 local cam = game.Workspace.CurrentCamera
 local UIS = game:GetService("UserInputService")
 local plr = game.Players.LocalPlayer
@@ -13,23 +14,41 @@ UIS.InputEnded:Connect(function(k)
 			print("Started")
 		end
 	end
+	if k.KeyCode == Enum.KeyCode.F2 then
+		if transporting then
+			transporting = false
+			print("Transporting stopped")
+		else
+			transporting = true
+			print("Transporting started")
+		end
+	end
 end)
-while true do
-	if running then
-		for _, v in pairs(workspace.WorldSpawn:GetChildren()) do
-			if v.Name == 'MineableRock' and v:FindFirstChild("RockString") and v.RockString.Value == "Sandstone" and v.Rock:FindFirstChild("Stage3") and running then
-				for _, n in pairs(v.Rock.Stage3:GetChildren()) do
-					if n and n.Name == "Part" and running then
-						plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame
-						repeat
-							wait(.1)
-							cam.CFrame = CFrame.new(cam.CFrame.Position, n.Position)
-							wait(1.25)
-						until n == nil or not n.Parent or running == false
+spawn(function()
+	while true do
+		if running then
+			for _, v in pairs(workspace.WorldSpawn:GetChildren()) do
+				if v.Name == 'MineableRock' and v:FindFirstChild("RockString") and v.RockString.Value == "Sandstone" and v.Rock:FindFirstChild("Stage3") and running then
+					for _, n in pairs(v.Rock.Stage3:GetChildren()) do
+						if n and n.Name == "Part" and running then
+							plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame
+							repeat
+								wait(.1)
+								cam.CFrame = CFrame.new(cam.CFrame.Position, n.Position)
+								wait(1.25)
+							until n == nil or not n.Parent or running == false
+						end
 					end
 				end
 			end
 		end
+		wait(1)
 	end
-	wait(1)
-end
+end)
+spawn(function()
+	while true do
+		if transporting then
+			
+		end
+	end
+end)
