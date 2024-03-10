@@ -112,11 +112,13 @@ spawn(function()
 end)
 spawn(function()
 	while true do
-		if humanoid and humanoid.Health < 100 then
-			local args = {[1] = "ResetInit"}
-			game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClientEvent"):FireServer(unpack(args))
-			wait(5)
-		end
-		wait(.1)
+    		if plr.Character and plr.Character:FindFirstChild("Humanoid") then
+        		if humanoid.Health < 100 then
+				local args = {[1] = "ResetInit"}
+				game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClientEvent"):FireServer(unpack(args))
+            			wait(5)
+        		end
+    		end
+    		wait(1)
 	end
 end)
