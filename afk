@@ -46,10 +46,12 @@ spawn(function()
 					for _, n in pairs(v.Rock.Stage3:GetChildren()) do
 						if n and n.Name == "Part" and running and humanoid and humanoid.Health == 100 then
 							repeat
-								plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame
-								wait(.1)
-								cam.CFrame = CFrame.new(cam.CFrame.Position, n.Position)
-								wait(.1)
+								if v:FinFirstChild("Part") ~= nil then
+									plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame
+									wait(.1)
+									cam.CFrame = CFrame.new(cam.CFrame.Position, n.Position)
+									wait(.1)
+								end
 							until n == nil or not n.Parent or running == false or humanoid.Health < 100
 						end
 					end
