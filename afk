@@ -116,7 +116,8 @@ spawn(function()
         		if humanoid.Health < 100 then
 				local args = {[1] = "ResetInit"}
 				game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClientEvent"):FireServer(unpack(args))
-            			wait(5)
+            			wait(7)
+				game:GetService("Players").LocalPlayer.Backpack["Duality Pickaxe"].Parent = game.Players.LocalPlayer.Character
         		end
     		end
     		wait(1)
