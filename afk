@@ -17,9 +17,9 @@ end)
 while true do
 	if running then
 		for _, v in pairs(workspace.WorldSpawn:GetChildren()) do
-			if v.Name == 'MineableRock' and v:FindFirstChild("RockString") and v.RockString.Value == "Sandstone" and v.Rock:FindFirstChild("Stage3") then
+			if v.Name == 'MineableRock' and v:FindFirstChild("RockString") and v.RockString.Value == "Sandstone" and v.Rock:FindFirstChild("Stage3") and running then
 				for _, n in pairs(v.Rock.Stage3:GetChildren()) do
-					if n and n.Name == "Part" then
+					if n and n.Name == "Part" and running then
 						plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame
 						repeat
 							wait(.1)
