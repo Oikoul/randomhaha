@@ -77,7 +77,7 @@ spawn(function()
 				end
 			end
 			--stage 2
-			wait(5)
+			wait(10)
 			for _, v in pairs(workspace.Grabable:GetChildren()) do
 				if v.Name == "SAND1" then
 					local bp = v.Part.BodyPosition
@@ -86,7 +86,7 @@ spawn(function()
 					bp.Position = Vector3.new(xx.x, workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker").Hitbox.Position.Y, zz.z)
 				end
 			end
-			wait(5)
+			wait(10)
 			--stage 3
 			for _, v in pairs(workspace.Grabable:GetChildren()) do
 				if v.Name == "SAND1" then
