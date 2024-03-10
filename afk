@@ -84,9 +84,9 @@ spawn(function()
 				if v.Name == "SAND1" then
 					if v.Part:FindFirstChild("BodyPosition") ~= nil then
 						local bp = v.Part.BodyPosition
-						local xx = workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker"):FindFirstChild("Hitbox").CFrame * CFrame.new(0, 0.6, 0)
-						local zz = workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker"):FindFirstChild("Hitbox").CFrame * CFrame.new(0, 0.6, 0)
-						bp.Position = Vector3.new(xx.x, workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker"):FindFirstChild("Hitbox").Position.Y, zz.z)
+						local xx = plot.Objects:FindFirstChild("Sandbed Shaker"):FindFirstChild("Hitbox").CFrame * CFrame.new(0, 0.6, 0)
+						local zz = plot.Objects:FindFirstChild("Sandbed Shaker"):FindFirstChild("Hitbox").CFrame * CFrame.new(0, 0.6, 0)
+						bp.Position = Vector3.new(xx.x, plot.Objects:FindFirstChild("Sandbed Shaker"):FindFirstChild("Hitbox").Position.Y, zz.z)
 					end
 				end
 			end
