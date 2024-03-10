@@ -80,10 +80,12 @@ spawn(function()
 			wait(10)
 			for _, v in pairs(workspace.Grabable:GetChildren()) do
 				if v.Name == "SAND1" then
-					local bp = v.Part.BodyPosition
-					local xx = workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker").Hitbox.CFrame * CFrame.new(0, 2, 0)
-					local zz = workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker").Hitbox.CFrame * CFrame.new(0, 2, 0)
-					bp.Position = Vector3.new(xx.x, workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker").Hitbox.Position.Y, zz.z)
+					if v.Part:FindFirstChild("BodyPosition") ~= nil then
+						local bp = v.Part.BodyPosition
+						local xx = workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker").Hitbox.CFrame * CFrame.new(0, 2, 0)
+						local zz = workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker").Hitbox.CFrame * CFrame.new(0, 2, 0)
+						bp.Position = Vector3.new(xx.x, workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker").Hitbox.Position.Y, zz.z)
+					end
 				end
 			end
 			wait(10)
