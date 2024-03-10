@@ -44,7 +44,7 @@ spawn(function()
 			for _, v in pairs(workspace.WorldSpawn:GetChildren()) do
 				if v.Name == 'MineableRock' and v:FindFirstChild("RockString") and v.RockString.Value == "Sandstone" and v.Rock:FindFirstChild("Stage3") and running then
 					for _, n in pairs(v.Rock.Stage3:GetChildren()) do
-						if n and n.Name == "Part" and running and game.Players.LocalPlayer:FindFirstChild("Character") and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") and game.Players.LocalPlayer.Character.Humanoid:FindFirstChild("Health") and game.Players.LocalPlayer.Character.Humanoid.Health == 100 then
+						if n and n.Name == "Part" and running and humanoid and humanoid.Health == 100 then
 							plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame
 							repeat
 								wait(.1)
