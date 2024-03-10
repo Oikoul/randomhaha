@@ -96,6 +96,7 @@ spawn(function()
 						v.Part.BodyPosition:Destroy()
 					end
 					v.Part.CanCollide = true
+					v:Destroy()
 					wait(.1)
 				end
 			end
