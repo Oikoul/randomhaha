@@ -4,6 +4,20 @@ local transporting = false
 local cam = game.Workspace.CurrentCamera
 local UIS = game:GetService("UserInputService")
 local plr = game.Players.LocalPlayer
+local plot = game:GetService("Players").LocalPlayer.Values.Plot.Value
+local character = plr.Character
+local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+-------------------------------------------------
+for _, v in pairs(workspace.Plots:GetChildren()) do
+	if v.Name == tostring(plot) then
+		plot = v
+		print("Plot: "..plot.Name)
+	end
+end
+--^^plot identification
+local shaker = plot.Objects:FindFirstChild("Sandbed Shaker")
+local furnace = plot.Objects:FindFirstChild("Basic Furnace").Hitbox
+
 UIS.InputEnded:Connect(function(k)
 	if k.KeyCode == Enum.KeyCode.F1 then
 		if running then
@@ -30,7 +44,7 @@ spawn(function()
 			for _, v in pairs(workspace.WorldSpawn:GetChildren()) do
 				if v.Name == 'MineableRock' and v:FindFirstChild("RockString") and v.RockString.Value == "Sandstone" and v.Rock:FindFirstChild("Stage3") and running then
 					for _, n in pairs(v.Rock.Stage3:GetChildren()) do
-						if n and n.Name == "Part" and running then
+						if n and n.Name == "Part" and running and game.Players.LocalPlayer:FindFirstChild("Character") and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") and game.Players.LocalPlayer.Character.Humanoid:FindFirstChild("Health") and game.Players.LocalPlayer.Character.Humanoid.Health == 100 then
 							plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame
 							repeat
 								wait(.1)
@@ -48,7 +62,55 @@ end)
 spawn(function()
 	while true do
 		if transporting then
-			
+			--stage 1
+			for _, v in pairs(workspace.Grabable:GetChildren()) do
+				if v.Name == "MaterialPart" and v:FindFirstChild("Configuration") and v.Configuration:FindFirstChild("Data") and v.Configuration.Data:FindFirstChild("MatInd") and v.Configuration.Data.MatInd.Value == "Sandstone" then
+					v.Name = "SAND1"
+					if v.Part:FindFirstChild("BodyPosition") ~= nil then
+						v.Part.BodyPosition:Destroy()
+					end
+					local bp = Instance.new("BodyPosition")
+					bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+					bp.Parent = v.Part
+					bp.Position = furnace.Position
+					v.Part.CanCollide = false
+				end
+			end
+			--stage 2
+			wait(5)
+			for _, v in pairs(workspace.Grabable:GetChildren()) do
+				if v.Name == "SAND1" then
+					local bp = v.Part.BodyPosition
+					local xx = workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker").Hitbox.CFrame * CFrame.new(0, 2, 0)
+					local zz = workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker").Hitbox.CFrame * CFrame.new(0, 2, 0)
+					bp.Position = Vector3.new(xx.x, workspace.Plots.Plot6.Objects:FindFirstChild("Sandbed Shaker").Hitbox.Position.Y, zz.z)
+				end
+			end
+			wait(5)
+			--stage 3
+			for _, v in pairs(workspace.Grabable:GetChildren()) do
+				if v.Name == "SAND1" then
+					if v.Part:FindFirstChild("BodyPosition") ~= nil then
+						v.Part.BodyPosition:Destroy()
+					end
+					v.Part.CFrame = CFrame.new(0, -1000, 0)
+				end
+			end
+			--safety
+			if plot.Objects:FindFirstChild("Packager") then
+				plot:WaitForChild("Objects"):WaitForChild("Packager"):WaitForChild("Hitbox"):WaitForChild("Interact"):FireServer()
+			end
 		end
+		wait(1)
+	end
+end)
+spawn(function()
+	while true do
+		if humanoid and humanoid.Health < 100 then
+			local args = {[1] = "ResetInit"}
+			game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClientEvent"):FireServer(unpack(args))
+			wait(5)
+		end
+		wait(.1)
 	end
 end)
