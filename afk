@@ -112,16 +112,16 @@ spawn(function()
 			for i, v in pairs(parts) do
 				if v and v:FindFirstChild("Configuration") and v.Configuration:FindFirstChild("Data") and v.Configuration.Data:FindFirstChild("MatInd") and v:FindFirstChild("Owner") and v.Owner.Value == game.Players.LocalPlayer and v.Configuration.Data.MatInd.Value ~= "Sandstone" and v.Configuration.Data.MatInd.Value ~= "Sand" then
 					if v:FindFirstChild("Part") then
-						if v.Part:FindFirstChild("BodyPosition") ~= nil then
-							v.Part.CanCollide = false
-							v.Part.BodyPosition.Position = Vector3.new(-437, 3, -91)
-						else
-							local bp = Instance.new("BodyPosition")
-							bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-							bp.Parent = v.Part
-							v.Part.CanCollide = false
-							bp.Position = Vector3.new(-437, 3, -91)
-						end
+						--if v.Part:FindFirstChild("BodyPosition") ~= nil then
+						--	v.Part.CanCollide = false
+						--	v.Part.BodyPosition.Position = Vector3.new(-437, 3, -91)
+						--else
+						--	local bp = Instance.new("BodyPosition")
+						--	bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+						--	bp.Parent = v.Part
+						--	v.Part.CanCollide = false
+						--	bp.Position = Vector3.new(-437, 3, -91)
+						--end
 						table.remove(parts, i)
 					end
 				end
@@ -133,7 +133,7 @@ spawn(function()
 end)
 spawn(function()
 	while true do
-		wait(600)
+		wait(1200)
 		running = false
 		for _, v in pairs(workspace.Grabable:GetChildren()) do
 			if  v.Name == "MaterialPart" and v:FindFirstChild("Configuration") and v.Configuration:FindFirstChild("Data") and v.Configuration.Data:FindFirstChild("MatInd") and v:FindFirstChild("Owner") and v.Owner.Value == game.Players.LocalPlayer and v.Configuration.Data.MatInd.Value ~= "Sandstone" and v.Configuration.Data.MatInd.Value ~= "Sand" then
