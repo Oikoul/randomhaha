@@ -1,9 +1,7 @@
 print("Executed afk script")
 local running = false
 local parts = {}
-local changed = false
-local dying = false
-local transporting = false
+local transporting = true
 local cam = game.Workspace.CurrentCamera
 local UIS = game:GetService("UserInputService")
 local plr = game.Players.LocalPlayer
@@ -31,16 +29,24 @@ UIS.InputEnded:Connect(function(k)
 			print("Started")
 		end
 	end
-	if k.KeyCode == Enum.KeyCode.F2 then
-		if transporting then
-			transporting = false
-			print("Transporting stopped")
-		else
-			transporting = true
-			print("Transporting started")
+end)
+local function stage1()
+	for _, v in pairs(workspace.Grabable:GetChildren()) do
+		if v.Name == "MaterialPart" and v:FindFirstChild("Configuration") and v.Configuration:FindFirstChild("Data") and v.Configuration.Data:FindFirstChild("MatInd") and v.Configuration.Data.MatInd.Value == "Sandstone" and  (v.Part.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude < 30 then
+			if v:FindFirstChild("Part") then
+				if v.Part:FindFirstChild("BodyPosition") ~= nil then
+					v.Part.BodyPosition:Destroy()
+				end
+				local bp = Instance.new("BodyPosition")
+				bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+				bp.Parent = v.Part
+				bp.Position = furnace.Position
+				v.Part.CanCollide = false
+				table.insert(parts, v)
+			end
 		end
 	end
-end)
+end
 spawn(function()
 	while true do
 		game.Players.LocalPlayer.MaximumSimulationRadius = math.pow(math.huge,math.huge)*math.huge
@@ -61,10 +67,20 @@ spawn(function()
 									wait(.1)
 									cam.CFrame = CFrame.new(cam.CFrame.Position, n.Position)
 									wait(.1)
+									for _, v in pairs(workspace.Grabable:GetChildren()) do
+										if v.Name == "MaterialPart" and v:FindFirstChild("Part") and (v.Part.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude < 30 and v:FindFirstChild("Owner") and v.Owner.Value == game.Players.LocalPlayer and running then
+											local args1 = {[1] = v.Part,[2] = {}}
+											game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Grab"):InvokeServer(unpack(args1))
+											local args2 = {[1] = v.Part,[3] = {}}
+											game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Ungrab"):FireServer(unpack(args2))
+										end
+									end
 								end
 							until n == nil or not n.Parent or running == false or humanoid.Health < 100
 						end
 					end
+					stage1()
+					wait(1)
 				end
 			end
 		end
@@ -73,89 +89,74 @@ spawn(function()
 end)
 spawn(function()
 	while true do
-		if transporting then
-			--stage 1
-			for _, v in pairs(workspace.Grabable:GetChildren()) do
-				if v.Name == "MaterialPart" and v:FindFirstChild("Configuration") and v.Configuration:FindFirstChild("Data") and v.Configuration.Data:FindFirstChild("MatInd") and v.Configuration.Data.MatInd.Value == "Sandstone" then
-					if  v:FindFirstChild("Part") and v.Part:FindFirstChild("BodyPosition") ~= nil then
-						v.Part.BodyPosition:Destroy()
-					end
-					local bp = Instance.new("BodyPosition")
-					bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-					bp.Parent = v.Part
-					bp.Position = furnace.Position
-					v.Part.CanCollide = false
-					table.insert(parts, v)
-				end
-			end
-			--stage 2
-			wait(10)
 			for _, v in pairs(parts) do
-				if v then
+				if v and v:FindFirstChild("Configuration") and v.Configuration:FindFirstChild("Data") and v.Configuration.Data:FindFirstChild("MatInd") and v.Configuration.Data.MatInd.Value == "Sand" and v:FindFirstChild("Owner") and v.Owner.Value == game.Players.LocalPlayer then
 					if  v:FindFirstChild("Part") and v.Part:FindFirstChild("BodyPosition") ~= nil then
 						local bp = v.Part.BodyPosition
-						local xx = plot.Objects:FindFirstChild("Sandbed Shaker"):FindFirstChild("Hitbox").CFrame * CFrame.new(0, 0.6, 0)
-						local zz = plot.Objects:FindFirstChild("Sandbed Shaker"):FindFirstChild("Hitbox").CFrame * CFrame.new(0, 0.6, 0)
-						bp.Position = Vector3.new(xx.x, plot.Objects:FindFirstChild("Sandbed Shaker"):FindFirstChild("Hitbox").Position.Y, zz.z)
+						local xx = shaker:FindFirstChild("Hitbox").CFrame * CFrame.new(0, 0.6, 0)
+						local zz = shaker:FindFirstChild("Hitbox").CFrame * CFrame.new(0, 0.6, 0)
+						bp.Position = Vector3.new(xx.x, shaker:FindFirstChild("Hitbox").Position.Y, zz.z)
 					end
 				end
 			end
-			wait(15)
-			--stage 3
-			if dying == false and running == true then
-				running = false
-				changed = true
-				wait(.2)
-			end
-			for _, v in pairs(parts) do
-				if v then
+			wait(20)
+			for i, v in pairs(parts) do
+				if v and v:FindFirstChild("Configuration") and v.Configuration:FindFirstChild("Data") and v.Configuration.Data:FindFirstChild("MatInd") and v:FindFirstChild("Owner") and v.Owner.Value == game.Players.LocalPlayer and v.Configuration.Data.MatInd.Value ~= "Sandstone" and v.Configuration.Data.MatInd.Value ~= "Sand" then
 					if v:FindFirstChild("Part") then
 						if v.Part:FindFirstChild("BodyPosition") ~= nil then
 							v.Part.CanCollide = false
 							v.Part.BodyPosition.Position = Vector3.new(-437, 3, -91)
-							plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame
-							local args1 = {[1] = v.Part,[2] = {}}
-							game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Grab"):InvokeServer(unpack(args1))
 						else
 							local bp = Instance.new("BodyPosition")
 							bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
 							bp.Parent = v.Part
 							v.Part.CanCollide = false
 							bp.Position = Vector3.new(-437, 3, -91)
-							plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame
-							local args1 = {[1] = v.Part,[2] = {}}
-							game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Grab"):InvokeServer(unpack(args1))
 						end
-						local args2 = {[1] = v.Part,[3] = {}}
-						game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Ungrab"):FireServer(unpack(args2))
-						table.clear(parts)
+						table.remove(parts, i)
 					end
 				end
 			end
-			if changed == true then
-				changed = false
-				running = true
-			end
-			wait(10)
-			workspace:WaitForChild("Map"):WaitForChild("Sellary"):WaitForChild("Keeper"):WaitForChild("IPart"):WaitForChild("Interact"):FireServer()
-			--safety
-			if plot.Objects:FindFirstChild("Packager") then
-				plot:WaitForChild("Objects"):WaitForChild("Packager"):WaitForChild("Hitbox"):WaitForChild("Interact"):FireServer()
+			wait(5)
+		workspace:WaitForChild("Map"):WaitForChild("Sellary"):WaitForChild("Keeper"):WaitForChild("IPart"):WaitForChild("Interact"):FireServer()
+		wait(1)
+	end
+end)
+spawn(function()
+	while true do
+		wait(600)
+		running = false
+		for _, v in pairs(workspace.Grabable:GetChildren()) do
+			if v and v:FindFirstChild("Configuration") and v.Configuration:FindFirstChild("Data") and v.Configuration.Data:FindFirstChild("MatInd") and v:FindFirstChild("Owner") and v.Owner.Value == game.Players.LocalPlayer and v.Configuration.Data.MatInd.Value ~= "Sandstone" and v.Configuration.Data.MatInd.Value ~= "Sand" then
+				if v:FindFirstChild("Part") then
+					if v.Part:FindFirstChild("BodyPosition") ~= nil then
+						
+					else
+						local bp = Instance.new("BodyPosition")
+						bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+						bp.Parent = v.Part
+						v.Part.CanCollide = false
+						bp.Position = Vector3.new(-437, 3, -91)
+					end
+					local args1 = {[1] = v.Part,[2] = {}}
+					game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Grab"):InvokeServer(unpack(args1))
+					local args2 = {[1] = v.Part,[3] = {}}
+					game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Ungrab"):FireServer(unpack(args2))
+				end
 			end
 		end
 		wait(1)
+		running = true
 	end
 end)
 spawn(function()
 	while true do
 		if plr.Character and plr.Character:FindFirstChild("Humanoid") then
 			if humanoid.Health < 100 then
-				dying = true
 				local args = {[1] = "ResetInit"}
 				game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClientEvent"):FireServer(unpack(args))
 				wait(7)
 				game:GetService("Players").LocalPlayer.Backpack["Duality Pickaxe"].Parent = game.Players.LocalPlayer.Character
-				dying = false
 			end
 		end
 		wait(1)
