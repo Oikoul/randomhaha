@@ -127,7 +127,7 @@ spawn(function()
 		wait(600)
 		running = false
 		for _, v in pairs(workspace.Grabable:GetChildren()) do
-			if v and v:FindFirstChild("Configuration") and v.Configuration:FindFirstChild("Data") and v.Configuration.Data:FindFirstChild("MatInd") and v:FindFirstChild("Owner") and v.Owner.Value == game.Players.LocalPlayer and v.Configuration.Data.MatInd.Value ~= "Sandstone" and v.Configuration.Data.MatInd.Value ~= "Sand" then
+			if  v.Name == "MaterialPart" and v:FindFirstChild("Configuration") and v.Configuration:FindFirstChild("Data") and v.Configuration.Data:FindFirstChild("MatInd") and v:FindFirstChild("Owner") and v.Owner.Value == game.Players.LocalPlayer and v.Configuration.Data.MatInd.Value ~= "Sandstone" and v.Configuration.Data.MatInd.Value ~= "Sand" then
 				if v:FindFirstChild("Part") then
 					if v.Part:FindFirstChild("BodyPosition") ~= nil then
 						
@@ -138,6 +138,8 @@ spawn(function()
 						v.Part.CanCollide = false
 						bp.Position = Vector3.new(-437, 3, -91)
 					end
+					plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame
+					wait(.2)
 					local args1 = {[1] = v.Part,[2] = {}}
 					game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Grab"):InvokeServer(unpack(args1))
 					local args2 = {[1] = v.Part,[3] = {}}
