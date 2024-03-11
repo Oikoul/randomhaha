@@ -139,7 +139,6 @@ spawn(function()
 						bp.Position = Vector3.new(-437, 3, -91)
 					end
 					plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame
-					wait(.2)
 					local args1 = {[1] = v.Part,[2] = {}}
 					game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Grab"):InvokeServer(unpack(args1))
 					local args2 = {[1] = v.Part,[3] = {}}
