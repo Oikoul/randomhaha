@@ -98,13 +98,13 @@ spawn(function()
 					if v:FindFirstChild("Part") then
 						if v.Part:FindFirstChild("BodyPosition") ~= nil then
 							v.Part.CanCollide = false
-							v.Part.BodyPosition = Vector3.new()
+							v.Part.BodyPosition.Position = Vector3.new(-437, 3, -91)
 						else
 							local bp = Instance.new("BodyPosition")
 							bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
 							bp.Parent = v.Part
 							v.Part.CanCollide = false
-							bp.Position = Vector3
+							bp.Position = Vector3.new(-437, 3, -91)
 						end
 						table.clear(parts)
 					end
