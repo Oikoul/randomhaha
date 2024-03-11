@@ -1,6 +1,7 @@
 print("Executed afk script")
 local running = false
 local parts = {}
+local dying = false
 local transporting = false
 local cam = game.Workspace.CurrentCamera
 local UIS = game:GetService("UserInputService")
@@ -93,9 +94,18 @@ spawn(function()
 			end
 			wait(10)
 			--stage 3
+			if dying == false then
+				running = false
+				wait(.1)
+				local xx = plot.Objects:FindFirstChild("Sandbed Shaker"):FindFirstChild("Hitbox").CFrame * CFrame.new(0, 0.6, 0)
+				local zz = plot.Objects:FindFirstChild("Sandbed Shaker"):FindFirstChild("Hitbox").CFrame * CFrame.new(0, 0.6, 0)
+				plr.Character.HumanoidRootPart.CFrame = CFrame.new(xx.x, plot.Objects:FindFirstChild("Sandbed Shaker"):FindFirstChild("Hitbox").Position.Y, zz.z)
+			end
 			for _, v in pairs(parts) do
 				if v then
 					if v:FindFirstChild("Part") then
+						local args1 = {[1] = v.Part,[2] = {}}
+						game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Grab"):InvokeServer(unpack(args1))
 						if v.Part:FindFirstChild("BodyPosition") ~= nil then
 							v.Part.CanCollide = false
 							v.Part.BodyPosition.Position = Vector3.new(-437, 3, -91)
@@ -106,10 +116,13 @@ spawn(function()
 							v.Part.CanCollide = false
 							bp.Position = Vector3.new(-437, 3, -91)
 						end
+						local args2 = {[1] = v.Part,[3] = {}}
+						game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Ungrab"):FireServer(unpack(args2))
 						table.clear(parts)
 					end
 				end
 			end
+			running = true
 			wait(10)
 			workspace:WaitForChild("Map"):WaitForChild("Sellary"):WaitForChild("Keeper"):WaitForChild("IPart"):WaitForChild("Interact"):FireServer()
 			--safety
@@ -124,10 +137,12 @@ spawn(function()
 	while true do
 		if plr.Character and plr.Character:FindFirstChild("Humanoid") then
 			if humanoid.Health < 100 then
+				dying = true
 				local args = {[1] = "ResetInit"}
 				game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClientEvent"):FireServer(unpack(args))
 				wait(7)
 				game:GetService("Players").LocalPlayer.Backpack["Duality Pickaxe"].Parent = game.Players.LocalPlayer.Character
+				dying = false
 			end
 		end
 		wait(1)
