@@ -113,7 +113,7 @@ spawn(function()
 						if v.Part:FindFirstChild("BodyPosition") ~= nil then
 							v.Part.CanCollide = false
 							v.Part.BodyPosition.Position = Vector3.new(-437, 3, -91)
-							plr.Character.HumanoidRootPart.Cframe = v.Part.CFrame
+							plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame
 							local args1 = {[1] = v.Part,[2] = {}}
 							game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Grab"):InvokeServer(unpack(args1))
 						else
@@ -122,7 +122,7 @@ spawn(function()
 							bp.Parent = v.Part
 							v.Part.CanCollide = false
 							bp.Position = Vector3.new(-437, 3, -91)
-							plr.Character.HumanoidRootPart.Cframe = v.Part.CFrame
+							plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame
 							local args1 = {[1] = v.Part,[2] = {}}
 							game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Grab"):InvokeServer(unpack(args1))
 						end
