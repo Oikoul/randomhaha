@@ -52,6 +52,15 @@ spawn(function()
 		game.Players.LocalPlayer.MaximumSimulationRadius = math.pow(math.huge,math.huge)*math.huge
 		sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.pow(math.huge,math.huge)*math.huge)
 		game:GetService("RunService").Heartbeat:Wait()
+		if humanoid then
+			if plr.Character.HumanoidRootPart.Position.Y < -10 then
+				plr.Character.HumanoidRootPart.Anchored = true
+				local args = {[1] = "ResetInit"}
+				game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClientEvent"):FireServer(unpack(args))
+				wait(7)
+				game:GetService("Players").LocalPlayer.Backpack["Duality Pickaxe"].Parent = game.Players.LocalPlayer.Character
+			end
+		end
 	end
 end)
 spawn(function()
@@ -63,7 +72,7 @@ spawn(function()
 						if n and n.Name == "Part" and running and humanoid and humanoid.Health == 100 then
 							repeat
 								if v:FindFirstChild("Part") ~= nil then
-									plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame + Vector3.new(0, 2, 0)
+									plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame + Vector3.new(0, 3, 0)
 									wait(.1)
 									cam.CFrame = CFrame.new(cam.CFrame.Position, n.Position)
 									wait(.1)
@@ -138,7 +147,7 @@ spawn(function()
 						v.Part.CanCollide = false
 						bp.Position = Vector3.new(-437, 3, -91)
 					end
-					plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame
+					plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame + Vector3.new(0, 3, 0)
 					local args1 = {[1] = v.Part,[2] = {}}
 					game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Grab"):InvokeServer(unpack(args1))
 					local args2 = {[1] = v.Part,[3] = {}}
