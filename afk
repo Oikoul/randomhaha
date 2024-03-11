@@ -1,5 +1,6 @@
 print("Executed afk script")
 local running = false
+local parts = {}
 local transporting = false
 local cam = game.Workspace.CurrentCamera
 local UIS = game:GetService("UserInputService")
@@ -67,7 +68,6 @@ spawn(function()
 			--stage 1
 			for _, v in pairs(workspace.Grabable:GetChildren()) do
 				if v.Name == "MaterialPart" and v:FindFirstChild("Configuration") and v.Configuration:FindFirstChild("Data") and v.Configuration.Data:FindFirstChild("MatInd") and v.Configuration.Data.MatInd.Value == "Sandstone" then
-					v.Name = "SAND1"
 					if  v:FindFirstChild("Part") and v.Part:FindFirstChild("BodyPosition") ~= nil then
 						v.Part.BodyPosition:Destroy()
 					end
@@ -76,12 +76,13 @@ spawn(function()
 					bp.Parent = v.Part
 					bp.Position = furnace.Position
 					v.Part.CanCollide = false
+					table.insert(parts, v)
 				end
 			end
 			--stage 2
 			wait(10)
-			for _, v in pairs(workspace.Grabable:GetChildren()) do
-				if v.Name == "SAND1" then
+			for _, v in pairs(parts) do
+				if v then
 					if  v:FindFirstChild("Part") and v.Part:FindFirstChild("BodyPosition") ~= nil then
 						local bp = v.Part.BodyPosition
 						local xx = plot.Objects:FindFirstChild("Sandbed Shaker"):FindFirstChild("Hitbox").CFrame * CFrame.new(0, 0.6, 0)
@@ -92,18 +93,25 @@ spawn(function()
 			end
 			wait(10)
 			--stage 3
-			for _, v in pairs(workspace.Grabable:GetChildren()) do
-				if v.Name == "SAND1" then
-					if v:FindFirstChild("Part") and v.Part:FindFirstChild("BodyPosition") ~= nil then
-						v.Part.BodyPosition:Destroy()
-					end
+			for _, v in pairs(parts) do
+				if v then
 					if v:FindFirstChild("Part") then
-						v.Part.CanCollide = true
-						v:Destroy()
+						if v.Part:FindFirstChild("BodyPosition") ~= nil then
+							v.Part.CanCollide = false
+							v.Part.BodyPosition = Vector3.new()
+						else
+							local bp = Instance.new("BodyPosition")
+							bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+							bp.Parent = v.Part
+							v.Part.CanCollide = false
+							bp.Position = Vector3
+						end
+						table.clear(parts)
 					end
-					wait(.1)
 				end
 			end
+			wait(10)
+			workspace:WaitForChild("Map"):WaitForChild("Sellary"):WaitForChild("Keeper"):WaitForChild("IPart"):WaitForChild("Interact"):FireServer()
 			--safety
 			if plot.Objects:FindFirstChild("Packager") then
 				plot:WaitForChild("Objects"):WaitForChild("Packager"):WaitForChild("Hitbox"):WaitForChild("Interact"):FireServer()
@@ -114,14 +122,14 @@ spawn(function()
 end)
 spawn(function()
 	while true do
-    		if plr.Character and plr.Character:FindFirstChild("Humanoid") then
-        		if humanoid.Health < 100 then
+		if plr.Character and plr.Character:FindFirstChild("Humanoid") then
+			if humanoid.Health < 100 then
 				local args = {[1] = "ResetInit"}
 				game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClientEvent"):FireServer(unpack(args))
-            			wait(7)
+				wait(7)
 				game:GetService("Players").LocalPlayer.Backpack["Duality Pickaxe"].Parent = game.Players.LocalPlayer.Character
-        		end
-    		end
-    		wait(1)
+			end
+		end
+		wait(1)
 	end
 end)
