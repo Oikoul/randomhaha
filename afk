@@ -53,7 +53,7 @@ spawn(function()
 		sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.pow(math.huge,math.huge)*math.huge)
 		game:GetService("RunService").Heartbeat:Wait()
 		if humanoid then
-			if plr.Character.HumanoidRootPart.Position.Y < -10 then
+			if plr.Character.HumanoidRootPart.Position.Y < -20 then
 				plr.Character.HumanoidRootPart.Anchored = true
 				local args = {[1] = "ResetInit"}
 				game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClientEvent"):FireServer(unpack(args))
