@@ -139,7 +139,7 @@ spawn(function()
 			if  v.Name == "MaterialPart" and v:FindFirstChild("Configuration") and v.Configuration:FindFirstChild("Data") and v.Configuration.Data:FindFirstChild("MatInd") and v:FindFirstChild("Owner") and v.Owner.Value == game.Players.LocalPlayer and v.Configuration.Data.MatInd.Value ~= "Sandstone" and v.Configuration.Data.MatInd.Value ~= "Sand" and humanoid and humanoid.Health == 100 and plr.Character:FindFirstChild("HumanoidRootPart") then
 				if v:FindFirstChild("Part") then
 					if v.Part:FindFirstChild("BodyPosition") ~= nil then
-						
+						v.Part.BodyPosition.Position = Vector3.new(-437, 3, -91)
 					else
 						local bp = Instance.new("BodyPosition")
 						bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
