@@ -89,7 +89,7 @@ spawn(function()
 						end
 					end
 					stage1()
-					wait(1)
+					wait(.25)
 				end
 			end
 		end
