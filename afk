@@ -1,5 +1,5 @@
 print("Executed afk script")
-local running = false
+local running = true
 local parts = {}
 local transporting = true
 local cam = game.Workspace.CurrentCamera
