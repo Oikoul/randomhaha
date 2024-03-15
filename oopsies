@@ -2,6 +2,7 @@ local info = {}
 local enabled = false
 local fling = false
 local mouse = false
+local noclip = false
 local plr = game.Players.LocalPlayer
 local head = plr.Character.Head
 local m = plr:GetMouse()
@@ -90,6 +91,11 @@ local function main()
 		if mouse ~= true then
 			for _, v in pairs(info) do
 				if v ~= nil and v:FindFirstChild("BodyPosition") ~= nil then
+					if noclip == true then
+						v.CanCollide = false
+					else
+						v.CanCollide = true
+					end
 					if spinmode == false then
 						local target1 = v.BodyPosition
 						local target2 = v.BodyGyro
@@ -312,14 +318,14 @@ uis.InputEnded:Connect(function(pp)
 			if string.lower(text) == "noclip" then
 				for _, v in pairs(info) do
 					if v ~= nil then
-						v.CanCollide = false
+						noclip = true
 					end
 				end
 			end
 			if string.lower(text) == "clip" then
 				for _, v in pairs(info) do
 					if v ~= nil then
-						v.CanCollide = true
+						noclip = false
 					end
 				end
 			end
