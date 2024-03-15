@@ -73,23 +73,22 @@ spawn(function()
 							repeat
 								if v:FindFirstChild("Part") ~= nil then
 									plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame + Vector3.new(0, 3, 0)
-									wait(.1)
+									wait()
 									cam.CFrame = CFrame.new(cam.CFrame.Position, n.Position)
-									wait(.1)
-									for _, v in pairs(workspace.Grabable:GetChildren()) do
-										if v.Name == "MaterialPart" and v:FindFirstChild("Part") and (v.Part.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude < 30 and v:FindFirstChild("Owner") and v.Owner.Value == game.Players.LocalPlayer and running then
-											local args1 = {[1] = v.Part,[2] = {}}
-											game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Grab"):InvokeServer(unpack(args1))
-											local args2 = {[1] = v.Part,[3] = {}}
-											game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Ungrab"):FireServer(unpack(args2))
-										end
-									end
+									wait()
 								end
 							until n == nil or not n.Parent or running == false or humanoid.Health < 100
 						end
 					end
+					for _, v in pairs(workspace.Grabable:GetChildren()) do
+						if v.Name == "MaterialPart" and v:FindFirstChild("Part") and (v.Part.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude < 30 and v:FindFirstChild("Owner") and v.Owner.Value == game.Players.LocalPlayer and running then
+							local args1 = {[1] = v.Part,[2] = {}}
+							game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Grab"):InvokeServer(unpack(args1))
+							local args2 = {[1] = v.Part,[3] = {}}
+							game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Ungrab"):FireServer(unpack(args2))
+						end
+					end
 					stage1()
-					wait(.25)
 				end
 			end
 		end
