@@ -1,0 +1,183 @@
+local parts = {}
+local _x = 0
+local _y = 0
+local _z = 0
+local buildm = false
+local movem = false
+local mouse = false
+local dist = false
+local ready = false
+
+
+
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
+local uis = game:GetService("UserInputService")
+local function createPart()
+	local part = Instance.new("Part")
+	part.Size = Vector3.new(5, 5, 5)
+	part.Anchored = true
+	part.CanCollide = false
+	part.Position = game.Players.LocalPlayer.Character.Head.Position
+	part.Color = Color3.new(0, 0.666667, 0)
+	part.Transparency = 0.75
+	part.Parent = game.Workspace
+	part.Name = "REGIONPART"
+	return part
+end
+local built = false
+local selectedPart = nil
+
+
+local function run()
+	if built == true then
+		local region = Region3.new(workspace.REGIONPART.Position - workspace.REGIONPART.Size / 2, workspace.REGIONPART.Position + workspace.REGIONPART.Size / 2)
+		local partsinregion = workspace:FindPartsInRegion3(region, workspace.REGIONPART, 100000)
+		for _, v in pairs(partsinregion) do
+			if v ~= nil and v.ClassName == "Part" and v.Name ~= "Hitbox" and v.Parent.Parent.Name == "Objects" then
+				table.insert(parts, v.Parent)
+			end
+			if v.Parent.Name == "Ramp 1/1 x 1" then
+				table.insert(parts, v.Parent)
+			end
+		end
+		local a = workspace.REGIONPART.Position
+		_x = a.x
+		_y = a.y
+		_z = a.z
+		ready = true
+	end
+end
+
+local function buildd()
+	local ea = workspace.REGIONPART.Position
+	local xx = ea.x - _x
+	local yy = ea.y - _y
+	local zz = ea.z - _z
+	if movem == true then
+		for _, v in pairs(parts) do
+			for _, part in pairs(v:GetChildren()) do
+				if part ~= nil and part.ClassName == "Part" and part.Name ~= "Hitbox" then
+					local args = {
+						[1] = v,
+						[2] = {
+							[1] = v.Name,
+							[2] = part.CFrame + Vector3.new(xx, yy, zz),
+							[3] = workspace.Plots.Plot
+						}
+					}
+					game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Move"):InvokeServer(unpack(args))
+					print("moved")
+				end
+			end
+		end
+		ready = false
+		table.clear(parts)
+	end
+	if buildm == true then
+		for _, v in pairs(parts) do
+			for _, part in pairs(v:GetChildren()) do
+				if part ~= nil and part.ClassName == "Part" and part.Name ~= "Hitbox" then
+					local args = {
+						[1] = v.Name,
+						[2] = part.CFrame + Vector3.new(xx, yy, zz),
+						[3] = workspace:WaitForChild("Plots"):WaitForChild("Plot")
+					}
+
+					game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Place"):InvokeServer(unpack(args))
+					print("built")
+				end
+				if part.Parent.Name == "Ramp 1/1 x 1" then
+					local args = {
+						[1] = v.Name,
+						[2] = part.Parent.Wedge.CFrame + Vector3.new(xx, yy, zz),
+						[3] = workspace:WaitForChild("Plots"):WaitForChild("Plot")
+					}
+
+					game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Place"):InvokeServer(unpack(args))
+
+					print("built")
+				end
+			end
+		end
+		ready = false
+		table.clear(parts)
+	end
+end
+
+uis.InputEnded:Connect(function(k)
+	if built == true then
+		if k.KeyCode == Enum.KeyCode.Minus then
+			selectedPart.Size = selectedPart.Size - Vector3.new(0.5, 0.5, 0.5)
+		end
+		if k.KeyCode == Enum.KeyCode.Equals then
+			selectedPart.Size = selectedPart.Size + Vector3.new(0.5, 0.5, 0.5)
+		end
+		if k.KeyCode == Enum.KeyCode.Left then
+			selectedPart.Position = selectedPart.Position + Vector3.new(-0.5, 0, 0)
+		end
+		if k.KeyCode == Enum.KeyCode.Right then
+			selectedPart.Position = selectedPart.Position + Vector3.new( 0.5, 0, 0)
+		end
+		if k.KeyCode == Enum.KeyCode.Up then
+			selectedPart.Position = selectedPart.Position + Vector3.new(0, 0, -0.5)
+		end
+		if k.KeyCode == Enum.KeyCode.Down then
+			selectedPart.Position = selectedPart.Position + Vector3.new(0, 0, 0.5)
+		end
+		if k.KeyCode == Enum.KeyCode.F3 then
+			selectedPart.Position = selectedPart.Position + Vector3.new(0, 0.5, 0)
+		end
+		if k.KeyCode == Enum.KeyCode.F4 then
+			selectedPart.Position = selectedPart.Position + Vector3.new(0, -0.5, 0)
+		end
+	end
+end)
+
+game.Players.LocalPlayer.Chatted:Connect(function(msg)
+	local e = msg:split(" ")
+	if string.lower(msg) == ".buildmode" then
+		buildm = true
+		movem = false
+		print("Build mode activated")
+	end
+	if string.lower(msg) == ".movemode" then
+		movem = true
+		buildm = false
+		print("Move mode activated")
+	end
+	if string.lower(msg) == ".mouse" then
+		mouse = true
+		dist = false
+		print("Mouse mode activated")
+	end
+	if string.lower(msg) == ".dist" then
+		dist = true
+		mouse = false
+		print("Distance mode activated")
+	end
+	if string.lower(msg) == ".run" then
+		run()
+	end
+	if string.lower(msg) == ".create" then
+		selectedPart = createPart()
+		game.Players.LocalPlayer.Character.Head.Anchored = true
+		built = true
+	end
+	if string.lower(msg) == ".delete" then
+		workspace.REGIONPART:Destroy()
+		game.Players.LocalPlayer.Character.Head.Anchored = false
+		built = false
+	end
+	if string.lower(msg) == ".build" then
+		buildd()
+	end
+	if string.lower(msg) == ".plot" then
+		for _, v in pairs(workspace.Plots:GetChildren()) do
+			if v:FindFirstChild("Base") ~= nil and (game.Players.LocalPlayer.Character.Head.Position - v.Base.Position).magnitude < 160 then
+				v.Name = "Plot"
+				print("FOUND PLOT")
+			end
+		end
+	end
+end)
