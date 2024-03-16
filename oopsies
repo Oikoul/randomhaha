@@ -432,7 +432,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	local plut = game:GetService("Players").LocalPlayer.Values.Plot.Value
 	for _, v in pairs(workspace.Plots:GetChildren()) do
 		if v.Name == tostring(plot) then
-			plot = v
+			plut = v
 		end
 	end
 	local e = msg:split(" ")
