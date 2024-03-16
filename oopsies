@@ -330,6 +330,26 @@ uis.InputEnded:Connect(function(pp)
 					end
 				end
 			end
+			local plut = game:GetService("Players").LocalPlayer.Values.Plot.Value
+			for _, v in pairs(workspace.Plots:GetChildren()) do
+				if v.Name == tostring(plot) then
+					plot = v
+				end
+			end
+			if string.lower(msg) == ".meteor_room" then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(430, 301, 756)
+			end
+			if string.lower(msg) == ".base" then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = plut.Base.CFrame + Vector3.new(0, 5, 0)
+			end
+			if string.lower(msg) == ".meteor" then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.Terrain.Surroundings.LandingCircle:FindFirstChild("Part").CFrame
+			end
+			if string.lower(msg) == ".sell" then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-439, 4, -91)
+				wait(5)
+				workspace:WaitForChild("Map"):WaitForChild("Sellary"):WaitForChild("Keeper"):WaitForChild("IPart"):WaitForChild("Interact"):FireServer()
+			end
 			if string.lower(text) == "uranium value" then
 				local val = 0
 				for _, v in pairs(info) do
