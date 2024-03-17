@@ -374,9 +374,9 @@ m.KeyDown:Connect(function(k)
 					bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
 					bp.Position = p.VehicleSeat.Position
 					bp.Parent = p.VehicleSeat
-					local p = Instance.new("BodyGyro")
-					p.Parent = p.VehicleSeat
-					p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+					local e = Instance.new("BodyGyro")
+					e.Parent = p.VehicleSeat
+					e.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
 					table.insert(info, p.VehicleSeat)
 				end
 			end
