@@ -409,6 +409,28 @@ m.KeyDown:Connect(function(k)
 						end
 					end
 				end
+				for _, v in pairs(workspace.Vehicles:GetChildren()) do
+					for _, n in pairs(v:GetChildren()) do
+						if n ~= nil and n:IsA("Part") or n:IsA("MeshPart") then
+							if m.Target == n then
+								if n:FindFirstChild("BodyPosition") ~= nil then
+									n.BodyPosition:Destroy()
+								end
+								if n:FindFirstChild("BodyGyro") ~= nil then
+									n.BodyGyro:Destroy()
+								end
+								local bp = Instance.new("BodyPosition")
+								bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+								bp.Position = n.Position
+								bp.Parent = n
+								local p = Instance.new("BodyGyro")
+								p.Parent = n
+								p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+								table.insert(info, n)
+							end
+						end
+					end
+				end
 			end
 		end
 	end
