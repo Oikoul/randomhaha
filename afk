@@ -3,11 +3,18 @@ local running = true
 local parts = {}
 local transporting = true
 local cam = game.Workspace.CurrentCamera
+local pick = nil
 local UIS = game:GetService("UserInputService")
 local plr = game.Players.LocalPlayer
 local plot = game:GetService("Players").LocalPlayer.Values.Plot.Value
 local character = plr.Character
 local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+for _, v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+	local a = v.Name:split(" ")
+	if a[2] and a[2] == "Pickaxe" then
+		pick = v
+	end
+end
 -------------------------------------------------
 for _, v in pairs(workspace.Plots:GetChildren()) do
 	if v.Name == tostring(plot) then
@@ -58,7 +65,7 @@ spawn(function()
 				local args = {[1] = "ResetInit"}
 				game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClientEvent"):FireServer(unpack(args))
 				wait(7)
-				game:GetService("Players").LocalPlayer.Backpack["Spore Pickaxe"].Parent = game.Players.LocalPlayer.Character
+				pick.Parent = game.Players.LocalPlayer.Character
 			end
 		end
 	end
@@ -169,7 +176,7 @@ spawn(function()
 				local args = {[1] = "ResetInit"}
 				game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClientEvent"):FireServer(unpack(args))
 				wait(7)
-				game:GetService("Players").LocalPlayer.Backpack["Spore Pickaxe"].Parent = game.Players.LocalPlayer.Character
+				pick.Parent = game.Players.LocalPlayer.Character
 			end
 		end
 		wait(1)
