@@ -58,7 +58,7 @@ spawn(function()
 				local args = {[1] = "ResetInit"}
 				game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClientEvent"):FireServer(unpack(args))
 				wait(7)
-				game:GetService("Players").LocalPlayer.Backpack["Duality Pickaxe"].Parent = game.Players.LocalPlayer.Character
+				game:GetService("Players").LocalPlayer.Backpack["Spore Pickaxe"].Parent = game.Players.LocalPlayer.Character
 			end
 		end
 	end
