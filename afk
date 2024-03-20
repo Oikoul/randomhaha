@@ -56,8 +56,10 @@ spawn(function()
 				plr.Character.HumanoidRootPart.Anchored = true
 				local args = {[1] = "ResetInit"}
 				game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClientEvent"):FireServer(unpack(args))
-				wait(7)
-				game:GetService("Players").LocalPlayer.Backpack["Spore Pickaxe"].Parent = game.Players.LocalPlayer.Character
+				wait(8)
+                                if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spore Pickaxe") ~= nil then
+				     game:GetService("Players").LocalPlayer.Backpack["Spore Pickaxe"].Parent = game.Players.LocalPlayer.Character
+                                end
 			end
 		end
 	end
@@ -168,7 +170,9 @@ spawn(function()
 				local args = {[1] = "ResetInit"}
 				game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClientEvent"):FireServer(unpack(args))
 				wait(7)
-				game:GetService("Players").LocalPlayer.Backpack["Spore Pickaxe"].Parent = game.Players.LocalPlayer.Character
+                                if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spore Pickaxe") ~= nil then
+				     game:GetService("Players").LocalPlayer.Backpack["Spore Pickaxe"].Parent = game.Players.LocalPlayer.Character
+                                end
 			end
 		end
 		wait(1)
