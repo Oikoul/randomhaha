@@ -130,6 +130,7 @@ spawn(function()
 			plot.Objects.Packager.Hitbox.Interact:FireServer()
 			character.HumanoidRootPart.CFrame = CFrame.new(10, -69, 4651)
 			running = true
+			table.clear(parts)
 		end
 	end
 end)
