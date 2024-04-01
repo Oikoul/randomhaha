@@ -22,7 +22,7 @@ if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spore Pickaxe
 end
 character.HumanoidRootPart.CFrame = CFrame.new(10, -69, 4651)
 UIS.InputEnded:Connect(function(k)
-	if k.KeyCode == Enum.KeyCode.F1 then
+	if k.KeyCode == Enum.KeyCode.Insert then
 		if running then
 			running = false
 			print("Stopped")
@@ -75,7 +75,7 @@ spawn(function()
 	while true do
 		if running then
 			for _, v in pairs(workspace.WorldSpawn:GetChildren()) do
-				if v.Name == 'MineableRock' and v:FindFirstChild("RockString") and v.RockString.Value == "Uranium" and v.Rock:FindFirstChild("Stage3") and running then
+				if v.Name == 'MineableRock' and v:FindFirstChild("RockString") and v:FindFirstChild("Damaged") and v.RockString.Value == "Uranium" and v.Rock:FindFirstChild("Stage3") and running then
 					for _, n in pairs(v.Rock.Stage3:GetChildren()) do
 						if n and n.Name == "Part" and running and humanoid and humanoid.Health == 100 then
 							repeat
@@ -85,7 +85,7 @@ spawn(function()
 									cam.CFrame = CFrame.new(cam.CFrame.Position, n.Position)
 									wait()
 								end
-							until n == nil or not n.Parent or running == false or humanoid.Health < 100
+							until n == nil or not n.Parent or running == false or humanoid.Health < 100 or v.Damaged.Value == true
 						end
 					end
 					for _, x in pairs(workspace.Grabable:GetChildren()) do
@@ -109,7 +109,7 @@ spawn(function()
 end)
 spawn(function()
 	while true do
-		wait(600)
+		wait(300)
 		if running then
 			running = false
 			for _, v in pairs(parts) do
