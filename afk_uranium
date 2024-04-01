@@ -1,0 +1,154 @@
+local running = true
+local parts = {}
+local transporting = true
+local cam = game.Workspace.CurrentCamera
+local UIS = game:GetService("UserInputService")
+local plr = game.Players.LocalPlayer
+local plot = game:GetService("Players").LocalPlayer.Values.Plot.Value
+local character = plr.Character
+local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+for _, v in pairs(workspace.Plots:GetChildren()) do
+	if v.Name == tostring(plot) then
+		plot = v
+		print("Plot: "..plot.Name)
+	end
+end
+--^^plot identification
+local pack = plot.Objects:FindFirstChild("Packager").Hitbox
+local furnace = plot.Objects:FindFirstChild("Atom-8 Furnace").Hitbox
+wait(1)
+if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spore Pickaxe") ~= nil then
+	game:GetService("Players").LocalPlayer.Backpack["Spore Pickaxe"].Parent = game.Players.LocalPlayer.Character
+end
+character.HumanoidRootPart.CFrame = CFrame.new(10, -69, 4651)
+UIS.InputEnded:Connect(function(k)
+	if k.KeyCode == Enum.KeyCode.Insert then
+		if running then
+			running = false
+			print("Stopped")
+		else
+			running = true
+			print("Started")
+		end
+	end
+end)
+local function stage1()
+	for _, v in pairs(workspace.Grabable:GetChildren()) do
+		if v.Name == "MaterialPart" and v:FindFirstChild("Configuration") and v.Configuration:FindFirstChild("Data") and v.Configuration.Data:FindFirstChild("MatInd") and v.Configuration.Data.MatInd.Value == "Raw Uranium" and  (v.Part.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude < 30 then
+			if v:FindFirstChild("Part") then
+				if v.Part:FindFirstChild("BodyPosition") ~= nil then
+					v.Part.BodyPosition:Destroy()
+				end
+				local bp = Instance.new("BodyPosition")
+				bp.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+				bp.Parent = v.Part
+				bp.Position = v.Part.Position
+				v.Part.CanCollide = false
+				table.insert(parts, v)
+			end
+		end
+	end
+end
+spawn(function()
+	while true do
+		game.Players.LocalPlayer.MaximumSimulationRadius = math.pow(math.huge,math.huge)*math.huge
+		sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.pow(math.huge,math.huge)*math.huge)
+		game:GetService("RunService").Heartbeat:Wait()
+		if humanoid then
+			if plr.Character.HumanoidRootPart.Position.Y < -90 then
+				if running then
+					running = false
+					plr.Character.HumanoidRootPart.Anchored = true
+					local args = {[1] = "ResetInit"}
+					game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClientEvent"):FireServer(unpack(args))
+					wait(10)
+					if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spore Pickaxe") ~= nil then
+						game:GetService("Players").LocalPlayer.Backpack["Spore Pickaxe"].Parent = game.Players.LocalPlayer.Character
+						running = true
+					end
+				end
+			end
+		end
+	end
+end)
+spawn(function()
+	while true do
+		if running then
+			for _, v in pairs(workspace.WorldSpawn:GetChildren()) do
+				if v.Name == 'MineableRock' and v:FindFirstChild("RockString") and v.RockString.Value == "Uranium" and v.Rock:FindFirstChild("Stage3") and running then
+					for _, n in pairs(v.Rock.Stage3:GetChildren()) do
+						if n and n.Name == "Part" and running and humanoid and humanoid.Health == 100 then
+							repeat
+								if v:FindFirstChild("Part") ~= nil then
+									plr.Character.HumanoidRootPart.CFrame = v.Part.CFrame + Vector3.new(0, 3, 0)
+									wait()
+									cam.CFrame = CFrame.new(cam.CFrame.Position, n.Position)
+									wait()
+								end
+							until n == nil or not n.Parent or running == false or humanoid.Health < 100
+						end
+					end
+					for _, x in pairs(workspace.Grabable:GetChildren()) do
+						if x.Name == "MaterialPart" and x:FindFirstChild("Part") and (x.Part.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude < 30 and x:FindFirstChild("Owner") and x.Owner.Value == game.Players.LocalPlayer and running then
+							if x:FindFirstChild("Part") ~= nil then
+								local args1 = {[1] = x.Part,[2] = {}}
+								game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Grab"):InvokeServer(unpack(args1))
+							end
+							if x:FindFirstChild("Part") ~= nil then
+								local args2 = {[1] = x.Part,[3] = {}}
+								game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Ungrab"):FireServer(unpack(args2))
+							end
+						end
+					end
+					stage1()
+				end
+			end
+		end
+		wait(1)
+	end
+end)
+spawn(function()
+	while true do
+		wait(600)
+		if running then
+			running = false
+			for _, v in pairs(parts) do
+				if v and v:FindFirstChild("Part") and v.Part:FindFirstChild("BodyPosition") then
+					local a = v.Part.BodyPosition
+					a.Position = furnace.Position
+				end
+			end
+			character.HumanoidRootPart.CFrame = plot.Base.CFrame + Vector3.new(0, 5, 0)
+			wait(20)
+			for _, v in pairs(parts) do
+				if v and v:FindFirstChild("Part") and v.Part:FindFirstChild("BodyPosition") then
+					local a = v.Part.BodyPosition
+					a.Position = pack.Position
+				end
+			end
+			wait(5)
+			plot.Objects.Packager.Hitbox.Interact:FireServer()
+			character.HumanoidRootPart.CFrame = CFrame.new(10, -69, 4651)
+			running = true
+		end
+	end
+end)
+spawn(function()
+	while true do
+		if plr.Character and plr.Character:FindFirstChild("Humanoid") then
+			if humanoid.Health < 100 then
+				if running then
+					running = false
+					local args = {[1] = "ResetInit"}
+					game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("ClientEvent"):FireServer(unpack(args))
+					wait(7)
+					if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spore Pickaxe") ~= nil then
+						game:GetService("Players").LocalPlayer.Backpack["Spore Pickaxe"].Parent = game.Players.LocalPlayer.Character
+						running = true
+					end
+				end
+			end
+		end
+		wait(1)
+	end
+end)
