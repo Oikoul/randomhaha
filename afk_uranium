@@ -55,7 +55,7 @@ spawn(function()
 		sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.pow(math.huge,math.huge)*math.huge)
 		game:GetService("RunService").Heartbeat:Wait()
 		if humanoid then
-			if plr.Character.HumanoidRootPart.Position.Y < -90 then
+			if character and character:FindFirstChild("HumanoidRootPart") and plr.Character.HumanoidRootPart.Position.Y < -90 then
 				if running then
 					running = false
 					plr.Character.HumanoidRootPart.Anchored = true
