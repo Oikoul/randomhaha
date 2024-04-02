@@ -22,7 +22,7 @@ if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Spore Pickaxe
 end
 character.HumanoidRootPart.CFrame = CFrame.new(10, -69, 4651)
 UIS.InputEnded:Connect(function(k)
-	if k.KeyCode == Enum.KeyCode.Insert then
+	if k.KeyCode == Enum.KeyCode.F1 then
 		if running then
 			running = false
 			print("Stopped")
