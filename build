@@ -2634,10 +2634,7 @@ local function rumn()
 	local region = Region3.new(workspace.selectedPart.Position - workspace.selectedPart.Size / 2, workspace.selectedPart.Position + workspace.selectedPart.Size / 2)
 	local partsinregion = workspace:FindPartsInRegion3(region, workspace.selectedPart, 100000)
 		for _, v in pairs(partsinregion) do
-			if v ~= nil and v.ClassName == "Part" and v.Name ~= "Hitbox" and v.Parent.Parent.Name == "Objects" then
-				table.insert(partss, v.Parent)
-			end
-			if v.Parent.Name == "Ramp 1/1 x 1" then
+			if v ~= nil and v.ClassName == "Part" or v.Name == "Hitbox" and v.Parent.Parent.Name == "Objects" then
 				table.insert(partss, v.Parent)
 			end
 		end
@@ -2654,7 +2651,7 @@ local function movemmd()
 	local zz = ea.z - _z
 	for _, v in pairs(partss) do
 		for _, part in pairs(v:GetChildren()) do
-			if part ~= nil and part.ClassName == "Part" and part.Name ~= "Hitbox" and plut then
+			if part ~= nil and part.ClassName == "Part" or part.Name == "Hitbox" and plut then
 				local args = {
 						[1] = v,
 						[2] = {
