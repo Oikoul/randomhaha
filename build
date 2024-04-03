@@ -8,9 +8,6 @@ spawn(function()
 	end
 end)
 ]]
---if game.CoreGui:FindFirstChild("Magic") then
---	game.CoreGui["Magic"]:Destroy()
---nd
 created = false
 local spinsp = 0.2
 local s
