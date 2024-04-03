@@ -1,69 +1,2666 @@
-local parts = {}
-local _x = 0
-local _y = 0
-local _z = 0
-local buildm = false
-local movem = false
-local mouse = false
-local dist = false
-local ready = false
+wait(5)
+--[[
+spawn(function()
+	while true do
+		game.Players.LocalPlayer.MaximumSimulationRadius = math.pow(math.huge,math.huge)*math.huge
+		sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",math.pow(math.huge,math.huge)*math.huge)
+		game:GetService("RunService").Heartbeat:Wait()
+	end
+end)
+]]
+--if game.CoreGui:FindFirstChild("Magic") then
+--	game.CoreGui["Magic"]:Destroy()
+--nd
+created = false
+local spinsp = 0.2
+local s
+local movemode = true
+local sizemode = false
+ScreenGui = Instance.new("ScreenGui")
+Main = Instance.new("Frame")
+Selection = Instance.new("ScrollingFrame")
+_2 = Instance.new("TextButton")
+_3 = Instance.new("TextButton")
+_1 = Instance.new("TextButton")
+_5 = Instance.new("TextButton")
+_4 = Instance.new("TextButton")
+_6 = Instance.new("TextButton")
+_7 = Instance.new("TextButton")
+Plr = Instance.new("ScrollingFrame")
+InfJump = Instance.new("TextButton")
+Speed = Instance.new("TextButton")
+Frame = Instance.new("Frame")
+TextBox = Instance.new("TextBox")
+TextButton = Instance.new("TextButton")
+Invisibility = Instance.new("TextButton")
+Movemm = Instance.new("TextButton")
+CreatePart = Instance.new("TextButton")
+DestroyPart = Instance.new("TextButton")
+TP = Instance.new("TextButton")
+Frame_2 = Instance.new("Frame")
+TextBox_2 = Instance.new("TextBox")
+TextButton_2 = Instance.new("TextButton")
+JumpHeight = Instance.new("TextButton")
+Frame_3 = Instance.new("Frame")
+TextBox_3 = Instance.new("TextBox")
+TextButton_3 = Instance.new("TextButton")
+Design = Instance.new("Frame")
+Design_2 = Instance.new("Frame")
+Visuals = Instance.new("ScrollingFrame")
+Chams1 = Instance.new("TextButton")
+Chams2 = Instance.new("TextButton")
+Booga = Instance.new("ScrollingFrame")
+AutoPick = Instance.new("TextButton")
+HoldPick = Instance.new("TextButton")
+AutoHeal = Instance.new("TextButton")
+HoldHeal = Instance.new("TextButton")
+Frame_4 = Instance.new("Frame")
+TextBox_4 = Instance.new("TextBox")
+Buildd = Instance.new("TextButton")
+TextButton_4 = Instance.new("TextButton")
+DESIGN = Instance.new("Frame")
+DESIGN_2 = Instance.new("TextLabel")
+Height = Instance.new("Frame")
+Plus = Instance.new("TextButton")
+DESIGN_3 = Instance.new("TextLabel")
+Minus = Instance.new("TextButton")
+TextBox_5 = Instance.new("TextBox")
+RightOrLeft = Instance.new("Frame")
+Plus_2 = Instance.new("TextButton")
+DESIGN_4 = Instance.new("TextLabel")
+Minus_2 = Instance.new("TextButton")
+TextBox_6 = Instance.new("TextBox")
+ThrowStr = Instance.new("Frame")
+TextBox_7 = Instance.new("TextBox")
+Plus_3 = Instance.new("TextButton")
+Minus_3 = Instance.new("TextButton")
+Toogle = Instance.new("TextButton")
+PickPart = Instance.new("TextButton")
+Movemd = Instance.new("TextButton")
+Sizemd = Instance.new("TextButton")
+DropPart = Instance.new("TextButton")
+PickwMous = Instance.new("TextButton")
+Frame_5 = Instance.new("Frame")
+TextBox_8 = Instance.new("TextBox")
+TextButton_5 = Instance.new("TextButton")
+ThrowKey = Instance.new("TextButton")
+Frame_6 = Instance.new("Frame")
+TextBox_9 = Instance.new("TextBox")
+TextButton_6 = Instance.new("TextButton")
+LineMode = Instance.new("TextButton")
+SpinSp = Instance.new("Frame")
+Plus_4 = Instance.new("TextButton")
+Minus_4 = Instance.new("TextButton")
+TextBox_10 = Instance.new("TextBox")
+Toogle_2 = Instance.new("TextButton")
+TextLabel = Instance.new("TextLabel")
+AimLock = Instance.new("ScrollingFrame")
+Target = Instance.new("TextButton")
+Frame_7 = Instance.new("Frame")
+TextButton_7 = Instance.new("TextButton")
+TextButton_8 = Instance.new("TextButton")
+TextButton_9 = Instance.new("TextButton")
+Start = Instance.new("TextButton")
+Key = Instance.new("TextButton")
+Frame_8 = Instance.new("Frame")
+TextButton_10 = Instance.new("TextButton")
+TextBox_11 = Instance.new("TextBox")
+TextButton_11 = Instance.new("TextButton")
+Prediction = Instance.new("Frame")
+NUMBER = Instance.new("TextLabel")
+NUMBER0 = Instance.new("TextLabel")
+NUMBERA = Instance.new("TextLabel")
+NUMBERB = Instance.new("TextLabel")
+TEXTT = Instance.new("TextBox")
+Plus_5 = Instance.new("TextButton")
+DESIGN_5 = Instance.new("TextLabel")
+Minus_5 = Instance.new("TextButton")
+SimpleSpy = Instance.new("ScrollingFrame")
+Execute = Instance.new("TextButton")
+Ref = Instance.new("ScrollingFrame")
+blockX = Instance.new("Frame")
+selectt = Instance.new("TextButton")
+blockY = Instance.new("Frame")
+blockZ = Instance.new("Frame")
+DESIGN_x = Instance.new("TextLabel")
+DESIGN_y = Instance.new("TextLabel")
+DESIGN_z = Instance.new("TextLabel")
+Plus_x = Instance.new("TextButton")
+Plus_y = Instance.new("TextButton")
+Plus_z = Instance.new("TextButton")
+Minus_x = Instance.new("TextButton")
+Minus_y = Instance.new("TextButton")
+Minus_z = Instance.new("TextButton")
+LocalPlr = Instance.new("ScrollingFrame")
+--ScreenGui.Parent = game.CoreGui
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.Name = "Magic"
+
+Main.Name = "Main"
+Main.Parent = ScreenGui
+Main.BackgroundColor3 = Color3.fromRGB(47, 47, 47)
+Main.Position = UDim2.new(0.12373969, 0, 0.147347733, 0)
+Main.Size = UDim2.new(0, 401, 0, 270)
+Main.Style = Enum.FrameStyle.RobloxRound
+
+Selection.Name = "Selection"
+Selection.Parent = Main
+Selection.Active = true
+Selection.BackgroundColor3 = Color3.fromRGB(29, 29, 29)
+Selection.BackgroundTransparency = 0.250
+Selection.Position = UDim2.new(-0.0170000009, 0, -0.0260000005, 0)
+Selection.Size = UDim2.new(0, 116, 0, 266)
+Selection.CanvasSize = UDim2.new(0, 0, 1.5, 2)
+Selection.ScrollBarThickness = 10
+Selection.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Left
+
+_2.Name = "2"
+_2.Parent = Selection
+_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+_2.Position = UDim2.new(0.0949999988, 0, 0.101000004, 0)
+_2.Size = UDim2.new(0, 105, 0, 31)
+_2.Style = Enum.ButtonStyle.RobloxRoundButton
+_2.Font = Enum.Font.SourceSans
+_2.Text = "Local Player"
+_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+_2.TextSize = 14.000
+
+_3.Name = "3"
+_3.Parent = Selection
+_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+_3.Position = UDim2.new(0.0949999988, 0, 0.187999994, 0)
+_3.Size = UDim2.new(0, 105, 0, 31)
+_3.Style = Enum.ButtonStyle.RobloxRoundButton
+_3.Font = Enum.Font.SourceSans
+_3.Text = "Visuals"
+_3.TextColor3 = Color3.fromRGB(0, 0, 0)
+_3.TextSize = 14.000
+
+_1.Name = "1"
+_1.Parent = Selection
+_1.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+_1.BorderColor3 = Color3.fromRGB(0, 0, 0)
+_1.Position = UDim2.new(0.0949999988, 0, 0.0140000004, 0)
+_1.Size = UDim2.new(0, 105, 0, 31)
+_1.Style = Enum.ButtonStyle.RobloxRoundButton
+_1.Font = Enum.Font.SourceSans
+_1.Text = "Aim Lock"
+_1.TextColor3 = Color3.fromRGB(0, 0, 0)
+_1.TextSize = 14.000
+
+_5.Name = "5"
+_5.Parent = Selection
+_5.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+_5.Position = UDim2.new(0.0949999988, 0, 0.361999989, 0)
+_5.Size = UDim2.new(0, 105, 0, 31)
+_5.Style = Enum.ButtonStyle.RobloxRoundButton
+_5.Font = Enum.Font.SourceSans
+_5.Text = "Counter Blox"
+_5.TextColor3 = Color3.fromRGB(0, 0, 0)
+_5.TextSize = 14.000
+
+_4.Name = "4"
+_4.Parent = Selection
+_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+_4.Position = UDim2.new(0.0949999988, 0, 0.275000006, 0)
+_4.Size = UDim2.new(0, 105, 0, 31)
+_4.Style = Enum.ButtonStyle.RobloxRoundButton
+_4.Font = Enum.Font.SourceSans
+_4.Text = "Booga booga"
+_4.TextColor3 = Color3.fromRGB(0, 0, 0)
+_4.TextSize = 14.000
+
+_6.Name = "6"
+_6.Parent = Selection
+_6.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
+_6.Position = UDim2.new(0.0949999988, 0, 0.449000001, 0)
+_6.Size = UDim2.new(0, 105, 0, 31)
+_6.Style = Enum.ButtonStyle.RobloxRoundButton
+_6.Font = Enum.Font.SourceSans
+_6.Text = "Refinery Caves"
+_6.TextColor3 = Color3.fromRGB(0, 0, 0)
+_6.TextSize = 14.000
+
+_7.Name = "7"
+_7.Parent = Selection
+_7.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+_7.BorderColor3 = Color3.fromRGB(0, 0, 0)
+_7.Position = UDim2.new(0.0949999988, 0, 0.536000013, 0)
+_7.Size = UDim2.new(0, 105, 0, 31)
+_7.Style = Enum.ButtonStyle.RobloxRoundButton
+_7.Font = Enum.Font.SourceSans
+_7.Text = "Simple Spy"
+_7.TextColor3 = Color3.fromRGB(0, 0, 0)
+_7.TextSize = 14.000
+
+LocalPlr.Name = "LocalPlr"
+LocalPlr.Parent = Main
+LocalPlr.Active = true
+LocalPlr.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+LocalPlr.BackgroundTransparency = 0.200
+LocalPlr.BorderColor3 = Color3.fromRGB(27, 42, 53)
+LocalPlr.Position = UDim2.new(0.306070596, 0, -0.008, 0)
+LocalPlr.Size = UDim2.new(0, 270, 0, 260)
+LocalPlr.Visible = false
+LocalPlr.CanvasSize = UDim2.new(0, 0, 1.25, 0)
+LocalPlr.ScrollBarThickness = 10
+
+InfJump.Name = "InfJump"
+InfJump.Parent = LocalPlr
+InfJump.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+InfJump.Position = UDim2.new(0.0329999998, 0, 0.0199527554, 0)
+InfJump.Size = UDim2.new(0, 105, 0, 31)
+InfJump.Style = Enum.ButtonStyle.RobloxRoundButton
+InfJump.Font = Enum.Font.SourceSans
+InfJump.Text = "Inf Jump"
+InfJump.TextColor3 = Color3.fromRGB(0, 0, 0)
+InfJump.TextSize = 14.000
+
+Speed.Name = "Speed"
+Speed.Parent = LocalPlr
+Speed.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Speed.Position = UDim2.new(0.0296296366, 0, 0.130535483, 0)
+Speed.Size = UDim2.new(0, 105, 0, 31)
+Speed.Style = Enum.ButtonStyle.RobloxRoundButton
+Speed.Font = Enum.Font.SourceSans
+Speed.Text = "Speed"
+Speed.TextColor3 = Color3.fromRGB(0, 0, 0)
+Speed.TextSize = 14.000
+
+Frame.Parent = Speed
+Frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 2
+Frame.Position = UDim2.new(-0.0856608152, 0, -1.2990191, 0)
+Frame.Size = UDim2.new(0, 100, 0, 32)
+Frame.Visible = false
+
+TextBox.Parent = Frame
+TextBox.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
+TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.BorderSizePixel = 2
+TextBox.Position = UDim2.new(0, 2, 0.0199999996, 0)
+TextBox.Size = UDim2.new(0, 95, 0, 31)
+TextBox.Font = Enum.Font.SourceSans
+TextBox.PlaceholderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.PlaceholderText = "Number:"
+TextBox.Text = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed
+TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.TextSize = 14.000
+
+Invisibility.Name = "Invisibility"
+Invisibility.Parent = LocalPlr
+Invisibility.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Invisibility.Position = UDim2.new(0.5, 0, 0.018905513, 0)
+Invisibility.Size = UDim2.new(0, 105, 0, 31)
+Invisibility.Style = Enum.ButtonStyle.RobloxRoundButton
+Invisibility.Font = Enum.Font.SourceSans
+Invisibility.Text = " Invisibility (R15)"
+Invisibility.TextColor3 = Color3.fromRGB(0, 0, 0)
+Invisibility.TextSize = 14.000
+
+TP.Name = "TP"
+TP.Parent = LocalPlr
+TP.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TP.Position = UDim2.new(0.5, 0, 0.130535483, 0)
+TP.Size = UDim2.new(0, 105, 0, 31)
+TP.Style = Enum.ButtonStyle.RobloxRoundButton
+TP.Font = Enum.Font.SourceSans
+TP.Text = "Key Press Teleport"
+TP.TextColor3 = Color3.fromRGB(0, 0, 0)
+TP.TextSize = 14.000
+
+Frame_2.Parent = TP
+Frame_2.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_2.BorderSizePixel = 2
+Frame_2.Position = UDim2.new(-0.0856608152, 0, -1.2990191, 0)
+Frame_2.Size = UDim2.new(0, 100, 0, 32)
+Frame_2.Visible = false
+
+TextBox_2.Parent = Frame_2
+TextBox_2.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
+TextBox_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_2.BorderSizePixel = 2
+TextBox_2.Position = UDim2.new(0, 2, 0.0199999996, 0)
+TextBox_2.Size = UDim2.new(0, 95, 0, 31)
+TextBox_2.Font = Enum.Font.SourceSans
+TextBox_2.PlaceholderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_2.PlaceholderText = "Key: (q,r,f,z,s...)"
+TextBox_2.Text = ""
+TextBox_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_2.TextSize = 14.000
+
+JumpHeight.Name = "JumpHeight"
+JumpHeight.Parent = LocalPlr
+JumpHeight.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+JumpHeight.Position = UDim2.new(0.0296296366, 0, 0.24392131, 0)
+JumpHeight.Size = UDim2.new(0, 105, 0, 31)
+JumpHeight.Style = Enum.ButtonStyle.RobloxRoundButton
+JumpHeight.Font = Enum.Font.SourceSans
+JumpHeight.Text = "Jump height"
+JumpHeight.TextColor3 = Color3.fromRGB(0, 0, 0)
+JumpHeight.TextSize = 14.000
+
+Frame_3.Parent = JumpHeight
+Frame_3.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Frame_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_3.BorderSizePixel = 2
+Frame_3.Position = UDim2.new(-0.0856608152, 0, -1.2990191, 0)
+Frame_3.Size = UDim2.new(0, 100, 0, 32)
+Frame_3.Visible = false
+
+TextBox_3.Parent = Frame_3
+TextBox_3.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
+TextBox_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_3.BorderSizePixel = 2
+TextBox_3.Position = UDim2.new(0, 2, 0.0199999996, 0)
+TextBox_3.Size = UDim2.new(0, 95, 0, 31)
+TextBox_3.Font = Enum.Font.SourceSans
+TextBox_3.PlaceholderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_3.PlaceholderText = "Number:"
+TextBox_3.Text = game.Players.LocalPlayer.Character.Humanoid.JumpHeight
+TextBox_3.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_3.TextSize = 14.000
+
+Design.Name = "Design"
+Design.Parent = Main
+Design.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Design.Position = UDim2.new(0.283937067, 0, -0.0235925913, 0)
+Design.Size = UDim2.new(0, 9, 0, 265)
+
+Design_2.Name = "Design"
+Design_2.Parent = Main
+Design_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Design_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Design_2.Position = UDim2.new(-0.0170791894, 0, -0.120365992, 0)
+Design_2.Size = UDim2.new(0, 400, 0, 30)
+
+Visuals.Name = "Visuals"
+Visuals.Parent = Main
+Visuals.Active = true
+Visuals.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Visuals.BackgroundTransparency = 0.200
+Visuals.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Visuals.Position = UDim2.new(0.305999994, 0, -0.008, 0)
+Visuals.Size = UDim2.new(0, 270, 0, 260)
+Visuals.Visible = false
+Visuals.CanvasSize = UDim2.new(0, 0, 1.25, 0)
+
+Chams1.Name = "Chams1"
+Chams1.Parent = Visuals
+Chams1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Chams1.Position = UDim2.new(0.0296296272, 0, 0.018905513, 0)
+Chams1.Size = UDim2.new(0, 105, 0, 31)
+Chams1.Style = Enum.ButtonStyle.RobloxRoundButton
+Chams1.Font = Enum.Font.SourceSans
+Chams1.Text = "Chams 1.0V"
+Chams1.TextColor3 = Color3.fromRGB(0, 0, 0)
+Chams1.TextSize = 14.000
+
+Chams2.Name = "Chams2"
+Chams2.Parent = Visuals
+Chams2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Chams2.Position = UDim2.new(0.5, 0, 0.018905513, 0)
+Chams2.Size = UDim2.new(0, 105, 0, 31)
+Chams2.Style = Enum.ButtonStyle.RobloxRoundButton
+Chams2.Font = Enum.Font.SourceSans
+Chams2.Text = "Chams 2.0V"
+Chams2.TextColor3 = Color3.fromRGB(0, 0, 0)
+Chams2.TextSize = 14.000
+
+Booga.Name = "Booga"
+Booga.Parent = Main
+Booga.Active = true
+Booga.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Booga.BackgroundTransparency = 0.200
+Booga.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Booga.Position = UDim2.new(0.305999994, 0, -0.008, 0)
+Booga.Size = UDim2.new(0, 270, 0, 260)
+Booga.CanvasPosition = Vector2.new(0, 52.5)
+Booga.CanvasSize = UDim2.new(0, 0, 1.25, 0)
+Booga.Visible = false
+
+AutoPick.Name = "AutoPick"
+AutoPick.Parent = Booga
+AutoPick.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+AutoPick.Position = UDim2.new(0.0296296272, 0, 0.018905513, 0)
+AutoPick.Size = UDim2.new(0, 105, 0, 31)
+AutoPick.Style = Enum.ButtonStyle.RobloxRoundButton
+AutoPick.Font = Enum.Font.SourceSans
+AutoPick.Text = "Auto Pick Up"
+AutoPick.TextColor3 = Color3.fromRGB(0, 0, 0)
+AutoPick.TextSize = 14.000
+
+HoldPick.Name = "HoldPick"
+HoldPick.Parent = Booga
+HoldPick.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+HoldPick.Position = UDim2.new(0.5, 0, 0.018905513, 0)
+HoldPick.Size = UDim2.new(0, 105, 0, 31)
+HoldPick.Style = Enum.ButtonStyle.RobloxRoundButton
+HoldPick.Font = Enum.Font.SourceSans
+HoldPick.Text = "Hold to Pick Up (F)"
+HoldPick.TextColor3 = Color3.fromRGB(0, 0, 0)
+HoldPick.TextSize = 14.000
+
+AutoHeal.Name = "AutoHeal"
+AutoHeal.Parent = Booga
+AutoHeal.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+AutoHeal.Position = UDim2.new(0.0296296272, 0, 0.129999995, 0)
+AutoHeal.Size = UDim2.new(0, 105, 0, 31)
+AutoHeal.Style = Enum.ButtonStyle.RobloxRoundButton
+AutoHeal.Font = Enum.Font.SourceSans
+AutoHeal.Text = "Auto Heal"
+AutoHeal.TextColor3 = Color3.fromRGB(0, 0, 0)
+AutoHeal.TextSize = 14.000
+
+HoldHeal.Name = "HoldHeal"
+HoldHeal.Parent = Booga
+HoldHeal.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+HoldHeal.Position = UDim2.new(0.5, 0, 0.129999995, 0)
+HoldHeal.Size = UDim2.new(0, 105, 0, 31)
+HoldHeal.Style = Enum.ButtonStyle.RobloxRoundButton
+HoldHeal.Font = Enum.Font.SourceSans
+HoldHeal.Text = "Hold Key to Heal"
+HoldHeal.TextColor3 = Color3.fromRGB(0, 0, 0)
+HoldHeal.TextSize = 14.000
+
+Frame_4.Parent = HoldHeal
+Frame_4.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Frame_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_4.BorderSizePixel = 2
+Frame_4.Position = UDim2.new(-0.0856608152, 0, -1.2990191, 0)
+Frame_4.Size = UDim2.new(0, 100, 0, 32)
+Frame_4.Visible = false
+
+TextBox_4.Parent = Frame_4
+TextBox_4.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
+TextBox_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_4.BorderSizePixel = 2
+TextBox_4.Position = UDim2.new(0, 2, 0.0199999996, 0)
+TextBox_4.Size = UDim2.new(0, 95, 0, 31)
+TextBox_4.Font = Enum.Font.SourceSans
+TextBox_4.PlaceholderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_4.PlaceholderText = "Key: (q,r;z;s...)"
+TextBox_4.Text = ""
+TextBox_4.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_4.TextSize = 14.000
+
+DESIGN.Name = "DESIGN"
+DESIGN.Parent = Booga
+DESIGN.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+DESIGN.BorderColor3 = Color3.fromRGB(0, 0, 0)
+DESIGN.Position = UDim2.new(-0.0296296291, 0, 0.253314853, 0)
+DESIGN.Size = UDim2.new(0, 265, 0, 9)
+
+DESIGN_2.Name = "DESIGN"
+DESIGN_2.Parent = Booga
+DESIGN_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+DESIGN_2.BackgroundTransparency = 1.000
+DESIGN_2.Position = UDim2.new(0.214814812, 0, 0.269150972, 0)
+DESIGN_2.Size = UDim2.new(0, 132, 0, 17)
+DESIGN_2.Font = Enum.Font.SourceSans
+DESIGN_2.Text = "Unanchored Part Options"
+DESIGN_2.TextColor3 = Color3.fromRGB(255, 0, 0)
+DESIGN_2.TextSize = 14.000
+
+Height.Name = "Height"
+Height.Parent = Booga
+Height.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+Height.Position = UDim2.new(0.0259259343, 0, 0.377960622, 0)
+Height.Size = UDim2.new(0, 105, 0, 25)
+
+Plus.Name = "Plus"
+Plus.Parent = Height
+Plus.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Plus.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Plus.Position = UDim2.new(0.786000013, 0, 0.0659999996, 0)
+Plus.Size = UDim2.new(0, 22, 0, 21)
+Plus.Font = Enum.Font.SourceSans
+Plus.Text = "+"
+Plus.TextColor3 = Color3.fromRGB(0, 170, 0)
+Plus.TextSize = 14.000
+
+DESIGN_3.Name = "DESIGN"
+DESIGN_3.Parent = Height
+DESIGN_3.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+DESIGN_3.Position = UDim2.new(0, 0, -0.661499918, 0)
+DESIGN_3.Size = UDim2.new(0, 104, 0, 14)
+DESIGN_3.Font = Enum.Font.SourceSans
+DESIGN_3.Text = "Height"
+DESIGN_3.TextColor3 = Color3.fromRGB(0, 0, 0)
+DESIGN_3.TextSize = 14.000
+
+Minus.Name = "Minus"
+Minus.Parent = Height
+Minus.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Minus.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Minus.Position = UDim2.new(0.0149999997, 0, 0.0659999996, 0)
+Minus.Size = UDim2.new(0, 22, 0, 21)
+Minus.Font = Enum.Font.SourceSans
+Minus.Text = "-"
+Minus.TextColor3 = Color3.fromRGB(255, 0, 0)
+Minus.TextSize = 14.000
+
+TextBox_5.Parent = Height
+TextBox_5.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+TextBox_5.Position = UDim2.new(0.247999996, 0, 0.119999997, 0)
+TextBox_5.Size = UDim2.new(0, 53, 0, 17)
+TextBox_5.Font = Enum.Font.SourceSans
+TextBox_5.PlaceholderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_5.PlaceholderText = "Number:"
+TextBox_5.Text = 3
+TextBox_5.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_5.TextSize = 14.000
+
+RightOrLeft.Name = "RightOrLeft"
+RightOrLeft.Parent = Booga
+RightOrLeft.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+RightOrLeft.Position = UDim2.new(0.0222222209, 0, 0.667724371, 0)
+RightOrLeft.Size = UDim2.new(0, 105, 0, 25)
+
+Plus_2.Name = "Plus"
+Plus_2.Parent = RightOrLeft
+Plus_2.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Plus_2.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Plus_2.Position = UDim2.new(0.786000013, 0, 0.0659999996, 0)
+Plus_2.Size = UDim2.new(0, 22, 0, 21)
+Plus_2.Font = Enum.Font.SourceSans
+Plus_2.Text = "+"
+Plus_2.TextColor3 = Color3.fromRGB(0, 170, 0)
+Plus_2.TextSize = 14.000
+
+DESIGN_4.Name = "DESIGN"
+DESIGN_4.Parent = RightOrLeft
+DESIGN_4.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+DESIGN_4.Position = UDim2.new(0, 0, -0.661499918, 0)
+DESIGN_4.Size = UDim2.new(0, 104, 0, 14)
+DESIGN_4.Font = Enum.Font.SourceSans
+DESIGN_4.Text = "Left/Right positions"
+DESIGN_4.TextColor3 = Color3.fromRGB(0, 0, 0)
+DESIGN_4.TextSize = 14.000
+
+Minus_2.Name = "Minus"
+Minus_2.Parent = RightOrLeft
+Minus_2.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Minus_2.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Minus_2.Position = UDim2.new(0.0149999997, 0, 0.0659999996, 0)
+Minus_2.Size = UDim2.new(0, 22, 0, 21)
+Minus_2.Font = Enum.Font.SourceSans
+Minus_2.Text = "-"
+Minus_2.TextColor3 = Color3.fromRGB(255, 0, 0)
+Minus_2.TextSize = 14.000
+
+TextBox_6.Parent = RightOrLeft
+TextBox_6.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+TextBox_6.Position = UDim2.new(0.247999996, 0, 0.119999997, 0)
+TextBox_6.Size = UDim2.new(0, 53, 0, 17)
+TextBox_6.Font = Enum.Font.SourceSans
+TextBox_6.PlaceholderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_6.PlaceholderText = "Number:"
+TextBox_6.Text = 0
+TextBox_6.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_6.TextSize = 14.000
+
+ThrowStr.Name = "ThrowStr"
+ThrowStr.Parent = Booga
+ThrowStr.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+ThrowStr.Position = UDim2.new(0.0222222302, 0, 0.519692898, 0)
+ThrowStr.Size = UDim2.new(0, 105, 0, 25)
+
+TextBox_7.Parent = ThrowStr
+TextBox_7.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+TextBox_7.Position = UDim2.new(0.247999996, 0, 0.119999997, 0)
+TextBox_7.Size = UDim2.new(0, 53, 0, 17)
+TextBox_7.Font = Enum.Font.SourceSans
+TextBox_7.PlaceholderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_7.PlaceholderText = "Number:"
+TextBox_7.Text = 1
+TextBox_7.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_7.TextSize = 14.000
+
+Plus_3.Name = "Plus"
+Plus_3.Parent = ThrowStr
+Plus_3.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Plus_3.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Plus_3.Position = UDim2.new(0.786000013, 0, 0.0659999996, 0)
+Plus_3.Size = UDim2.new(0, 22, 0, 21)
+Plus_3.Font = Enum.Font.SourceSans
+Plus_3.Text = "+"
+Plus_3.TextColor3 = Color3.fromRGB(0, 170, 0)
+Plus_3.TextSize = 14.000
+
+Minus_3.Name = "Minus"
+Minus_3.Parent = ThrowStr
+Minus_3.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Minus_3.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Minus_3.Position = UDim2.new(0.0149999997, 0, 0.0659999996, 0)
+Minus_3.Size = UDim2.new(0, 22, 0, 21)
+Minus_3.Font = Enum.Font.SourceSans
+Minus_3.Text = "-"
+Minus_3.TextColor3 = Color3.fromRGB(255, 0, 0)
+Minus_3.TextSize = 14.000
+
+Toogle.Name = "Toogle"
+Toogle.Parent = ThrowStr
+Toogle.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+Toogle.Position = UDim2.new(-0.00264550559, 0, -0.569842458, 0)
+Toogle.Size = UDim2.new(0, 104, 0, 14)
+Toogle.Font = Enum.Font.SourceSans
+Toogle.Text = "Throw mode & its strength"
+Toogle.TextColor3 = Color3.fromRGB(0, 0, 0)
+Toogle.TextSize = 12.000
+
+PickPart.Name = "PickPart"
+PickPart.Parent = Booga
+PickPart.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+PickPart.Position = UDim2.new(0.5, 0, 0.328425199, 0)
+PickPart.Size = UDim2.new(0, 105, 0, 31)
+PickPart.Style = Enum.ButtonStyle.RobloxRoundButton
+PickPart.Font = Enum.Font.SourceSans
+PickPart.Text = "Pick Up Parts"
+PickPart.TextColor3 = Color3.fromRGB(0, 0, 0)
+PickPart.TextSize = 14.000
+
+DropPart.Name = "DropPart"
+DropPart.Parent = Booga
+DropPart.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+DropPart.Position = UDim2.new(0.5, 0, 0.435511827, 0)
+DropPart.Size = UDim2.new(0, 105, 0, 31)
+DropPart.Style = Enum.ButtonStyle.RobloxRoundButton
+DropPart.Font = Enum.Font.SourceSans
+DropPart.Text = "Drop Parts"
+DropPart.TextColor3 = Color3.fromRGB(0, 0, 0)
+DropPart.TextSize = 14.000
+
+PickwMous.Name = "PickwMous"
+PickwMous.Parent = Booga
+PickwMous.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+PickwMous.Position = UDim2.new(0.5, 0, 0.546551168, 0)
+PickwMous.Size = UDim2.new(0, 105, 0, 31)
+PickwMous.Style = Enum.ButtonStyle.RobloxRoundButton
+PickwMous.Font = Enum.Font.SourceSans
+PickwMous.Text = "Pick Up Parts with Mouse"
+PickwMous.TextColor3 = Color3.fromRGB(0, 0, 0)
+PickwMous.TextSize = 12.000
+
+Frame_5.Parent = PickwMous
+Frame_5.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Frame_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_5.BorderSizePixel = 2
+Frame_5.Position = UDim2.new(-0.0905238539, 0, -1.15541625, 0)
+Frame_5.Size = UDim2.new(0, 100, 0, 35)
+Frame_5.Visible = false
+
+TextBox_8.Parent = Frame_5
+TextBox_8.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
+TextBox_8.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_8.BorderSizePixel = 2
+TextBox_8.Position = UDim2.new(0, 2, 0.0485714078, 0)
+TextBox_8.Size = UDim2.new(0, 95, 0, 31)
+TextBox_8.Font = Enum.Font.SourceSans
+TextBox_8.PlaceholderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_8.PlaceholderText = "Key: (q,r,s,f,g...)"
+TextBox_8.Text = ""
+TextBox_8.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_8.TextSize = 14.000
+
+ThrowKey.Name = "ThrowKey"
+ThrowKey.Parent = Booga
+ThrowKey.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ThrowKey.Position = UDim2.new(0.5, 0, 0.657086611, 0)
+ThrowKey.Size = UDim2.new(0, 105, 0, 31)
+ThrowKey.Style = Enum.ButtonStyle.RobloxRoundButton
+ThrowKey.Font = Enum.Font.SourceSans
+ThrowKey.Text = "Throw key"
+ThrowKey.TextColor3 = Color3.fromRGB(0, 0, 0)
+ThrowKey.TextSize = 14.000
+
+Frame_6.Parent = ThrowKey
+Frame_6.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Frame_6.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_6.BorderSizePixel = 2
+Frame_6.Position = UDim2.new(-0.0905238539, 0, -1.15541625, 0)
+Frame_6.Size = UDim2.new(0, 100, 0, 35)
+Frame_6.Visible = false
+
+TextBox_9.Parent = Frame_6
+TextBox_9.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
+TextBox_9.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_9.BorderSizePixel = 2
+TextBox_9.Position = UDim2.new(0, 2, 0.0485714078, 0)
+TextBox_9.Size = UDim2.new(0, 95, 0, 31)
+TextBox_9.Font = Enum.Font.SourceSans
+TextBox_9.PlaceholderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_9.PlaceholderText = "Key: (q,r,s,f,g...)"
+TextBox_9.Text = ""
+TextBox_9.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_9.TextSize = 14.000
+
+LineMode.Name = "LineMode"
+LineMode.Parent = Booga
+LineMode.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+LineMode.Position = UDim2.new(0.5, 0, 0.759921312, 0)
+LineMode.Size = UDim2.new(0, 105, 0, 31)
+LineMode.Style = Enum.ButtonStyle.RobloxRoundButton
+LineMode.Font = Enum.Font.SourceSans
+LineMode.Text = "Line Mode"
+LineMode.TextColor3 = Color3.fromRGB(0, 0, 0)
+LineMode.TextSize = 14.000
+
+SpinSp.Name = "SpinSp"
+SpinSp.Parent = Booga
+SpinSp.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+SpinSp.Position = UDim2.new(0.0222222209, 0, 0.82520467, 0)
+SpinSp.Size = UDim2.new(0, 105, 0, 25)
+
+Plus_4.Name = "Plus"
+Plus_4.Parent = SpinSp
+Plus_4.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Plus_4.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Plus_4.Position = UDim2.new(0.786000013, 0, 0.0659999996, 0)
+Plus_4.Size = UDim2.new(0, 22, 0, 21)
+Plus_4.Font = Enum.Font.SourceSans
+Plus_4.Text = "+"
+Plus_4.TextColor3 = Color3.fromRGB(0, 170, 0)
+Plus_4.TextSize = 14.000
+
+Minus_4.Name = "Minus"
+Minus_4.Parent = SpinSp
+Minus_4.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Minus_4.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Minus_4.Position = UDim2.new(0.0149999997, 0, 0.0659999996, 0)
+Minus_4.Size = UDim2.new(0, 22, 0, 21)
+Minus_4.Font = Enum.Font.SourceSans
+Minus_4.Text = "-"
+Minus_4.TextColor3 = Color3.fromRGB(255, 0, 0)
+Minus_4.TextSize = 14.000
+
+TextBox_10.Parent = SpinSp
+TextBox_10.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+TextBox_10.Position = UDim2.new(0.247999996, 0, 0.119999997, 0)
+TextBox_10.Size = UDim2.new(0, 53, 0, 17)
+TextBox_10.Font = Enum.Font.SourceSans
+TextBox_10.PlaceholderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_10.PlaceholderText = "Number:"
+TextBox_10.Text = spinsp
+TextBox_10.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_10.TextSize = 14.000
+
+Toogle_2.Name = "Toogle"
+Toogle_2.Parent = SpinSp
+Toogle_2.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+Toogle_2.Position = UDim2.new(-0.00264550559, 0, -0.569842458, 0)
+Toogle_2.Size = UDim2.new(0, 104, 0, 14)
+Toogle_2.Font = Enum.Font.SourceSans
+Toogle_2.Text = "Spin mode & its speed"
+Toogle_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+Toogle_2.TextSize = 13.000
+
+AimLock.Name = "AimLock"
+AimLock.Parent = Main
+AimLock.Active = true
+AimLock.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+AimLock.BackgroundTransparency = 0.200
+AimLock.Position = UDim2.new(0.306070596, 0, -0.008, 0)
+AimLock.Size = UDim2.new(0, 270, 0, 260)
+AimLock.Visible = false
+AimLock.CanvasSize = UDim2.new(0, 0, 1.25, 0)
+AimLock.ScrollBarThickness = 10
+
+Ref.Name = "Ref"
+Ref.Parent = Main
+Ref.Active = true
+Ref.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Ref.BackgroundTransparency = 0.200
+Ref.Position = UDim2.new(0.306070596, 0, -0.008, 0)
+Ref.Size = UDim2.new(0, 270, 0, 260)
+Ref.Visible = false
+Ref.CanvasSize = UDim2.new(0, 0, 1.25, 0)
+Ref.ScrollBarThickness = 10
 
 
 
-local player = game.Players.LocalPlayer
-local mouse = player:GetMouse()
-local uis = game:GetService("UserInputService")
-local function createPart()
-	local part = Instance.new("Part")
-	part.Size = Vector3.new(5, 5, 5)
-	part.Anchored = true
-	part.CanCollide = false
-	part.Position = game.Players.LocalPlayer.Character.Head.Position
-	part.Color = Color3.new(0, 0.666667, 0)
-	part.Transparency = 0.75
-	part.Parent = game.Workspace
-	part.Name = "REGIONPART"
-	return part
+
+Target.Name = "Target"
+Target.Parent = AimLock
+Target.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Target.Position = UDim2.new(0.0333333351, 0, 0.149433076, 0)
+Target.Size = UDim2.new(0, 105, 0, 31)
+Target.Style = Enum.ButtonStyle.RobloxRoundButton
+Target.Font = Enum.Font.SourceSans
+Target.Text = "Target"
+Target.TextColor3 = Color3.fromRGB(0, 0, 0)
+Target.TextSize = 14.000
+
+Frame_7.Parent = Target
+Frame_7.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Frame_7.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_7.BorderSizePixel = 2
+Frame_7.Position = UDim2.new(-0.104999997, 0, -0.973985493, 0)
+Frame_7.Size = UDim2.new(0, 100, 0, 70)
+Frame_7.Visible = false
+
+TextButton_7.Parent = Frame_7
+TextButton_7.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
+TextButton_7.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_7.BorderSizePixel = 2
+TextButton_7.Position = UDim2.new(0, 2, 0.0199999996, 0)
+TextButton_7.Size = UDim2.new(0, 95, 0, 31)
+TextButton_7.Font = Enum.Font.SourceSans
+TextButton_7.Text = "Head"
+TextButton_7.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_7.TextSize = 14.000
+
+TextButton_8.Parent = Frame_7
+TextButton_8.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
+TextButton_8.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_8.BorderSizePixel = 2
+TextButton_8.Position = UDim2.new(0, 2, 0.519999981, 0)
+TextButton_8.Size = UDim2.new(0, 95, 0, 31)
+TextButton_8.Font = Enum.Font.SourceSans
+TextButton_8.Text = "Torso"
+TextButton_8.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_8.TextSize = 14.000
+
+Start.Name = "Start"
+Start.Parent = AimLock
+Start.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Start.Position = UDim2.new(0.0333333015, 0, 0.0423464701, 0)
+Start.Size = UDim2.new(0, 105, 0, 31)
+Start.Style = Enum.ButtonStyle.RobloxRoundButton
+Start.Font = Enum.Font.SourceSans
+Start.Text = "Start"
+Start.TextColor3 = Color3.fromRGB(0, 0, 0)
+Start.TextSize = 14.000
+
+Key.Name = "Key"
+Key.Parent = AimLock
+Key.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Key.Position = UDim2.new(0.5, 0, 0.150000006, 0)
+Key.Size = UDim2.new(0, 105, 0, 31)
+Key.Style = Enum.ButtonStyle.RobloxRoundButton
+Key.Font = Enum.Font.SourceSans
+Key.Text = "Key"
+Key.TextColor3 = Color3.fromRGB(0, 0, 0)
+Key.TextSize = 14.000
+
+Frame_8.Parent = Key
+Frame_8.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Frame_8.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_8.BorderSizePixel = 2
+Frame_8.Position = UDim2.new(-0.104999997, 0, -0.973985493, 0)
+Frame_8.Size = UDim2.new(0, 100, 0, 70)
+Frame_8.Visible = false
+
+TextButton_10.Parent = Frame_8
+TextButton_10.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
+TextButton_10.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_10.BorderSizePixel = 2
+TextButton_10.Position = UDim2.new(0, 2, 0.0199999996, 0)
+TextButton_10.Size = UDim2.new(0, 95, 0, 31)
+TextButton_10.Font = Enum.Font.SourceSans
+TextButton_10.Text = "Right Click"
+TextButton_10.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton_10.TextSize = 14.000
+
+TextBox_11.Parent = Frame_8
+TextBox_11.BackgroundColor3 = Color3.fromRGB(115, 115, 115)
+TextBox_11.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_11.BorderSizePixel = 2
+TextBox_11.Position = UDim2.new(0, 2, 0.519999981, 0)
+TextBox_11.Size = UDim2.new(0, 95, 0, 31)
+TextBox_11.Font = Enum.Font.SourceSans
+TextBox_11.PlaceholderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_11.PlaceholderText = "Key: (q,r,f,s...)"
+TextBox_11.Text = ""
+TextBox_11.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox_11.TextSize = 14.000
+
+Prediction.Name = "Prediction"
+Prediction.Parent = AimLock
+Prediction.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+Prediction.Position = UDim2.new(0.5, 0, 0.063000001, 0)
+Prediction.Size = UDim2.new(0, 105, 0, 25)
+
+blockX.Name = "X"
+blockX.Parent = Ref
+blockX.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+blockX.Position = UDim2.new(0.033, 0, 0.042, 0)
+blockX.Size = UDim2.new(0, 105, 0, 25)
+
+blockY.Name = "Y"
+blockY.Parent = Ref
+blockY.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+blockY.Position = UDim2.new(0.033, 0, 0.199, 0)
+blockY.Size = UDim2.new(0, 105, 0, 25)
+
+blockZ.Name = "Z"
+blockZ.Parent = Ref
+blockZ.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+blockZ.Position = UDim2.new(0.033, 0, 0.356, 0)
+blockZ.Size = UDim2.new(0, 105, 0, 25)
+
+NUMBER0.Name = "NUMBER"
+NUMBER0.Parent = blockX
+NUMBER0.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+NUMBER0.Position = UDim2.new(0.247619063, 0, 0.107, 0)
+NUMBER0.Size = UDim2.new(0, 53, 0, 17)
+NUMBER0.Font = Enum.Font.SourceSans
+NUMBER0.Text = 0
+NUMBER0.TextColor3 = Color3.fromRGB(0, 0, 0)
+NUMBER0.TextSize = 14.000
+
+TEXTT.Name = "TEXTT"
+TEXTT.Parent = Ref
+TEXTT.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+TEXTT.Position = UDim2.new(0.015, 0,0.55, 0)
+TEXTT.Size = UDim2.new(0, 120,0, 30)
+TEXTT.Font = Enum.Font.SourceSans
+TEXTT.PlaceholderText = "Plot  owner's username"
+TEXTT.PlaceholderColor3 = Color3.fromRGB(0, 0, 0)
+TEXTT.TextSize = 12
+TEXTT.TextXAlignment = 0
+TEXTT.Text = ""
+
+
+NUMBERA.Name = "NUMBER"
+NUMBERA.Parent = blockY
+NUMBERA.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+NUMBERA.Position = UDim2.new(0.247619063, 0, 0.107, 0)
+NUMBERA.Size = UDim2.new(0, 53, 0, 17)
+NUMBERA.Font = Enum.Font.SourceSans
+NUMBERA.Text = 0
+NUMBERA.TextColor3 = Color3.fromRGB(0, 0, 0)
+NUMBERA.TextSize = 14.000
+
+NUMBERB.Name = "NUMBER"
+NUMBERB.Parent = blockZ
+NUMBERB.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+NUMBERB.Position = UDim2.new(0.247619063, 0, 0.107, 0)
+NUMBERB.Size = UDim2.new(0, 53, 0, 17)
+NUMBERB.Font = Enum.Font.SourceSans
+NUMBERB.Text = 0
+NUMBERB.TextColor3 = Color3.fromRGB(0, 0, 0)
+NUMBERB.TextSize = 14.000
+
+NUMBER.Name = "NUMBER"
+NUMBER.Parent = Prediction
+NUMBER.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+NUMBER.Position = UDim2.new(0.247619063, 0, 0.119999997, 0)
+NUMBER.Size = UDim2.new(0, 53, 0, 17)
+NUMBER.Font = Enum.Font.SourceSans
+NUMBER.Text = 0
+NUMBER.TextColor3 = Color3.fromRGB(0, 0, 0)
+NUMBER.TextSize = 14.000
+
+CreatePart.Name = "Create a part"
+CreatePart.Parent = Ref
+CreatePart.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+CreatePart.Position = UDim2.new(0.5, 0, 0.018905513, 0)
+CreatePart.Size = UDim2.new(0, 105, 0, 31)
+CreatePart.Style = Enum.ButtonStyle.RobloxRoundButton
+CreatePart.Font = Enum.Font.SourceSans
+CreatePart.Text = " Create a part"
+CreatePart.TextColor3 = Color3.fromRGB(0, 0, 0)
+CreatePart.TextSize = 14.000
+
+DestroyPart.Name = "Destroy the part"
+DestroyPart.Parent = Ref
+DestroyPart.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+DestroyPart.Position = UDim2.new(0.5, 0, 0.130535483, 0)
+DestroyPart.Size = UDim2.new(0, 105, 0, 31)
+DestroyPart.Style = Enum.ButtonStyle.RobloxRoundButton
+DestroyPart.Font = Enum.Font.SourceSans
+DestroyPart.Text = "Destroy the part"
+DestroyPart.TextColor3 = Color3.fromRGB(0, 0, 0)
+DestroyPart.TextSize = 14.000
+
+DESIGN_x.Name = "DESIGN"
+DESIGN_x.Parent = blockX
+DESIGN_x.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+DESIGN_x.Position = UDim2.new(0, 0, -0.661499918, 0)
+DESIGN_x.Size = UDim2.new(0, 104, 0, 14)
+DESIGN_x.Font = Enum.Font.SourceSans
+DESIGN_x.Text = "X value"
+DESIGN_x.TextColor3 = Color3.fromRGB(0, 0, 0)
+DESIGN_x.TextSize = 14.000
+
+DESIGN_y.Name = "DESIGN"
+DESIGN_y.Parent = blockY
+DESIGN_y.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+DESIGN_y.Position = UDim2.new(0, 0, -0.661499918, 0)
+DESIGN_y.Size = UDim2.new(0, 104, 0, 14)
+DESIGN_y.Font = Enum.Font.SourceSans
+DESIGN_y.Text = "Y value"
+DESIGN_y.TextColor3 = Color3.fromRGB(0, 0, 0)
+DESIGN_y.TextSize = 14.000
+
+DESIGN_z.Name = "DESIGN"
+DESIGN_z.Parent = blockZ
+DESIGN_z.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+DESIGN_z.Position = UDim2.new(0, 0, -0.661499918, 0)
+DESIGN_z.Size = UDim2.new(0, 104, 0, 14)
+DESIGN_z.Font = Enum.Font.SourceSans
+DESIGN_z.Text = "Z value"
+DESIGN_z.TextColor3 = Color3.fromRGB(0, 0, 0)
+DESIGN_z.TextSize = 14.000
+
+Plus_x.Name = "Plus"
+Plus_x.Parent = blockX
+Plus_x.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Plus_x.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Plus_x.Position = UDim2.new(0.786000013, 0, 0.0659999996, 0)
+Plus_x.Size = UDim2.new(0, 22, 0, 21)
+Plus_x.Font = Enum.Font.SourceSans
+Plus_x.Text = "+"
+Plus_x.TextColor3 = Color3.fromRGB(0, 170, 0)
+Plus_x.TextSize = 14.000
+
+Plus_y.Name = "Plus"
+Plus_y.Parent = blockY
+Plus_y.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Plus_y.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Plus_y.Position = UDim2.new(0.786000013, 0, 0.0659999996, 0)
+Plus_y.Size = UDim2.new(0, 22, 0, 21)
+Plus_y.Font = Enum.Font.SourceSans
+Plus_y.Text = "+"
+Plus_y.TextColor3 = Color3.fromRGB(0, 170, 0)
+Plus_y.TextSize = 14.000
+
+Plus_z.Name = "Plus"
+Plus_z.Parent = blockZ
+Plus_z.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Plus_z.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Plus_z.Position = UDim2.new(0.786000013, 0, 0.0659999996, 0)
+Plus_z.Size = UDim2.new(0, 22, 0, 21)
+Plus_z.Font = Enum.Font.SourceSans
+Plus_z.Text = "+"
+Plus_z.TextColor3 = Color3.fromRGB(0, 170, 0)
+Plus_z.TextSize = 14.000
+
+Minus_x.Name = "Minus"
+Minus_x.Parent = blockX
+Minus_x.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Minus_x.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Minus_x.Position = UDim2.new(0.0149999997, 0, 0.0659999996, 0)
+Minus_x.Size = UDim2.new(0, 22, 0, 21)
+Minus_x.Font = Enum.Font.SourceSans
+Minus_x.Text = "-"
+Minus_x.TextColor3 = Color3.fromRGB(255, 0, 0)
+Minus_x.TextSize = 14.000
+
+Minus_y.Name = "Minus"
+Minus_y.Parent = blockY
+Minus_y.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Minus_y.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Minus_y.Position = UDim2.new(0.0149999997, 0, 0.0659999996, 0)
+Minus_y.Size = UDim2.new(0, 22, 0, 21)
+Minus_y.Font = Enum.Font.SourceSans
+Minus_y.Text = "-"
+Minus_y.TextColor3 = Color3.fromRGB(255, 0, 0)
+Minus_y.TextSize = 14.000
+
+Minus_z.Name = "Minus"
+Minus_z.Parent = blockZ
+Minus_z.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Minus_z.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Minus_z.Position = UDim2.new(0.0149999997, 0, 0.0659999996, 0)
+Minus_z.Size = UDim2.new(0, 22, 0, 21)
+Minus_z.Font = Enum.Font.SourceSans
+Minus_z.Text = "-"
+Minus_z.TextColor3 = Color3.fromRGB(255, 0, 0)
+Minus_z.TextSize = 14.000
+
+
+Movemd.Name = "Movemd"
+Movemd.Parent = Ref
+Movemd.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Movemd.Position = UDim2.new(0.5, 0, 0.238, 0)
+Movemd.Size = UDim2.new(0, 105, 0, 31)
+Movemd.Style = Enum.ButtonStyle.RobloxRoundButton
+Movemd.Font = Enum.Font.SourceSans
+Movemd.Text = "Move mode"
+Movemd.TextColor3 = Color3.fromRGB(0, 0, 0)
+Movemd.TextSize = 14.000
+
+
+Sizemd.Name = "Sizemd"
+Sizemd.Parent = Ref
+Sizemd.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Sizemd.Position = UDim2.new(0.5, 0, 0.346, 0)
+Sizemd.Size = UDim2.new(0, 105, 0, 31)
+Sizemd.Style = Enum.ButtonStyle.RobloxRoundButton
+Sizemd.Font = Enum.Font.SourceSans
+Sizemd.Text = "Size mode"
+Sizemd.TextColor3 = Color3.fromRGB(0, 0, 0)
+Sizemd.TextSize = 14.000
+
+selectt.Name = "selectt"
+selectt.Parent = Ref
+selectt.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+selectt.Position = UDim2.new(0.5, 0, 0.446, 0)
+selectt.Size = UDim2.new(0, 105, 0, 31)
+selectt.Style = Enum.ButtonStyle.RobloxRoundButton
+selectt.Font = Enum.Font.SourceSans
+selectt.Text = "Select parts"
+selectt.TextColor3 = Color3.fromRGB(0, 0, 0)
+selectt.TextSize = 14.000
+
+Movemm.Name = "Movemm"
+Movemm.Parent = Ref
+Movemm.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Movemm.Position = UDim2.new(0.5, 0, 0.546, 0)
+Movemm.Size = UDim2.new(0, 105, 0, 31)
+Movemm.Style = Enum.ButtonStyle.RobloxRoundButton
+Movemm.Font = Enum.Font.SourceSans
+Movemm.Text = "Move parts"
+Movemm.TextColor3 = Color3.fromRGB(0, 0, 0)
+Movemm.TextSize = 14.000
+
+Buildd.Name = "Buildd"
+Buildd.Parent = Ref
+Buildd.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Buildd.Position = UDim2.new(0.03, 0, 0.446, 0)
+Buildd.Size = UDim2.new(0, 105, 0, 31)
+Buildd.Style = Enum.ButtonStyle.RobloxRoundButton
+Buildd.Font = Enum.Font.SourceSans
+Buildd.Text = "Build parts"
+Buildd.TextColor3 = Color3.fromRGB(0, 0, 0)
+Buildd.TextSize = 14.000
+
+
+Plus_5.Name = "Plus"
+Plus_5.Parent = Prediction
+Plus_5.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Plus_5.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Plus_5.Position = UDim2.new(0.786000013, 0, 0.0659999996, 0)
+Plus_5.Size = UDim2.new(0, 22, 0, 21)
+Plus_5.Font = Enum.Font.SourceSans
+Plus_5.Text = "+"
+Plus_5.TextColor3 = Color3.fromRGB(0, 170, 0)
+Plus_5.TextSize = 14.000
+
+DESIGN_5.Name = "DESIGN"
+DESIGN_5.Parent = Prediction
+DESIGN_5.BackgroundColor3 = Color3.fromRGB(136, 136, 136)
+DESIGN_5.Position = UDim2.new(0, 0, -0.661499918, 0)
+DESIGN_5.Size = UDim2.new(0, 104, 0, 14)
+DESIGN_5.Font = Enum.Font.SourceSans
+DESIGN_5.Text = "Prediction"
+DESIGN_5.TextColor3 = Color3.fromRGB(0, 0, 0)
+DESIGN_5.TextSize = 14.000
+
+Minus_5.Name = "Minus"
+Minus_5.Parent = Prediction
+Minus_5.BackgroundColor3 = Color3.fromRGB(54, 54, 54)
+Minus_5.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Minus_5.Position = UDim2.new(0.0149999997, 0, 0.0659999996, 0)
+Minus_5.Size = UDim2.new(0, 22, 0, 21)
+Minus_5.Font = Enum.Font.SourceSans
+Minus_5.Text = "-"
+Minus_5.TextColor3 = Color3.fromRGB(255, 0, 0)
+Minus_5.TextSize = 14.000
+
+SimpleSpy.Name = "SimpleSpy"
+SimpleSpy.Parent = Main
+SimpleSpy.Active = true
+SimpleSpy.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+SimpleSpy.BackgroundTransparency = 0.200
+SimpleSpy.BorderColor3 = Color3.fromRGB(27, 42, 53)
+SimpleSpy.Position = UDim2.new(0.305999994, 0, -0.023, 0)
+SimpleSpy.Size = UDim2.new(0, 270, 0, 265)
+SimpleSpy.Visible = false
+SimpleSpy.CanvasSize = UDim2.new(0, 0, 1.25, 0)
+
+Execute.Name = "Execute"
+Execute.Parent = SimpleSpy
+Execute.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Execute.Position = UDim2.new(0.0296296272, 0, 0.018905513, 0)
+Execute.Size = UDim2.new(0, 105, 0, 31)
+Execute.Style = Enum.ButtonStyle.RobloxRoundButton
+Execute.Font = Enum.Font.SourceSans
+Execute.Text = "Launch"
+Execute.TextColor3 = Color3.fromRGB(0, 0, 0)
+Execute.TextSize = 14.000
+local plr = game.Players.LocalPlayer
+local mous = plr:GetMouse()
+local paged = false
+local aimStart = false
+local pages = {}
+local target = "Head"
+local epi = 0.4
+local keyy = nil
+local infjumpp = false
+local tpp = false
+local tpk = nil
+local speedd = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed
+local jumpp = game.Players.LocalPlayer.Character.Humanoid.JumpHeight
+local chamm1 = false
+local chamm2 = false
+local autopick = false
+local holdpick = false
+local autoheal = false
+local holdheal = false
+local holdhealkey = nil
+local pickparts = false
+local dropparts = false
+local pickwmouse = false
+local pickwmousekey = nil
+local throwkeyy = nil
+local line = false
+local heightt = 3
+local throww = false
+local throwstre = 1
+local LeOrRight = 0
+local spinn = false
+local spinsp = 0.2
+local info = {}
+local started = false
+local times = 2.3
+local attracting = false
+local fling = false
+local healarg = nil
+local waitt = 1
+local e = game.Players.LocalPlayer
+local spinspp = 0
+local num123 = 0
+local building = false
+local qeqe = 0
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+
+if game.Players.LocalPlayer.PlayerGui:FindFirstChild("MainGui") and game.Players.LocalPlayer.PlayerGui:FindFirstChild("MainGui"):FindFirstChild("RightPanel") then
+	for _, v in pairs(game.Players.LocalPlayer.PlayerGui.MainGui.RightPanel.Inventory.List:GetChildren()) do
+		qeqe += 1
+		if v.Name == "Bloodfruit" then
+			local eqeq = qeqe - 1
+			healarg = eqeq
+		end
+	end
 end
-local built = false
-local selectedPart = nil
-
-
-local function run()
-	if built == true then
-		local region = Region3.new(workspace.REGIONPART.Position - workspace.REGIONPART.Size / 2, workspace.REGIONPART.Position + workspace.REGIONPART.Size / 2)
-		local partsinregion = workspace:FindPartsInRegion3(region, workspace.REGIONPART, 100000)
-		for _, v in pairs(partsinregion) do
-			if v ~= nil and v.ClassName == "Part" and v.Name ~= "Hitbox" and v.Parent.Parent.Name == "Objects" then
-				table.insert(parts, v.Parent)
+local function forcestart()
+	while attracting == true do
+		if line == true and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Health > 0 then
+			local nuz = 0
+			for _, v in pairs(info) do
+				if v ~= nil then
+					nuz += 1
+				end
 			end
-			if v.Parent.Name == "Ramp 1/1 x 1" then
-				table.insert(parts, v.Parent)
+			nuz -= 1
+			local disst = (nuz * times) /-2
+			local nuzz = 0
+			for _, v in pairs(info) do
+				if v ~= nil and v:FindFirstChild("BodyPosition") ~= nil and v:FindFirstChild("BodyGyro") and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Health > 0 then
+					local fut = e.Character:FindFirstChild("HumanoidRootPart").CFrame + (e.Character:FindFirstChild("HumanoidRootPart").Velocity * .4)
+					local xx = fut * CFrame.new(disst + nuzz, 0, 0)
+					local zz = fut * CFrame.new(disst + nuzz, 0, 0)
+					nuzz +=  times
+					v.BodyGyro.CFrame = e.Character:FindFirstChild("Head").CFrame
+					v.BodyPosition.Position = Vector3.new(xx.x + LeOrRight, fut.y + heightt, zz.z)
+				end
 			end
 		end
-		local a = workspace.REGIONPART.Position
-		_x = a.x
-		_y = a.y
-		_z = a.z
-		ready = true
+		if spinn == true and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Health > 0 then
+			local set = 0
+			for _, v in pairs(info) do
+				if v ~= nil then
+					set += 1
+				end
+			end
+			local setup = 360 / set
+			local items = 0
+			for _, v in pairs(info) do
+				if v ~= nil and v:FindFirstChild("BodyPosition") ~= nil and v:FindFirstChild("BodyGyro") and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Health > 0 then
+					local fut = e.Character:FindFirstChild("HumanoidRootPart").Position + (e.Character:FindFirstChild("HumanoidRootPart").Velocity * .4)
+					local ea = spinsp * 50
+					local xx = fut.x + ea * math.cos(math.rad(spinspp + setup * items))
+					local yy = fut.y
+					local zz = fut.z - ea * math.sin(math.rad(spinspp + setup * items))
+					spinspp += spinsp
+					items += 1
+					v.BodyPosition.Position = Vector3.new(xx + LeOrRight, yy + heightt, zz)
+					v.BodyGyro.CFrame = e.Character:FindFirstChild("Head").CFrame
+				end
+			end
+		end
+		if line == false and spinn == false and attracting == true and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Health > 0 then
+			for _, v in pairs(info) do
+				if v ~= nil and v:FindFirstChild("BodyPosition") ~= nil and v:FindFirstChild("BodyGyro") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Health > 0 then
+					local fut = e.Character:FindFirstChild("HumanoidRootPart").CFrame + (e.Character:FindFirstChild("HumanoidRootPart").Velocity * .4)
+					local xx = fut * CFrame.new(LeOrRight, 0, 0)
+					local zz = fut * CFrame.new(LeOrRight, 0, 0)
+					v.BodyPosition.Position = Vector3.new(xx.x, fut.y + heightt, zz.z)
+					v.BodyGyro.CFrame = e.Character:FindFirstChild("Head").CFrame
+				end
+			end
+		end
+		game:GetService("RunService").Heartbeat:Wait()
+	end
+end
+local function CreateSG(name,parent,face)
+	local SurfaceGui = Instance.new("SurfaceGui",parent)
+	SurfaceGui.Parent = parent
+	SurfaceGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	SurfaceGui.Face = Enum.NormalId[face]
+	SurfaceGui.LightInfluence = 0
+	SurfaceGui.ResetOnSpawn = false
+	SurfaceGui.Name = name
+	SurfaceGui.AlwaysOnTop = true
+	local Frame = Instance.new("Frame",SurfaceGui)
+	Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	Frame.Size = UDim2.new(1,0,1,0)
+	Frame.BorderColor3 = Color3.fromRGB(255, 0, 0)
+	Frame.BorderSizePixel = 7
+	Frame.BackgroundTransparency = 0.9
+end
+
+local ended = false
+local function chamm12()
+	while wait(5) and chamm1 == true do
+		if chamm1 == true then
+			ended = false
+			for i,v in pairs (game:GetService("Players"):GetPlayers()) do
+				if v ~= game:GetService("Players").LocalPlayer and 
+					v.Character ~= nil and 
+					v.Character:FindFirstChild("Head") and 
+					_G.chams == true and
+					v.Character.Head:FindFirstChild("lol1") == nil and
+					v.Name ~= game.Players.LocalPlayer.Name then
+					for i,v in pairs(v.Character:GetChildren()) do
+						if v:IsA("MeshPart") or v.Name == "Head" or v:IsA("Part") then
+							CreateSG("lol1",v,"Back")
+							CreateSG("lol1",v,"Front")
+							CreateSG("lol1",v,"Left")
+							CreateSG("lol1",v,"Right")
+							CreateSG("lol1",v,"Top")
+							CreateSG("lol1",v,"Bottom")
+						end
+					end
+
+				end
+			end
+		end
+		if chamm1 == false and ended == false then
+			for i, b in pairs(game:GetDescendants()) do
+				if b:IsA("SurfaceGui") and b.Name == "lol1" then
+					b:Destroy()
+				end
+			end
+			ended = true
+		end
 	end
 end
 
-local function buildd()
-	local ea = workspace.REGIONPART.Position
+local ended1 = false
+local function chamm21()
+	while chamm2 == true do
+		if chamm2 == true then
+			ended1 = false
+			for _, v in pairs(game.Players:GetPlayers()) do
+				local ch = Instance.new("Highlight")
+				ch.OutlineColor = Color3.fromRGB(255, 0, 0)
+				ch.FillColor = Color3.fromRGB(0, 0, 0)
+				ch.OutlineTransparency = 0.5
+				ch.FillTransparency = 1
+				ch.Name = "lol3"
+				ch.Enabled = true
+				if v ~= nil and v ~= game.Players.LocalPlayer and v.Character ~= nil then
+					if chamm2 == true then
+						if v.Character:FindFirstChild("lol3") then
+							_G.defak = true
+						else
+							ch.Adornee = v.Character
+							ch.Parent = v.Character	
+						end
+					end
+				end
+			end
+		end
+		if chamm2 == false and ended1 == false then
+			for _, v in pairs(game:GetDescendants()) do
+				if v.Name == "lol3" then
+					v:Destroy()
+				end
+			end
+			ended1 = true
+		end
+		wait(1)
+	end
+end
+local function autopick1()
+	while autopick == true do
+		if autopick == true then
+			local chr = game.Players.LocalPlayer.Character
+			local items = {}
+			for _, pick in pairs(game.Workspace:GetChildren()) do
+				if pick:FindFirstChild("Pickup") then
+					for _, pick1 in pairs(pick:GetChildren()) do
+						if pick1:IsA("Part") and (chr.HumanoidRootPart.Position - pick1.Position).magnitude < 80 then
+							table.insert(items, pick)
+						end
+					end
+				end
+			end
+			for _, pick in pairs(game.Workspace.Items:GetChildren()) do
+				if pick.ClassName ~= "Model" and (chr.HumanoidRootPart.Position - pick.Position).magnitude < 80 then
+					table.insert(items, pick)
+				end
+			end
+			for _, pick in pairs(game.Workspace.Deployables:GetDescendants()) do
+				if pick.Name == "Pickup" and pick.Parent.Parent.Parent.Name == "Chest" and (chr.HumanoidRootPart.Position - pick.Parent.Parent.Parent.Base.Position).magnitude < 80 then
+					table.insert(items, pick.Parent)
+				end
+			end
+
+			for _, pick in pairs(items) do
+				game:GetService("ReplicatedStorage").Events.Pickup:FireServer(pick, pick.ClassName)
+			end
+		end
+		wait(2)
+	end
+end
+local function autoheal1()
+	while autoheal == true do
+		local popo = 0
+		for _, v in pairs(game.Players.LocalPlayer.PlayerGui.MainGui.RightPanel.Inventory.List:GetChildren()) do
+			popo += 1
+			if v.Name == "Bloodfruit" then
+				local popo = popo - 1
+				healarg = popo
+			end
+		end
+		if autoheal == true then
+			if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Health ~= nil and game.Players.LocalPlayer.Character.Humanoid.Health < 100 and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Health ~= 0 then
+				repeat
+					game:GetService("ReplicatedStorage").Events.UseBagItem:FireServer(tonumber(healarg))
+					wait()
+				until game.Players.LocalPlayer:FindFirstChild("Character") == nil or game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") == nil or game.Players.LocalPlayer.Character.Humanoid:FindFirstChild("Health") == nil or game.Players.LocalPlayer.Character.Humanoid.Health == 100 or game.Players.LocalPlayer.Character.Humanoid.Health == 0 or autoheal == false
+			end
+		end
+		wait()
+	end
+end
+
+for _, v in pairs(Main:GetChildren()) do
+	if v.Name == "AimLock" or v.Name == "LocalPlr" or v.Name == "Booga" or v.Name == "Visuals" or v.Name == "SimpleSpy" or v.Name == "Ref" then
+		table.insert(pages, v)
+	end
+end
+
+local UIS = game:GetService('UserInputService')
+local frame = Main
+local dragToggle = nil
+local dragSpeed = 0.25
+local dragStart = nil
+local startPos = nil
+
+local function updateInput(input)
+	local delta = input.Position - dragStart
+	local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+		startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+end
+
+frame.InputBegan:Connect(function(input)
+	if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+		dragToggle = true
+		dragStart = input.Position
+		startPos = frame.Position
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragToggle = false
+			end
+		end)
+	end
+end)
+
+UIS.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+		if dragToggle then
+			updateInput(input)
+		end
+	end
+end)
+
+----
+_1.MouseButton1Click:Connect(function()
+	local a = AimLock
+	if paged == false then
+		a.Visible = true
+		paged = true
+	else
+		if a.Visible == false then
+			for _, v in pairs(pages) do
+				v.Visible = false	
+			end
+			a.Visible = true
+		end
+	end
+end)
+_2.MouseButton1Click:Connect(function()
+	local a = LocalPlr
+	if paged == false then
+		a.Visible = true
+		paged = true
+	else
+		if a.Visible == false then
+			for _, v in pairs(pages) do
+				v.Visible = false	
+			end
+			a.Visible = true
+		end
+	end
+end)
+_3.MouseButton1Click:Connect(function()
+	local a = Visuals
+	if paged == false then
+		a.Visible = true
+		paged = true
+	else
+		if a.Visible == false then
+			for _, v in pairs(pages) do
+				v.Visible = false	
+			end
+			a.Visible = true
+		end
+	end
+end)
+_4.MouseButton1Click:Connect(function()
+	local a = Booga
+	if paged == false then
+		a.Visible = true
+		paged = true
+	else
+		if a.Visible == false then
+			for _, v in pairs(pages) do
+				v.Visible = false	
+			end
+			a.Visible = true
+		end
+	end
+end)
+_6.MouseButton1Click:Connect(function()
+	local a = Ref
+	if paged == false then
+		a.Visible = true
+		paged = true
+	else
+		if a.Visible == false then
+			for _, v in pairs(pages) do
+				v.Visible = false	
+			end
+			a.Visible = true
+		end
+	end
+end)
+_7.MouseButton1Click:Connect(function()
+	local a = SimpleSpy
+	if paged == false then
+		a.Visible = true
+		paged = true
+	else
+		if a.Visible == false then
+			for _, v in pairs(pages) do
+				v.Visible = false	
+			end
+			a.Visible = true
+		end
+	end
+end)
+Start.MouseButton1Click:Connect(function()
+	if aimStart == false then
+		aimStart = true
+		print("Aimlocking: true")
+	else
+		aimStart = false
+		print("Aimlocking: false")
+	end
+end)
+Target.MouseButton1Click:Connect(function()
+	Target.Frame.Visible = true
+end)
+TextButton_7.MouseButton1Click:Connect(function()
+	target = "Head"
+	Target.Frame.Visible = false
+	print("Target:"..target)
+end)
+TextButton_8.MouseButton1Click:Connect(function()
+	target = "Torso"
+	Target.Frame.Visible = false
+	print("Target:"..target)
+end)
+
+DestroyPart.MouseButton1Click:Connect(function()
+	if created == true then
+		if workspace:FindFirstChild("selectedPart") ~= nil then
+			workspace:FindFirstChild("selectedPart"):Destroy()
+		end
+		created = false
+	end
+end)
+Minus_5.MouseButton1Click:Connect(function()
+	epi -= 0.1
+	local val = epi val *= 100 val = math.floor(val) val = val / 100
+	Plus_5.Parent.NUMBER.Text = val
+	print("Pred: "..val)
+end)
+Key.MouseButton1Click:Connect(function()
+	Key.Frame.Visible = true
+end)
+TextButton_10.MouseButton1Click:Connect(function()
+	keyy = "RightClick"
+	Key.Frame.Visible = false
+	print("Key set: "..keyy)
+end)
+TextBox_11.InputEnded:Connect(function()
+	if TextBox_11.Text ~= "" then
+		keyy = TextBox_11.Text
+		print("Key set: "..keyy)
+		Key.Frame.Visible = false
+	end
+end)
+InfJump.MouseButton1Click:Connect(function()
+	if infjumpp == false then
+		infjumpp = true
+		print("InfJump: enabled")
+	else
+		infjumpp = false
+		print("InfJump: disabled")
+	end
+end)
+Invisibility.MouseButton1Click:Connect(function()
+	local mi = game.Players.LocalPlayer
+	local me = mi.Character
+	me.Head.Anchored = true
+	me.LowerTorso:Destroy()
+end)
+Speed.MouseButton1Click:Connect(function()
+	Speed.Frame.Visible = true
+end)
+TextBox.InputEnded:Connect(function()
+	if TextBox.Text ~= "" then
+		Speed.Frame.Visible = false
+		speedd = TextBox.Text
+		print("Speed set: "..speedd)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speedd
+	end
+end)
+TP.MouseButton1Click:Connect(function()
+	TP.Frame.Visible = true
+	if tpp == false then
+		tpp = true
+		print("Tp: enabled")
+	else
+		tpp = false
+		print("Tp: disabled")
+	end
+end)
+TP.Frame.TextBox.InputEnded:Connect(function()
+	if TP.Frame.TextBox.Text ~= "" then
+		tpk = TP.Frame.TextBox.Text
+		print("TP Key: "..tpk)
+		TP.Frame.Visible = false
+	end
+end)
+JumpHeight.MouseButton1Click:Connect(function()
+	JumpHeight.Frame.Visible = true
+end)
+JumpHeight.Frame.TextBox.InputEnded:Connect(function()
+	if JumpHeight.Frame.TextBox.Text ~= "" then
+		jumpp = JumpHeight.Frame.TextBox.Text
+		JumpHeight.Frame.Visible = false
+		print("JumpHeight set: "..jumpp)
+		game.Players.LocalPlayer.Character.Humanoid.JumpHeight = jumpp
+	end
+end)
+Chams1.MouseButton1Click:Connect(function()
+	if chamm1 == false then
+		chamm1 = true
+		print("Chams 1: enabled")
+		chamm12()
+	else
+		chamm1 = false
+		print("Chams 1: disabled")
+	end
+end)
+Chams2.MouseButton1Click:Connect(function()
+	if chamm2 == false then
+		chamm2 = true
+		print("Chams 2: enabled")
+		chamm21()
+	else
+		chamm2 = false
+		print("Chams 2: disabled")
+	end
+end)
+AutoPick.MouseButton1Click:Connect(function()
+	if autopick == false then
+		autopick = true
+		print("Auto Pick: enabled")
+		autopick1()
+	else
+		autopick = false
+		print("Auto Pick: disabled")
+	end
+end)
+AutoHeal.MouseButton1Click:Connect(function()
+	if autoheal == false then
+		autoheal = true
+		print("Auto Heal: enabled")
+		autoheal1()
+	else
+		autoheal = false
+		print("Auto Heal: disabled")
+	end
+end)
+HoldPick.MouseButton1Click:Connect(function()
+	if holdpick == false then
+		holdpick = true
+		print("Hold to Pick: enabled")
+	else
+		holdpick = false
+		print("Hold to Pick: disabled")
+	end
+end)
+HoldHeal.MouseButton1Click:Connect(function()
+	HoldHeal.Frame.Visible = true
+	if holdheal == false then
+		holdheal = true
+		print("Hold to Heal: enabled")
+	else
+		holdheal = false
+		print("Hold to Heal: disabled")
+	end
+end)
+HoldHeal.Frame.TextBox.InputEnded:Connect(function()
+	if HoldHeal.Frame.TextBox.Text ~= "" then
+		HoldHeal.Frame.Visible = false
+		holdhealkey = HoldHeal.Frame.TextBox.Text
+		print("Hold To Heal Key: "..holdhealkey)
+	end
+end)
+PickPart.MouseButton1Click:Connect(function()
+	print("Started")
+	attracting = true
+	local e = game.Players.LocalPlayer
+	for _, v in pairs(game:GetService("Workspace").Critters:GetChildren()) do
+		if v:FindFirstChild("Head") ~= nil and (v.Head.Position - e.Character.HumanoidRootPart.Position).magnitude < 50 then
+			if v.Name == "Lurky Boi" then
+				print("Inserted into a table: "..v.Name)
+				table.insert(info, v.HumanoidRootPart)
+				local a = v.HumanoidRootPart
+				if a:FindFirstChild("BodyPosition") ~= nil then
+					a.BodyPosition:Destroy()
+				end
+				if a:FindFirstChild("BodyGyro") ~= nil then
+					a.BodyGyro:Destroy()
+				end
+				local i = Instance.new("BodyPosition")
+				i.Parent = a
+				i.MaxForce = Vector3.new(math.huge*math.huge,math.huge*math.huge,math.huge*math.huge)
+				local p = Instance.new("BodyGyro")
+				p.Parent = a
+				p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+			else
+				print("Inserted into a table: "..v.Name)
+				table.insert(info, v.Head)
+				local a = v.Head
+				if a:FindFirstChild("BodyPosition") ~= nil then
+					a.BodyPosition:Destroy()
+				end
+				if a:FindFirstChild("BodyGyro") ~= nil then
+					a.BodyGyro:Destroy()
+				end
+				local i = Instance.new("BodyPosition")
+				i.Parent = a
+				i.MaxForce = Vector3.new(math.huge*math.huge,math.huge*math.huge,math.huge*math.huge)
+				local p = Instance.new("BodyGyro")
+				p.Parent = a
+				p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+			end				
+
+		end
+	end
+	forcestart()
+end)
+DropPart.MouseButton1Click:Connect(function()
+	print("Stopped")
+	for _, v in pairs(info) do
+		if v then
+			if v:FindFirstChild("BodyPosition") then
+				v.BodyPosition:Destroy()
+			end
+			if v:FindFirstChild("BodyGyro") then
+				v.BodyGyro:Destroy()
+			end
+			print("Table removed")
+			table.clear(info)
+		end
+	end
+	attracting = false
+end)
+PickwMous.MouseButton1Click:Connect(function()
+	if pickwmouse == false then
+		pickwmouse = true
+		PickwMous.Frame.Visible = true
+		ThrowKey.Visible = false
+		print("Pick with Mouse: enabled")
+	else
+		pickwmouse = false
+		print("Pick with Mouse: disabled")
+	end
+end)
+PickwMous.Frame.TextBox.InputEnded:Connect(function()
+	if PickwMous.Frame.TextBox.Text ~= "" then
+		pickwmousekey = PickwMous.Frame.TextBox.Text
+		PickwMous.Frame.Visible = false
+		ThrowKey.Visible = true
+		print("Pick with Mouse Key: "..pickwmousekey)
+	end
+end)
+ThrowKey.MouseButton1Click:Connect(function()
+	ThrowKey.Frame.Visible = true
+	LineMode.Visible = false
+end)
+ThrowKey.Frame.TextBox.InputEnded:Connect(function()
+	if ThrowKey.Frame.TextBox.Text ~= "" then
+		ThrowKey.Frame.Visible = false
+		LineMode.Visible = true
+		throwkeyy = ThrowKey.Frame.TextBox.Text
+		print("Throw Key: "..throwkeyy)
+	end
+end)
+LineMode.MouseButton1Click:Connect(function()
+	if line == false then
+		line = true
+		print("Line Mode: enabled")
+	else
+		line = false
+		print("Line Mode: disabled")
+	end
+end)
+
+TextBox_6.InputEnded:Connect(function()
+	if TextBox_6.Text ~= nil then
+		LeOrRight = TextBox_6.Text
+		forcestart()
+	end
+end)
+Plus.MouseButton1Click:Connect(function()
+	heightt += 4
+	local val = heightt val *= 100 val = math.floor(val) val = val / 100
+	Plus.Parent.TextBox.Text = val
+end)
+Minus.MouseButton1Click:Connect(function()
+	heightt -= 4
+	local val = heightt val *= 100 val = math.floor(val) val = val / 100
+	Minus.Parent.TextBox.Text = val
+end)
+TextBox_7.InputEnded:Connect(function()
+	if TextBox_7.Text ~= nil then
+		throwstre = TextBox_7.Text
+		forcestart()
+	end
+end)
+Plus_3.MouseButton1Click:Connect(function()
+	throwstre += 1
+	local val = throwstre val *= 100 val = math.floor(val) val = val / 100
+	Plus_3.Parent.TextBox.Text = val
+end)
+Minus_3.MouseButton1Click:Connect(function()
+	throwstre -= 1
+	local val = throwstre val *= 100 val = math.floor(val) val = val / 100
+	Minus_3.Parent.TextBox.Text = val
+	print("Throw strength: "..throwstre)
+end)
+TextBox_5.InputEnded:Connect(function()
+	if TextBox_5.Text ~= nil then
+		heightt = TextBox_5.Text
+		forcestart()
+	end
+end)
+Toogle.MouseButton1Click:Connect(function()
+	if throww == false then
+		throww = true
+		print("Throw Mode: enabled")
+	else
+		throww = false
+		print("Throw Mode: disabled")
+	end
+end)
+Plus_2.MouseButton1Click:Connect(function()
+	LeOrRight += 6
+	local val = LeOrRight val *= 100 val = math.floor(val) val = val / 100
+	Plus_2.Parent.TextBox.Text = val
+end)
+Minus_2.MouseButton1Click:Connect(function()
+	LeOrRight -= 6
+	local val = LeOrRight val *= 100 val = math.floor(val) val = val / 100
+	Minus_2.Parent.TextBox.Text = val
+end)
+Plus_4.MouseButton1Click:Connect(function()
+	spinsp += 0.05
+	local val = spinsp val *= 100 val = math.floor(val) val = val / 100
+	Plus_4.Parent.TextBox.Text = val
+end)
+Minus_4.MouseButton1Click:Connect(function()
+	spinsp -= 0.05
+	local val = spinsp val *= 100 val = math.floor(val) val = val / 100
+	Minus_4.Parent.TextBox.Text = val
+end)
+Toogle_2.MouseButton1Click:Connect(function()
+	if spinn == false then
+		spinn = true
+		print("Spin Mode: enabled")
+	else
+		spinn = false
+		print("Spin Mode: disabled")
+	end
+end)
+TextBox_10.InputEnded:Connect(function()
+	if TextBox_10.Text ~= nil then
+		spinsp = TextBox_10.Text
+		forcestart()
+	end
+end)
+Execute.MouseButton1Click:Connect(function()
+	loadstring(game:HttpGet("https://pastebin.com/raw/66NjbMN7",true))()
+end)
+------
+
+
+
+---
+
+local Area = game:GetService("Workspace")
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+local MyView = Area.CurrentCamera
+local Holding = false
+local Active = false
+local Lock = false
+_G.Sensitivity = 0
+_G.CircleSides = 64
+_G.CircleColor = Color3.fromRGB(255, 0, 130)
+_G.CircleTransparency = 0
+_G.CircleRadius = 2000
+_G.CircleFilled = false
+_G.CircleVisible = true
+_G.CircleThickness = 1
+
+local function FindNearestPlayer()
+	local dist = math.huge
+	local Target = nil
+	for _, v in pairs(Players:GetPlayers()) do
+		if v ~= nil and v ~= LocalPlayer and v.Character and v.Character:FindFirstChild("Head") ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("Humanoid").Health > 0 and v.Character:FindFirstChild("HumanoidRootPart") ~= nil then
+			local TheirCharacter = v.Character
+			local CharacterRoot, Visible = MyView:WorldToViewportPoint(TheirCharacter.Head.Position)
+			if Visible then
+				local RealMag = (Vector2.new(Mouse.X, Mouse.Y) - Vector2.new(CharacterRoot.X, CharacterRoot.Y)).Magnitude
+				if RealMag < dist and RealMag < 2000 then
+					dist = RealMag
+					Target = TheirCharacter
+				end
+			end
+		end
+	end
+	return Target
+end
+mous.Button2Down:Connect(function()
+	if keyy ~= nil and keyy == "RightClick" and aimStart == true then
+		Holding = true
+		Active = true
+		Lock = true
+		if Active then
+			local The_Enemy = FindNearestPlayer()
+			while Holding and aimStart == true and The_Enemy.Humanoid.Health > 0 do task.wait(.0000000001)
+				if Lock and The_Enemy ~= nil then
+					if The_Enemy.Head.Name == target then
+						local Future = The_Enemy.Head.CFrame + (The_Enemy.Head.Velocity * epi)
+						MyView.CFrame = CFrame.lookAt(MyView.CFrame.Position, Future.Position)
+					else
+						local head = CFrame.new(The_Enemy.Head.CFrame.x, The_Enemy.Head.CFrame.y - 3, The_Enemy.Head.CFrame)
+						local Future = head + (The_Enemy.Head.Velocity * epi)
+						MyView.CFrame = CFrame.lookAt(MyView.CFrame.Position, Future.Position)
+					end
+
+				end
+			end
+		end
+	end
+end)
+UIS.InputBegan:Connect(function(pl)
+	if keyy ~= nil and pl.KeyCode.Name == keyy and keyy ~= "RightClick" and aimStart == true then
+		Holding = true
+		Active = true
+		Lock = true
+		if Active then
+			local The_Enemy = FindNearestPlayer()
+			while Holding and aimStart == true and The_Enemy.Humanoid.Health > 0 do task.wait(.0000000001)
+				if Lock and The_Enemy ~= nil then
+					if The_Enemy.Head.Name == target then
+						local Future = The_Enemy.Head.CFrame + (The_Enemy.Head.Velocity * epi)
+						MyView.CFrame = CFrame.lookAt(MyView.CFrame.Position, Future.Position)
+					else
+						local head = CFrame.new(The_Enemy.Head.CFrame.x, The_Enemy.Head.CFrame.y - 3, The_Enemy.Head.CFrame)
+						local Future = head + (The_Enemy.Head.Velocity * epi)
+						MyView.CFrame = CFrame.lookAt(MyView.CFrame.Position, Future.Position)
+					end
+
+				end
+			end
+		end
+	end
+end)
+mous.Button2Up:Connect(function()
+	if keyy ~= nil and keyy == "RightClick" then
+		Holding = false Active = false Lock = false
+	end
+end)
+UIS.InputEnded:Connect(function(f)
+	if keyy ~= nil and keyy ~= "RightClick" and f.KeyCode.Name == keyy then
+		Holding = false Active = false Lock = false
+	end
+end)
+--
+UIS.InputBegan:Connect(function(el)
+	if el.KeyCode == Enum.KeyCode.Space and infjumpp == true then
+		local lp = game.Players.LocalPlayer
+		local chr = lp.Character
+		local hurp = chr.HumanoidRootPart
+		local inf = Instance.new("BodyVelocity", hurp)
+		inf.MaxForce = Vector3.new(0, 40000, 0)	
+		inf.P = 300
+		inf.Velocity = Vector3.new(0, 50, 0)
+		wait(0.07)
+		inf.MaxForce = Vector3.new(0, 0, 0)
+		inf.P = 0
+		inf.Velocity = Vector3.new(0, 0, 0)
+		wait()
+		inf:Destroy()
+	end	
+end)
+--
+local active2 = false
+UIS.InputEnded:Connect(function(i)
+	if i.KeyCode == Enum.KeyCode.F then
+		active2 = false
+	end
+end)
+UIS.InputBegan:Connect(function(o)
+	if o.KeyCode == Enum.KeyCode.F then
+		active2 = true
+		local m = mous
+		while active2 == true and game.Players.LocalPlayer.Character.Humanoid.Health > 0 and holdpick == true do
+			if m.Target:FindFirstChild("Pickup") ~= nil then
+				game:GetService("ReplicatedStorage").Events.Pickup:FireServer(m.Target, m.Target.ClassName)
+			end
+			if m.Target:FindFirstChild("Pickup") == nil and m.Target:IsA("Part") or m.Target:IsA("UnionOperation") then
+				game:GetService("ReplicatedStorage").Events.Pickup:FireServer(m.Target.Parent, m.Target.Parent.ClassName)
+			end
+			game:GetService("RunService").Heartbeat:Wait()
+		end
+	end
+end)
+local activee = false
+UIS.InputEnded:Connect(function(n)
+	if holdhealkey ~= nil and n.KeyCode.Name == holdhealkey then
+		activee = false
+	end
+end)
+UIS.InputBegan:Connect(function(p)
+	if holdhealkey ~= nil and p.KeyCode.Name == holdhealkey and holdheal == true then
+		activee = true
+		local eoer = 0
+		for _, v in pairs(game.Players.LocalPlayer.PlayerGui.MainGui.RightPanel.Inventory.List:GetChildren()) do
+			eoer += 1
+			if v.Name == "Bloodfruit" then
+				local eoer = eoer - 1
+				healarg = eoer
+			end
+		end
+		while activee == true and game.Players.LocalPlayer.Character.Humanoid.Health > 0 and holdheal == true do
+			game:GetService("ReplicatedStorage").Events.UseBagItem:FireServer(tonumber(healarg))
+			game:GetService("RunService").Heartbeat:Wait()
+		end
+	end
+end)
+mous.KeyUp:Connect(function(ei)
+	if pickwmousekey ~= nil and string.upper(ei) == pickwmousekey and pickwmouse == true and mous.Target then
+		if mous.Target.Parent.Parent.Name == "Critters" then
+			if mous.Target.Parent.Name == "Lurky Boi" then
+				table.insert(info, mous.Target.Parent.HumanoidRootPart)
+				print("picked "..mous.Target.Parent.Name)
+				local a = mous.Target.Parent.HumanoidRootPart
+				if a:FindFirstChild("BodyPosition") ~= nil then
+					a.BodyPosition:Destroy()
+				end
+				if a:FindFirstChild("BodyGyro") ~= nil then
+					a.BodyGyro:Destroy()
+				end
+				local i = Instance.new("BodyPosition")
+				i.Parent = a
+				i.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+				local p = Instance.new("BodyGyro")
+				p.Parent = a
+				p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+			else
+				table.insert(info, mous.Target.Parent.Head)
+				print("picked "..mous.Target.Parent.Name)
+				local a = mous.Target.Parent.Head
+				if a:FindFirstChild("BodyPosition") ~= nil then
+					a.BodyPosition:Destroy()
+				end
+				if a:FindFirstChild("BodyGyro") ~= nil then
+					a.BodyGyro:Destroy()
+				end
+				local i = Instance.new("BodyPosition")
+				i.Parent = a
+				i.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+				local p = Instance.new("BodyGyro")
+				p.Parent = a
+				p.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+			end
+		end
+	end
+	if throwkeyy ~= nil and  string.upper(ei) == throwkeyy and throww == true then
+		local num = 0
+		for _, v in pairs(info) do
+			num += 1
+		end
+		if num >= 1 then
+			local bullet = info[1]
+			table.remove(info, 1)
+			bullet.BodyPosition.P = bullet.BodyPosition.P * throwstre
+			bullet.BodyPosition.Position = Vector3.new(mous.Hit.X, mous.Hit.Y, mous.Hit.Z)
+			print("Threw: "..bullet.Parent.Name)
+			wait()
+			bullet:FindFirstChild("BodyPosition"):Destroy()
+			bullet:FindFirstChild("BodyGyro"):Destroy()
+		end
+	end
+end)
+UIS.InputEnded:Connect(function(a)
+	if a.KeyCode == Enum.KeyCode.RightBracket then
+		game.CoreGui.Magic.Main.Visible = true
+	end
+	if a.KeyCode == Enum.KeyCode.LeftBracket then
+		game.CoreGui.Magic.Main.Visible = false
+	end
+end)
+
+local function build()
+	local e = game.Players.LocalPlayer.Character.LowerTorso
+	local ypos = game.Players.LocalPlayer.Character.LowerTorso.Position.Y - 2
+	game:GetService("ReplicatedStorage").Events.PlaceStructure:FireServer(Vector3.new(e.Position.x, e.Position.y - 2, e.Position.z), "Plant Box", 0, false)
+	wait(.5)
+	while building == true do
+		for _, v in pairs(game.Workspace.Deployables:GetChildren()) do
+			if v.Name == "Plant Box" and v:FindFirstChild("Compost") ~= nil and (e.Position - v.Compost.Position).magnitude < 5 then
+				local f = v.Compost
+				for xx = -7, 7, 7 do
+					for zz = -7, 7, 7 do
+						game:GetService("ReplicatedStorage").Events.PlaceStructure:FireServer(Vector3.new(f.Position.x + xx, ypos, f.Position.z + zz), "Plant Box", 0, false)
+					end
+				end
+			end
+		end
+		wait()
+	end
+end
+
+local plr = game.Players.LocalPlayer
+local hum = plr.Character.HumanoidRootPart
+local mouse = plr:GetMouse()
+local service = game:GetService("TweenService")
+local i1 = TweenInfo.new(5,Enum.EasingStyle.Sine,Enum.EasingDirection.Out,0,false,0)
+mouse.KeyDown:connect(function(keiy)
+	if keiy ~= nil and string.upper(keiy) == tpk and tpp == true then 
+		if mouse.Target then
+			local i2 = {CFrame = CFrame.new(mouse.Hit.x, mouse.Hit.y + 5, mouse.Hit.z)}
+			local tp = service:Create(hum, i1, i2)
+			tp:Play()
+		end
+	end
+end)
+
+UIS.InputEnded:Connect(function(inpp)
+	if inpp.KeyCode == Enum.KeyCode.PageUp then
+		if building == false then
+			building = true
+			build()
+		else
+			building  = false
+		end
+	end
+	if inpp.KeyCode == Enum.KeyCode.Minus and waitt ~= 0 then
+		waitt -= 0.1
+		print("Shoot cooldown: "..waitt)
+	end
+	if inpp.KeyCode == Enum.KeyCode.Equals then
+		waitt += 0.1
+		print("Shoot cooldown: "..waitt)
+	end
+	if inpp.KeyCode == Enum.KeyCode.F1 then
+		if fling == false then
+			print("fling enabled")
+			fling = true
+			for i,v in next, game:GetService("Players").LocalPlayer.Character:GetDescendants() do
+				if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then 
+					game:GetService("RunService").Heartbeat:connect(function()
+						v.Velocity = Vector3.new(-30,0,0)
+					end)
+				end
+			end
+			for _, v in pairs(info) do
+				if v ~= nil then
+					local bt = Instance.new("BodyThrust")
+					bt.Parent = v
+					bt.Force = Vector3.new(500000, 500000, 500000)
+					bt.Location = v.Position
+					bt.Parent = v
+					for _, n in pairs(v.Parent:GetDescendants()) do
+						if n.ClassName == "Part" or n.ClassName == "MeshPart" or n.ClassName == "UnionOperation" then
+							n.CanCollide = false
+						end
+					end
+				end
+			end
+		else
+			fling = false
+			print("fling disabled")
+			for _, v in pairs(info) do
+				if v ~= nil and v:FindFirstChild("BodyThrust") then
+					v.BodyThrust:Destroy()
+					for _, n in pairs(v.Parent:GetDescendants()) do
+						if n.ClassName == "Part" or n.ClassName == "MeshPart" or n.ClassName == "UnionOperation" then
+							n.CanCollide = true
+						end
+					end
+				end
+			end
+		end
+	end
+end)
+--------------
+-------
+local mous = game.Players.LocalPlayer:GetMouse()
+local target = nil
+local spam = false
+local function start()
+	while spam == true do
+		local v = target
+		local pos = v.Position
+		local dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - pos).magnitude
+		if dist < 145 then
+			local epi = .25
+			local orgcal = dist / 22
+			if dist > 85 and dist <= 125 then
+				orgcal = orgcal * 1.5
+				epi = .5
+			end
+			if dist > 125 and dist <= 140 then
+				orgcal = orgcal * 1.75
+				epi = .7
+			end
+			if dist > 140 and dist <= 145.5 then
+				orgcal = orgcal * 2
+				epi = .9
+			end
+			local Future = pos + (v.Velocity * epi)
+			local args = {[1] = Vector3.new(Future.x, pos.y + orgcal, Future.z),[2] = 1,[3] = 76653.4595537}
+			game:GetService("ReplicatedStorage").Modules.ProjectileHandler.Event:FireServer(unpack(args))
+			epi = .1
+		end
+		wait(waitt)
+	end
+end
+mous.KeyDown:Connect(function(ei)
+	if ei == "r" and mous.Target then
+		if target == nil then
+			for _, plr in pairs(game.Players:GetPlayers()) do
+				if plr ~= nil and plr ~= game.Players.LocalPlayer then
+					local mouspos = Vector3.new(mous.Hit.x, mous.Hit.y, mous.Hit.z)
+					if (mouspos - plr.Character.HumanoidRootPart.Position).Magnitude < 10 then
+						target = plr.Character.HumanoidRootPart
+						spam = true
+						print("Started")
+						start()
+					end
+				end
+			end
+		else
+			spam = false
+			target = nil
+			print("Stopped")
+		end
+	end
+end)
+local selectedPart = workspace
+local arrowParts = {} -- Table to store arrow parts
+local moveIncrement = 1
+local currentArrow = nil
+local plr = game:WaitForChild("Players").LocalPlayer
+local pressedON = nil
+local offset1 = 0
+local offset2 = 0
+local mouse = plr:GetMouse()
+
+
+
+-- Function to create an arrow along a specific axis
+local function createArrow(axis, color, offset)
+	local arrow = Instance.new("Part")
+	arrow.Name = "Arrow_" .. axis
+	arrow.Anchored = true
+	arrow.Size = Vector3.new(1, 1, 1) -- Set the arrow size to 6 studs in length (twice as big)
+	arrow.Color = color
+	arrow.Shape = Enum.PartType.Ball
+	arrow.Transparency = 0 -- Ensure arrows are fully visible
+	arrow.CanCollide = false
+	arrow.Parent = selectedPart -- Parent the arrow to the selected part
+
+	-- Add the arrow to the arrowParts table for easy access
+	arrowParts[axis] = arrow
+	return arrow
+end
+
+-- Create arrows along each axis
+local arrowX = workspace
+local arrowY = workspace
+local arrowZ = workspace
+
+-- Function to update arrow positions
+local function updateArrows()
+	local x = selectedPart.Size.X / 2
+	local y = selectedPart.Size.Y / 2
+	local z = selectedPart.Size.Z / 2
+	arrowX.Position = selectedPart.Position + Vector3.new(x + 2, 0, 0) -- Adjust arrow X position
+	arrowY.Position = selectedPart.Position + Vector3.new(0, y + 2, 0) -- Adjust arrow Y position
+	arrowZ.Position = selectedPart.Position + Vector3.new(0, 0, z + 2) -- Adjust arrow Z position
+end
+mouse.Button1Down:Connect(function(k)
+		if mouse.Target == arrowX then
+			pressedON = "x"
+			local value = arrowX.Position.X
+			local roundedValue = math.floor(value)
+			if value - roundedValue >= 0.5 then
+				roundedValue = roundedValue + 1
+			end
+			offset1 = roundedValue
+		elseif mouse.Target == arrowY then
+			pressedON = "y"
+			local value = arrowX.Position.Y
+			local roundedValue = math.floor(value)
+			if value - roundedValue >= 0.5 then
+				roundedValue = roundedValue + 1
+			end
+			offset1 = roundedValue
+		elseif mouse.Target == arrowZ then
+			pressedON = "z"
+			local value = arrowX.Position.Z
+			local roundedValue = math.floor(value)
+			if value - roundedValue >= 0.5 then
+				roundedValue = roundedValue + 1
+			end
+			offset1 = roundedValue
+		end
+end)
+
+mouse.Button1Up:Connect(function(k)
+	if movemode and sizemode == false then
+		if pressedON == "x" then
+			local value = mouse.Hit.Position.X
+			local roundedValue = math.floor(value)
+			if value - roundedValue >= 0.5 then
+				roundedValue = roundedValue + 1
+			end
+			offset2 = roundedValue - offset1
+			selectedPart.Position = selectedPart.Position + Vector3.new(offset2, 0, 0)
+			Plus_x.Parent.NUMBER.Text = selectedPart.Position.X
+			updateArrows()
+			pressedON = nil
+			offset1 = 0
+			offset2 = 0
+		elseif pressedON == "y" then
+			local value = mouse.Hit.Position.Y
+			local roundedValue = math.floor(value)
+			if value - roundedValue >= 0.5 then
+				roundedValue = roundedValue + 1
+			end
+			offset2 = roundedValue - offset1
+			selectedPart.Position = selectedPart.Position + Vector3.new(0, offset2, 0)
+			Plus_y.Parent.NUMBER.Text = selectedPart.Position.Y
+			updateArrows()
+			pressedON = nil
+			offset1 = 0
+			offset2 = 0
+		elseif pressedON == "z" then
+			local value = mouse.Hit.Position.Z
+			local roundedValue = math.floor(value)
+			if value - roundedValue >= 0.5 then
+				roundedValue = roundedValue + 1
+			end
+			offset2 = roundedValue - offset1
+			pressedON = nil
+			selectedPart.Position = selectedPart.Position + Vector3.new(0, 0, offset2)
+			Plus_z.Parent.NUMBER.Text = selectedPart.Position.Z
+			updateArrows()
+			offset1 = 0
+			offset2 = 0
+		end
+	elseif movemode == false and sizemode then
+		if pressedON == "x" then
+			local value = mouse.Hit.Position.X
+			local roundedValue = math.floor(value)
+			if value - roundedValue >= 0.5 then
+				roundedValue = roundedValue + 1
+			end
+			offset2 = roundedValue - offset1
+			selectedPart.Size = selectedPart.Size + Vector3.new(offset2, 0, 0)
+			Plus_x.Parent.NUMBER.Text = selectedPart.Size.X
+			updateArrows()
+			pressedON = nil
+			offset1 = 0
+			offset2 = 0
+		elseif pressedON == "y" then
+			local value = mouse.Hit.Position.Y
+			local roundedValue = math.floor(value)
+			if value - roundedValue >= 0.5 then
+				roundedValue = roundedValue + 1
+			end
+			offset2 = roundedValue - offset1
+			selectedPart.Size = selectedPart.Size + Vector3.new(0, offset2, 0)
+			Plus_y.Parent.NUMBER.Text = selectedPart.Size.Y
+			updateArrows()
+			pressedON = nil
+			offset1 = 0
+			offset2 = 0
+		elseif pressedON == "z" then
+			local value = mouse.Hit.Position.Z
+			local roundedValue = math.floor(value)
+			if value - roundedValue >= 0.5 then
+				roundedValue = roundedValue + 1
+			end
+			offset2 = roundedValue - offset1
+			pressedON = nil
+			selectedPart.Size = selectedPart.Size + Vector3.new(0, 0, offset2)
+			Plus_z.Parent.NUMBER.Text = selectedPart.Size.Z
+			updateArrows()
+			offset1 = 0
+			offset2 = 0
+		end
+	end	
+end)
+
+
+CreatePart.MouseButton1Click:Connect(function()
+	if created == false then
+		local a = Instance.new("Part")
+		a.Parent = workspace
+		a.Size = Vector3.new(2, 2, 2)
+		a.Transparency = .5
+		a.Anchored = true
+		a.CanCollide = false
+		local value1 = game.Players.LocalPlayer.Character.Head.Position.X
+		local value2 = game.Players.LocalPlayer.Character.Head.Position.Y
+		local value3 = game.Players.LocalPlayer.Character.Head.Position.Z
+		local roundedValue1 = math.floor(value1)
+		if value1 - roundedValue1 >= 0.5 then
+			roundedValue1 = roundedValue1 + 1
+		end
+
+		local roundedValue2 = math.floor(value2)
+		if value2 - roundedValue2 >= 0.5 then
+			roundedValue2 = roundedValue2 + 1
+		end
+
+		local roundedValue3 = math.floor(value3)
+		if value3 - roundedValue3 >= 0.5 then
+			roundedValue3 = roundedValue3 + 1
+		end
+		a.Position = Vector3.new(roundedValue1, roundedValue2, roundedValue3)
+		a.Name = "selectedPart"
+		created = true
+		selectedPart = workspace:FindFirstChild("selectedPart")
+		arrowX = createArrow("X", Color3.fromRGB(255, 0, 0)) -- Red arrow along X axis
+		arrowY = createArrow("Y", Color3.fromRGB(0, 255, 0)) -- Green arrow along Y axis
+		arrowZ = createArrow("Z", Color3.fromRGB(0, 0, 255)) -- Blue arrow along Z axis
+		updateArrows()----
+	end
+end)
+
+Plus_x.MouseButton1Click:Connect(function()
+	if movemode and sizemode == false then
+		selectedPart.Position = selectedPart.Position + Vector3.new(1, 0, 0)
+		Plus_x.Parent.NUMBER.Text = selectedPart.Position.X
+		updateArrows()
+	elseif movemode == false and sizemode then
+		selectedPart.Size = selectedPart.Size + Vector3.new(1, 0, 0)
+		Plus_x.Parent.NUMBER.Text = selectedPart.Size.X
+		updateArrows()
+	end
+end)
+Plus_y.MouseButton1Click:Connect(function()
+	if movemode and sizemode == false then
+		selectedPart.Position = selectedPart.Position + Vector3.new(0, 1, 0)
+		Plus_y.Parent.NUMBER.Text = selectedPart.Position.Y
+		updateArrows()
+	elseif movemode == false and sizemode then
+		selectedPart.Size = selectedPart.Size + Vector3.new(0, 1, 0)
+		Plus_y.Parent.NUMBER.Text = selectedPart.Size.Y
+		updateArrows()
+	end
+end)
+Plus_z.MouseButton1Click:Connect(function()
+	if movemode and sizemode == false then
+		selectedPart.Position = selectedPart.Position + Vector3.new(0, 0, 1)
+		Plus_z.Parent.NUMBER.Text = selectedPart.Position.Z
+		updateArrows()
+	elseif movemode == false and sizemode then
+		selectedPart.Size = selectedPart.Size + Vector3.new(0, 0, 1)
+		Plus_z.Parent.NUMBER.Text = selectedPart.Size.Z
+		updateArrows()
+	end
+end)
+
+Minus_x.MouseButton1Click:Connect(function()
+	if movemode and sizemode == false then
+		selectedPart.Position = selectedPart.Position - Vector3.new(1, 0, 0)
+		Plus_x.Parent.NUMBER.Text = selectedPart.Position.X
+		updateArrows()
+	elseif movemode == false and sizemode then
+		selectedPart.Size = selectedPart.Size - Vector3.new(1, 0, 0)
+		Plus_x.Parent.NUMBER.Text = selectedPart.Size.X
+		updateArrows()
+	end
+end)
+Minus_y.MouseButton1Click:Connect(function()
+	if movemode and sizemode == false then
+		selectedPart.Position = selectedPart.Position - Vector3.new(0, 1, 0)
+		Plus_y.Parent.NUMBER.Text = selectedPart.Position.Y
+		updateArrows()
+	elseif movemode == false and sizemode then
+		selectedPart.Size = selectedPart.Size - Vector3.new(0, 1, 0)
+		Plus_y.Parent.NUMBER.Text = selectedPart.Size.Y
+		updateArrows()
+	end
+end)
+Minus_z.MouseButton1Click:Connect(function()
+	if movemode and sizemode == false then
+		selectedPart.Position = selectedPart.Position - Vector3.new(0, 0, 1)
+		Plus_z.Parent.NUMBER.Text = selectedPart.Position.Z
+		updateArrows()
+	elseif movemode == false and sizemode then
+		selectedPart.Size = selectedPart.Size - Vector3.new(0, 0, 1)
+		Plus_z.Parent.NUMBER.Text = selectedPart.Size.Z
+		updateArrows()
+	end
+end)
+Movemd.MouseButton1Click:Connect(function()
+	if movemode == false then
+		movemode = true
+		sizemode = false
+	end
+end)
+Sizemd.MouseButton1Click:Connect(function()
+	if sizemode == false then
+		sizemode = true
+		movemode = false
+	end
+end)
+
+local partss = {}
+local _x = 0
+local _y = 0
+local _z = 0
+local plut = nil
+
+local function rumn()
+	partss = {}
+	_x = 0
+	_y = 0
+	_z = 0
+	local region = Region3.new(workspace.selectedPart.Position - workspace.selectedPart.Size / 2, workspace.selectedPart.Position + workspace.selectedPart.Size / 2)
+	local partsinregion = workspace:FindPartsInRegion3(region, workspace.selectedPart, 100000)
+		for _, v in pairs(partsinregion) do
+			if v ~= nil and v.ClassName == "Part" and v.Name ~= "Hitbox" and v.Parent.Parent.Name == "Objects" then
+				table.insert(partss, v.Parent)
+			end
+			if v.Parent.Name == "Ramp 1/1 x 1" then
+				table.insert(partss, v.Parent)
+			end
+		end
+		local a = workspace.selectedPart.Position
+		_x = a.x
+		_y = a.y
+		_z = a.z
+end
+
+local function movemmd()
+	local ea = workspace.selectedPart.Position
 	local xx = ea.x - _x
 	local yy = ea.y - _y
 	local zz = ea.z - _z
-	if movem == true then
-		for _, v in pairs(parts) do
-			for _, part in pairs(v:GetChildren()) do
-				if part ~= nil and part.ClassName == "Part" and part.Name ~= "Hitbox" then
-					local args = {
+	for _, v in pairs(partss) do
+		for _, part in pairs(v:GetChildren()) do
+			if part ~= nil and part.ClassName == "Part" and part.Name ~= "Hitbox" and plut then
+				local args = {
 						[1] = v,
 						[2] = {
 							[1] = v.Name,
 							[2] = part.CFrame + Vector3.new(xx, yy, zz),
-							[3] = workspace.Plots.Plot
+							[3] = plut
 						}
 					}
 					game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Move"):InvokeServer(unpack(args))
@@ -71,11 +2668,14 @@ local function buildd()
 				end
 			end
 		end
-		ready = false
-		table.clear(parts)
-	end
-	if buildm == true then
-		for _, v in pairs(parts) do
+end
+
+local function buildmd()
+	local ea = workspace.selectedPart.Position
+	local xx = ea.x - _x
+	local yy = ea.y - _y
+	local zz = ea.z - _z
+		for _, v in pairs(partss) do
 			for _, part in pairs(v:GetChildren()) do
 				if part ~= nil and part.ClassName == "Part" and part.Name ~= "Hitbox" then
 					local args = {
@@ -100,84 +2700,39 @@ local function buildd()
 				end
 			end
 		end
-		ready = false
-		table.clear(parts)
-	end
 end
 
-uis.InputEnded:Connect(function(k)
-	if built == true then
-		if k.KeyCode == Enum.KeyCode.Minus then
-			selectedPart.Size = selectedPart.Size - Vector3.new(0.5, 0.5, 0.5)
-		end
-		if k.KeyCode == Enum.KeyCode.Equals then
-			selectedPart.Size = selectedPart.Size + Vector3.new(0.5, 0.5, 0.5)
-		end
-		if k.KeyCode == Enum.KeyCode.Left then
-			selectedPart.Position = selectedPart.Position + Vector3.new(-0.5, 0, 0)
-		end
-		if k.KeyCode == Enum.KeyCode.Right then
-			selectedPart.Position = selectedPart.Position + Vector3.new( 0.5, 0, 0)
-		end
-		if k.KeyCode == Enum.KeyCode.Up then
-			selectedPart.Position = selectedPart.Position + Vector3.new(0, 0, -0.5)
-		end
-		if k.KeyCode == Enum.KeyCode.Down then
-			selectedPart.Position = selectedPart.Position + Vector3.new(0, 0, 0.5)
-		end
-		if k.KeyCode == Enum.KeyCode.F3 then
-			selectedPart.Position = selectedPart.Position + Vector3.new(0, 0.5, 0)
-		end
-		if k.KeyCode == Enum.KeyCode.F4 then
-			selectedPart.Position = selectedPart.Position + Vector3.new(0, -0.5, 0)
-		end
-	end
+selectt.MouseButton1Click:Connect(function()
+	rumn()
 end)
-
-game.Players.LocalPlayer.Chatted:Connect(function(msg)
-	local e = msg:split(" ")
-	if string.lower(msg) == ".buildmode" then
-		buildm = true
-		movem = false
-		print("Build mode activated")
-	end
-	if string.lower(msg) == ".movemode" then
-		movem = true
-		buildm = false
-		print("Move mode activated")
-	end
-	if string.lower(msg) == ".mouse" then
-		mouse = true
-		dist = false
-		print("Mouse mode activated")
-	end
-	if string.lower(msg) == ".dist" then
-		dist = true
-		mouse = false
-		print("Distance mode activated")
-	end
-	if string.lower(msg) == ".run" then
-		run()
-	end
-	if string.lower(msg) == ".create" then
-		selectedPart = createPart()
-		game.Players.LocalPlayer.Character.Head.Anchored = true
-		built = true
-	end
-	if string.lower(msg) == ".delete" then
-		workspace.REGIONPART:Destroy()
-		game.Players.LocalPlayer.Character.Head.Anchored = false
-		built = false
-	end
-	if string.lower(msg) == ".build" then
-		buildd()
-	end
-	if string.lower(msg) == ".plot" then
-		for _, v in pairs(workspace.Plots:GetChildren()) do
-			if v:FindFirstChild("Base") ~= nil and (game.Players.LocalPlayer.Character.Head.Position - v.Base.Position).magnitude < 160 then
-				v.Name = "Plot"
-				print("FOUND PLOT")
+Movemm.MouseButton1Click:Connect(function()
+	movemmd()
+end)
+Buildd.MouseButton1Click:Connect(function()
+	buildmd()
+end)
+TEXTT.FocusLost:Connect(function(i)
+	for _, v in pairs(game.Players:GetPlayers()) do
+		if string.lower(TEXTT.Text) == string.lower(v.Name) then
+			local plot = v.Values.Plot.Value
+			for _, n in pairs(workspace.Plots:GetChildren()) do
+				if n.Name == tostring(plot) then
+					plut = n
+					TEXTT.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+					print("Plot: "..plut.Name)
+				end
 			end
+		elseif string.lower(TEXTT.Text) == "me" then
+			local plot = game:GetService("Players").LocalPlayer.Values.Plot.Value
+			for _, n in pairs(workspace.Plots:GetChildren()) do
+				if n.Name == tostring(plot) then
+					plut = n
+					TEXTT.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+					print("Plot: "..plut.Name)
+				end
+			end
+		else
+			TEXTT.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
 		end
 	end
 end)
