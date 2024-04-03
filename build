@@ -1,5 +1,4 @@
 wait(5)
---[[
 spawn(function()
 	while true do
 		game.Players.LocalPlayer.MaximumSimulationRadius = math.pow(math.huge,math.huge)*math.huge
@@ -7,10 +6,9 @@ spawn(function()
 		game:GetService("RunService").Heartbeat:Wait()
 	end
 end)
-]]
 created = false
 local spinsp = 0.2
-local s
+local s = 0
 local movemode = true
 local sizemode = false
 ScreenGui = Instance.new("ScreenGui")
