@@ -2634,7 +2634,7 @@ local function rumn()
 	local region = Region3.new(workspace.selectedPart.Position - workspace.selectedPart.Size / 2, workspace.selectedPart.Position + workspace.selectedPart.Size / 2)
 	local partsinregion = workspace:FindPartsInRegion3(region, workspace.selectedPart, 100000)
 		for _, v in pairs(partsinregion) do
-			if v ~= nil and v.ClassName == "Part" or v.Name == "Hitbox" and v.Parent and v.Parent.Parent and v.Parent.Parent.Name == "Objects" then
+			if v ~= nil and v.ClassName == "Part" and v.Name == "Hitbox" or v.Name == "Part" and v.Parent and v.Parent.Parent and v.Parent.Parent.Name == "Objects" and v.Parent.Parent.Parent and v.Parent.Parent.Parent.Parent and v.Parent.Parent.Parent.Parent.Name == "Plots" then
 				table.insert(partss, v.Parent)
 			end
 		end
@@ -2678,21 +2678,10 @@ local function buildmd()
 					local args = {
 						[1] = v.Name,
 						[2] = part.CFrame + Vector3.new(xx, yy, zz),
-						[3] = workspace:WaitForChild("Plots"):WaitForChild("Plot")
+						[3] = plut
 					}
 
 					game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Place"):InvokeServer(unpack(args))
-					print("built")
-				end
-				if part.Parent.Name == "Ramp 1/1 x 1" then
-					local args = {
-						[1] = v.Name,
-						[2] = part.Parent.Wedge.CFrame + Vector3.new(xx, yy, zz),
-						[3] = workspace:WaitForChild("Plots"):WaitForChild("Plot")
-					}
-
-					game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Place"):InvokeServer(unpack(args))
-
 					print("built")
 				end
 			end
