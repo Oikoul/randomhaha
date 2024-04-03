@@ -2651,7 +2651,7 @@ local function movemmd()
 	local zz = ea.z - _z
 	for _, v in pairs(partss) do
 		for _, part in pairs(v:GetChildren()) do
-			if part ~= nil and part.ClassName == "Part" or part.Name == "Hitbox" and plut then
+			if part ~= nil and part.ClassName == "Part" and part.Name == "Part" or part.Name == "Hitbox" and plut then
 				local args = {
 						[1] = v,
 						[2] = {
@@ -2674,7 +2674,7 @@ local function buildmd()
 	local zz = ea.z - _z
 		for _, v in pairs(partss) do
 			for _, part in pairs(v:GetChildren()) do
-				if part ~= nil and part.ClassName == "Part" and part.Name ~= "Hitbox" then
+				if part ~= nil and part.ClassName == "Part" and part.Name == "Part" or part.Name == "Hitbox" and plut then
 					local args = {
 						[1] = v.Name,
 						[2] = part.CFrame + Vector3.new(xx, yy, zz),
