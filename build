@@ -2634,7 +2634,7 @@ local function rumn()
 	local region = Region3.new(workspace.selectedPart.Position - workspace.selectedPart.Size / 2, workspace.selectedPart.Position + workspace.selectedPart.Size / 2)
 	local partsinregion = workspace:FindPartsInRegion3(region, workspace.selectedPart, 100000)
 		for _, v in pairs(partsinregion) do
-			if v ~= nil and v.ClassName == "Part" or v.Name == "Hitbox" and v.Parent.Parent.Name == "Objects" then
+			if v ~= nil and v.ClassName == "Part" or v.Name == "Hitbox" and v.Parent and v.Parent.Parent and v.Parent.Parent.Name == "Objects" then
 				table.insert(partss, v.Parent)
 			end
 		end
