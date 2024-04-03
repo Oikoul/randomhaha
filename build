@@ -1,4 +1,5 @@
 wait(5)
+--
 spawn(function()
 	while true do
 		game.Players.LocalPlayer.MaximumSimulationRadius = math.pow(math.huge,math.huge)*math.huge
@@ -127,7 +128,6 @@ Minus_x = Instance.new("TextButton")
 Minus_y = Instance.new("TextButton")
 Minus_z = Instance.new("TextButton")
 LocalPlr = Instance.new("ScrollingFrame")
---ScreenGui.Parent = game.CoreGui
 ScreenGui.Parent = game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.Name = "Magic"
