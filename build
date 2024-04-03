@@ -1,5 +1,4 @@
 wait(5)
---
 spawn(function()
 	while true do
 		game.Players.LocalPlayer.MaximumSimulationRadius = math.pow(math.huge,math.huge)*math.huge
@@ -2385,31 +2384,31 @@ local function updateArrows()
 	arrowZ.Position = selectedPart.Position + Vector3.new(0, 0, z + 2) -- Adjust arrow Z position
 end
 mouse.Button1Down:Connect(function(k)
-		if mouse.Target == arrowX then
-			pressedON = "x"
-			local value = arrowX.Position.X
-			local roundedValue = math.floor(value)
-			if value - roundedValue >= 0.5 then
-				roundedValue = roundedValue + 1
-			end
-			offset1 = roundedValue
-		elseif mouse.Target == arrowY then
-			pressedON = "y"
-			local value = arrowX.Position.Y
-			local roundedValue = math.floor(value)
-			if value - roundedValue >= 0.5 then
-				roundedValue = roundedValue + 1
-			end
-			offset1 = roundedValue
-		elseif mouse.Target == arrowZ then
-			pressedON = "z"
-			local value = arrowX.Position.Z
-			local roundedValue = math.floor(value)
-			if value - roundedValue >= 0.5 then
-				roundedValue = roundedValue + 1
-			end
-			offset1 = roundedValue
+	if mouse.Target == arrowX then
+		pressedON = "x"
+		local value = arrowX.Position.X
+		local roundedValue = math.floor(value)
+		if value - roundedValue >= 0.5 then
+			roundedValue = roundedValue + 1
 		end
+		offset1 = roundedValue
+	elseif mouse.Target == arrowY then
+		pressedON = "y"
+		local value = arrowX.Position.Y
+		local roundedValue = math.floor(value)
+		if value - roundedValue >= 0.5 then
+			roundedValue = roundedValue + 1
+		end
+		offset1 = roundedValue
+	elseif mouse.Target == arrowZ then
+		pressedON = "z"
+		local value = arrowX.Position.Z
+		local roundedValue = math.floor(value)
+		if value - roundedValue >= 0.5 then
+			roundedValue = roundedValue + 1
+		end
+		offset1 = roundedValue
+	end
 end)
 
 mouse.Button1Up:Connect(function(k)
@@ -2628,16 +2627,16 @@ local function rumn()
 	_z = 0
 	local region = Region3.new(workspace.selectedPart.Position - workspace.selectedPart.Size / 2, workspace.selectedPart.Position + workspace.selectedPart.Size / 2)
 	local partsinregion = workspace:FindPartsInRegion3(region, workspace.selectedPart, 100000)
-		for _, v in pairs(partsinregion) do
-			if v ~= nil and v.ClassName == "Part" and v.Name == "Hitbox" or v.Name == "Part" and v.Parent and v.Parent.Parent and v.Parent.Parent.Name == "Objects" and v.Parent.Parent.Parent and v.Parent.Parent.Parent.Parent and v.Parent.Parent.Parent.Parent.Name == "Plots" then
-				table.insert(partss, v.Parent)
-				print(v.Parent.Name)
-			end
+	for _, v in pairs(partsinregion) do
+		if v ~= nil and v.ClassName == "Part" and v.Name == "Hitbox" or v.Name == "Part" and v.Parent and v.Parent.Parent and v.Parent.Parent.Name == "Objects" and v.Parent.Parent.Parent and v.Parent.Parent.Parent.Parent and v.Parent.Parent.Parent.Parent.Name == "Plots" then
+			table.insert(partss, v.Parent)
+			print(v.Parent.Name)
 		end
-		local a = workspace.selectedPart.Position
-		_x = a.x
-		_y = a.y
-		_z = a.z
+	end
+	local a = workspace.selectedPart.Position
+	_x = a.x
+	_y = a.y
+	_z = a.z
 end
 
 local function movemmd()
@@ -2649,32 +2648,32 @@ local function movemmd()
 		for _, part in pairs(v:GetChildren()) do
 			if part ~= nil and part.ClassName == "Part" and part.Name == "Hitbox" or part.Name == "Part" and plut then
 				print("Moving")
-				if v:FindFirstChild("Part" and v:FindFirstChild("Hitbox") then
+				if v:FindFirstChild("Part") and v:FindFirstChild("Hitbox") then
 					local args = {
-							[1] = v,
-							[2] = {
-								[1] = v.Name,
-								[2] = v.Hitbox.CFrame + Vector3.new(xx, yy, zz),
-								[3] = plut
-							}
+						[1] = v,
+						[2] = {
+							[1] = v.Name,
+							[2] = v.Hitbox.CFrame + Vector3.new(xx, yy, zz),
+							[3] = plut
 						}
-						game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Move"):InvokeServer(unpack(args))
-						print("moved")
+					}
+					game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Move"):InvokeServer(unpack(args))
+					print("moved")
 				else
 					local args = {
-							[1] = v,
-							[2] = {
-								[1] = v.Name,
-								[2] = part.CFrame + Vector3.new(xx, yy, zz),
-								[3] = plut
-							}
+						[1] = v,
+						[2] = {
+							[1] = v.Name,
+							[2] = part.CFrame + Vector3.new(xx, yy, zz),
+							[3] = plut
 						}
-						game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Move"):InvokeServer(unpack(args))
-						print("moved")
-					end
+					}
+					game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Move"):InvokeServer(unpack(args))
+					print("moved")
 				end
 			end
 		end
+	end
 end
 
 local function buildmd()
@@ -2682,32 +2681,32 @@ local function buildmd()
 	local xx = ea.x - _x
 	local yy = ea.y - _y
 	local zz = ea.z - _z
-		for _, v in pairs(partss) do
-			for _, part in pairs(v:GetChildren()) do
-				if part ~= nil and part.ClassName == "Part" and part.Name == "Hitbox" or part.Name == "Part" and plut then
+	for _, v in pairs(partss) do
+		for _, part in pairs(v:GetChildren()) do
+			if part ~= nil and part.ClassName == "Part" and part.Name == "Hitbox" or part.Name == "Part" and plut then
 				print("Building")
-					if v:FindFirstChild("Part" and v:FindFirstChild("Hitbox") then
-						local args = {
-							[1] = v.Name,
-							[2] = v.Hitbox.CFrame + Vector3.new(xx, yy, zz),
-							[3] = plut
-						}
-	
-						game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Place"):InvokeServer(unpack(args))
-						print("built")
-					else
-						local args = {
-							[1] = v.Name,
-							[2] = part.CFrame + Vector3.new(xx, yy, zz),
-							[3] = plut
-						}
-	
-						game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Place"):InvokeServer(unpack(args))
-						print("built")
-					end
+				if v:FindFirstChild("Part") and v:FindFirstChild("Hitbox") then
+					local args = {
+						[1] = v.Name,
+						[2] = v.Hitbox.CFrame + Vector3.new(xx, yy, zz),
+						[3] = plut
+					}
+
+					game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Place"):InvokeServer(unpack(args))
+					print("built")
+				else
+					local args = {
+						[1] = v.Name,
+						[2] = part.CFrame + Vector3.new(xx, yy, zz),
+						[3] = plut
+					}
+
+					game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Place"):InvokeServer(unpack(args))
+					print("built")
 				end
 			end
 		end
+	end
 end
 
 selectt.MouseButton1Click:Connect(function()
