@@ -7,7 +7,24 @@ local random = false
 local TweenService = game:GetService("TweenService")
 local tweenInfo = TweenInfo.new(0.1,Enum.EasingStyle.Linear,Enum.EasingDirection.Out,0,false,0)
 local function grab()
-	
+	local args = {
+    	[1] = {
+        ["HitPos"] = Vector3.new(-12.290212631225586, 162.02850341796875, 152.06614685058594),
+        ["ChargeRes"] = 1,
+        ["Time"] = 1712673332.909814,
+        ["HitChar"] = workspace:WaitForChild("Characters"):WaitForChild("ISellK11eeGrows"),
+        ["_CFrame"] = CFrame.new(-11.937573432922363, 162.54998779296875, 149.95738220214844, -0.8494771718978882, 0, 0.5276253819465637, 0, 1, 0, -0.5276253819465637, 0, -0.8494771718978882),
+        ["Count"] = 1,
+        ["HitObj"] = game:GetService("Players"):WaitForChild("ISellK11eeGrows").Character:FindFirstChild("Right Arm"),
+        ["HitNorm"] = Vector3.new(0.995898962020874, -0.08256370574235916, 0.03700438141822815),
+        ["Tick"] = 16533,
+        ["Tool"] = game:GetService("Players").LocalPlayer.Character.Fists,
+        ["ID"] = 9582426907.424671
+    }
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ToServer"):WaitForChild("MeleeHit"):InvokeServer(unpack(args))
+
 end
 spawn(function()
 	while true do
