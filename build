@@ -2319,6 +2319,7 @@ local function start()
 		wait(waitt)
 	end
 end
+--[[
 mous.KeyDown:Connect(function(ei)
 	if ei == "r" and mous.Target then
 		if target == nil then
@@ -2340,6 +2341,7 @@ mous.KeyDown:Connect(function(ei)
 		end
 	end
 end)
+]]
 local selectedPart = workspace
 local arrowParts = {} -- Table to store arrow parts
 local moveIncrement = 1
