@@ -104,5 +104,10 @@ UIS.InputEnded:Connect(function(i)
 		     end)
 		end
             end
-            
+            local bt = Instance.new("BodyThrust")
+	    bt.Force = Vector3.new(50000, 50000, 50000)
+	    bt.Location = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+	    bt.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+         end
+     end
 end)
