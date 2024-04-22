@@ -1,0 +1,96 @@
+--[[
+    Controls: 
+    -F1 ijungti ir isjungti tp
+    -PageUp ir PageDown keisti targetus
+    -F4 teleportuotis i virsu ir isjungti tp
+]]
+local UIS = game:GetService("UserInputService")
+local tp = false
+local target = nil
+local plrtbl = {}
+local plr = game.Players.LocalPlayer
+local currentIndex = 1
+local function esp(targ)
+    local ch = Instance.new("Highlight")
+	ch.OutlineColor = Color3.fromRGB(255, 0, 0)
+	ch.FillColor = Color3.fromRGB(0, 0, 0)
+	ch.OutlineTransparency = 0
+	ch.FillTransparency = 1
+	ch.Name = "lol3"
+	ch.Enabled = true
+	ch.Adornee = targ.Character
+	ch.Parent = targ.Character
+end
+local function update()
+    table.clear(plrtbl)
+    for _, v in pairs(game.Players:GetPlayers()) do
+        if v and v ~= plr then
+            table.insert(plrtbl, v)
+        end
+    end
+end
+local function switchPLUS()
+    if target and target.Character then
+        if target.Character:FindFirstChild("lol3") then
+            target.Character:FindFirstChild("lol3"):Destroy()
+        end
+    end
+    print(plrtbl[currentIndex])
+    target = plrtbl[currentIndex]
+    currentIndex = (currentIndex % #plrtbl) + 1
+    if target and target.Character and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid").Health > 0 then
+        esp(target)
+    end
+end
+local function switchMINUS()
+    if target and target.Character then
+        if target.Character:FindFirstChild("lol3") then
+            target.Character:FindFirstChild("lol3"):Destroy()
+        end
+    end
+    print(plrtbl[currentIndex])
+    target = plrtbl[currentIndex]
+    currentIndex = (currentIndex % #plrtbl) - 1
+    if target and target.Character and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid").Health > 0 then
+        esp(target)
+    end
+end
+spawn(function()
+    while true do
+        update()
+        wait(60)
+    end
+end)
+spawn(function()
+    while true do
+        if tp == true and target ~= nil and target.Character then
+            if target.Character:FindFirstChild("lol3") ~= nil then
+	            if plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character:FindFirstChild("Humanoid") and plr.Character:FindFirstChild("Humanoid").Health > 0 then
+	                plr.Character.HumanoidRootPart.CFrame = target.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1.75)
+                end
+            else
+	            esp(target)
+            end
+        end
+        game:GetService("RunService").Heartbeat:Wait()
+    end
+end)
+UIS.InputEnded:Connect(function(i)
+	if i.KeyCode == Enum.KeyCode.F1 then
+        if tp == false then
+            tp = true
+        else
+            tp = false
+        end
+    end
+    if i.KeyCode == Enum.KeyCode.PageDown then
+        switchMINUS()
+    end
+    if i.KeyCode == Enum.KeyCode.PageUp then
+        switchPLUS()
+    end
+    if i.KeyCode == Enum.KeyCode.F4 then
+        tp = false
+        plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame + Vector3.new(0, 300, 0)
+    end
+end)
