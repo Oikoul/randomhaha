@@ -93,4 +93,16 @@ UIS.InputEnded:Connect(function(i)
         tp = false
         plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame + Vector3.new(0, 300, 0)
     end
+    if i.KeyCode == Enum.KeyCode.F5 then
+        if fling then
+            fling = false
+        else
+            for i,v in next, game:GetService("Players").LocalPlayer.Character:GetDescendants() do
+		if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then 
+		     game:GetService("RunService").Heartbeat:connect(function()
+			v.Velocity = Vector3.new(-30,0,0)
+		     end)
+		end
+            end
+            
 end)
