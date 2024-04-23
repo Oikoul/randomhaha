@@ -3,6 +3,7 @@
     -F1 ijungti ir isjungti tp
     -PageUp ir PageDown keisti targetus
     -F4 teleportuotis i virsu ir isjungti tp
+    -F5 fling
 ]]
 local UIS = game:GetService("UserInputService")
 local tp = false
@@ -96,7 +97,11 @@ UIS.InputEnded:Connect(function(i)
     if i.KeyCode == Enum.KeyCode.F5 then
         if fling then
             fling = false
+            if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyThrust") then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.BodyThrust:Destroy()
+            end
         else
+            fling = true
             for i,v in next, game:GetService("Players").LocalPlayer.Character:GetDescendants() do
 		if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then 
 		     game:GetService("RunService").Heartbeat:connect(function()
