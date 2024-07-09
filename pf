@@ -1,4 +1,4 @@
-_G.target = false
+_G.target = true
 _G.chams = true
 _G.aimlock = true
 local m = 1
@@ -227,7 +227,7 @@ local function FindNearestPlayer()
 	return Target
 end
 UIS.InputBegan:Connect(function(Input)
-	if Input.KeyCode == Enum.KeyCode.Z and _G.aimlock == true then
+	if Input.UserInputType == Enum.UserInputType.MouseButton2 and _G.aimlock == true then
 		Holding = true
 		Active = true
 		Lock = true
@@ -243,7 +243,7 @@ UIS.InputBegan:Connect(function(Input)
 	end
 end)
 UIS.InputEnded:Connect(function(Input)
-	if Input.KeyCode == Enum.KeyCode.Z then
+	if Input.UserInputType == Enum.UserInputType.MouseButton2 then
 		Holding = false Active = false Lock = false
 	end
 end)
