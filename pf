@@ -1,0 +1,249 @@
+_G.target = true
+_G.chams = true
+_G.aimlock = true
+local m = 1
+local plrlist = {
+	"a",
+}
+local UIS = game:GetService("UserInputService")
+local a = Instance.new("ScreenGui")
+a.Name = "Magic1"
+a.Enabled = true
+a.Parent = game.CoreGui
+local b = Instance.new("Frame")
+b.BorderColor3 = Color3.fromRGB(0, 0, 0)
+b.BackgroundTransparency = 0.5
+b.BorderColor3 = Color3.fromRGB(170, 0, 0)
+b.BorderSizePixel = 2
+b.Size = UDim2.new(0, 185, 0, 30)
+b.Name = "Magic2"
+b.Parent = a
+b.Position = UDim2.new(0.408, 0, 0.071, 0)
+b.Visible = false
+local c = Instance.new("TextBox")
+local vis = false
+c.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+c.BackgroundTransparency = 0.5
+c.BorderColor3 = Color3.fromRGB(0, 0, 0)
+c.BorderSizePixel = 3
+c.Size = UDim2.new(0, 180, 0, 25)
+c.TextEditable = true
+c.TextColor3 = Color3.fromRGB(170, 0, 0)
+c.TextStrokeColor3 = Color3.fromRGB(170, 0, 0)
+c.TextSize = 8
+c.TextXAlignment = Enum.TextXAlignment.Left
+c.Name = "Magic3"
+c.Parent = b
+c.Position = UDim2.new(0.013, 0, 0.071, 0)
+game.Players.LocalPlayer:GetMouse().KeyUp:Connect(function(x)
+	if x == "]" then
+		if _G.target == false then
+			_G.target = true
+			print("Targeting")
+		else
+			_G.target = false
+			print("Not Targeting")
+		end
+	end
+	if x == "[" then
+		if _G.chams == false then
+			_G.chams = true
+			print("Chams enabled")
+		else
+			_G.chams = false
+			for _, v in pairs(game.Players:GetPlayers()) do
+				if v ~= nil and v ~= game.Players.LocalPlayer and v.Character ~= nil and v.Character:FindFirstChild("lol3") then
+					v.Character.lol3:Destroy()
+				end
+			end
+			print("Chams disabled")
+		end
+	end
+	if x == "-" then
+		if _G.aimlock == false then
+			_G.aimlock = true
+			print("Aimlock enabled")
+		else
+			_G.aimlock = false
+			print("Aimlock disabled")
+		end
+	end
+end)
+UIS.InputEnded:Connect(function(i)
+	if i.KeyCode == Enum.KeyCode.Quote then
+		local l = game.CoreGui["Magic1"].Magic2.Magic3
+		if l.Text ~= "" then
+			local cmd = l.Text:split(" ")
+			if cmd[1] and cmd[2] then
+				if cmd[1] == "hb" then
+					m = cmd[2]
+				end
+				if cmd[1] == "target" then
+					for _, v in pairs(game.Players:GetPlayers()) do
+						if cmd[2] == v.Name then
+							table.insert(plrlist, v.Name)
+							print("Targeting: "..cmd[2])
+							if v ~= nil and v ~= game.Players.LocalPlayer and v.Character ~= nil and v.Character:FindFirstChild("lol3") then
+								print("Targeting: "..cmd[2])
+								if _G.chams == true then
+									v.Character.lol3.OutlineColor = Color3.fromRGB(0, 0, 255)
+								else
+									local ch = Instance.new("Highlight")
+									ch.OutlineColor = Color3.fromRGB(255, 0, 0)
+									ch.FillColor = Color3.fromRGB(0, 0, 0)
+									ch.OutlineTransparency = 0.5
+									ch.FillTransparency = 1
+									ch.Name = "lol3"
+									ch.Enabled = true
+									ch.Adornee = v.Character
+									ch.Parent = v.Character
+								end
+							end
+						end
+					end
+				end
+				if cmd[1] == "untarget" then
+					for _, v in pairs(game.Players:GetPlayers()) do
+						if cmd[2] == v.Name then
+							local p = 0
+							for _, n in pairs(plrlist) do
+								p += 1
+								if n == cmd[2] then
+									table.remove(plrlist, p)
+									if v ~= nil and v ~= game.Players.LocalPlayer and v.Character ~= nil and v.Character:FindFirstChild("lol3") then
+										if _G.chams == true then
+											v.Character.lol3.OutlineColor = Color3.fromRGB(255, 0, 0)
+										else
+											v.Character.lol3:Destroy()
+										end
+
+									end
+								end
+							end
+						end
+					end
+				end
+			end		
+		end
+	end
+	if i.KeyCode == Enum.KeyCode.F3 then
+		if vis == false then
+			vis = true
+			b.Visible = true
+		else
+			vis = false
+			b.Visible = false
+		end
+	end	
+end)
+spawn(function()
+	while true do
+		for _, v in pairs(game.Players:GetPlayers()) do
+			local ch = Instance.new("Highlight")
+			ch.OutlineColor = Color3.fromRGB(255, 0, 0)
+			ch.FillColor = Color3.fromRGB(0, 0, 0)
+			ch.OutlineTransparency = 0.5
+			ch.FillTransparency = 1
+			ch.Name = "lol3"
+			ch.Enabled = true
+			if v ~= nil and v ~= game.Players.LocalPlayer and v.Character ~= nil then
+				for _, x in pairs(plrlist) do
+					if v.Name == x then
+						if _G.target == true then
+							if v.Character:FindFirstChild("lol3") then
+								--v.Character.HeadHB.Size = Vector3.new(1.175 * 15, 1.175 * 15, 1.175 * 15)
+                                v.Character.lol3.OutlineColor = Color3.fromRGB(0, 0, 255)
+							else
+								ch.Adornee = v.Character
+								ch.Parent = v.Character
+								wait()
+								v.Character.lol3.OutlineColor = Color3.fromRGB(0, 0, 255)
+							end
+						end
+					else
+						--v.Character.HeadHB.Size = Vector3.new(1.175 * m, 1.175 * m, 1.175 * m)
+						if _G.chams == true then
+							if v.Character:FindFirstChild("lol3") then
+								_G.defak = true
+							else
+								ch.Adornee = v.Character
+								ch.Parent = v.Character	
+							end
+						end	
+					end
+				end
+			end
+		end
+		wait(1)
+	end
+end)
+--
+local Area = game:GetService("Workspace")
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+local MyView = Area.CurrentCamera
+local Holding = false
+local Active = false
+local Lock = false
+local Epitaph = .04 
+
+
+_G.Sensitivity = 0
+_G.CircleSides = 64
+_G.CircleColor = Color3.fromRGB(255, 0, 130)
+_G.CircleTransparency = 0
+_G.CircleRadius = 2000
+_G.CircleFilled = false
+_G.CircleVisible = true
+_G.CircleThickness = 1
+local FOVCircle = Drawing.new("Circle")
+FOVCircle.Position = Vector2.new(MyView.ViewportSize.X / 2, MyView.ViewportSize.Y / 2)
+FOVCircle.Radius = _G.CircleRadius
+FOVCircle.Filled = _G.CircleFilled
+FOVCircle.Color = _G.CircleColor
+FOVCircle.Visible = _G.CircleVisible
+FOVCircle.Transparency = _G.CircleTransparency
+FOVCircle.NumSides = _G.CircleSides
+FOVCircle.Thickness = _G.CircleThickness
+
+local function FindNearestPlayer()
+	local dist = math.huge
+	local Target = nil
+	for _, v in pairs(Players:GetPlayers()) do
+		if v ~= nil and v ~= LocalPlayer and v.Character and v.Character:FindFirstChild("Head") ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("Humanoid").Health > 0 and v.Character:FindFirstChild("HumanoidRootPart") ~= nil then
+			local TheirCharacter = v.Character
+			local CharacterRoot, Visible = MyView:WorldToViewportPoint(TheirCharacter.Head.Position)
+			if Visible then
+				local RealMag = (Vector2.new(Mouse.X, Mouse.Y) - Vector2.new(CharacterRoot.X, CharacterRoot.Y)).Magnitude
+				if RealMag < dist and RealMag < FOVCircle.Radius then
+					dist = RealMag
+					Target = TheirCharacter
+				end
+			end
+		end
+	end
+	return Target
+end
+UIS.InputBegan:Connect(function(Input)
+	if Input.UserInputType == Enum.UserInputType.MouseButton2 and _G.aimlock == true then
+		Holding = true
+		Active = true
+		Lock = true
+		if Active then
+			local The_Enemy = FindNearestPlayer()
+			while Holding and _G.aimlock == true and The_Enemy.Humanoid.Health > 0 do task.wait(.0000000001)
+				if Lock and The_Enemy ~= nil then
+					local Future = The_Enemy.Head.CFrame + (The_Enemy.Head.Velocity * Epitaph)
+					MyView.CFrame = CFrame.lookAt(MyView.CFrame.Position, Future.Position)
+				end
+			end
+		end
+	end
+end)
+UIS.InputEnded:Connect(function(Input)
+	if Input.UserInputType == Enum.UserInputType.MouseButton2 then
+		Holding = false Active = false Lock = false
+	end
+end)
