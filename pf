@@ -149,7 +149,7 @@ spawn(function()
 						if _G.target == true then
 							if v.Character:FindFirstChild("lol3") then
 								--v.Character.HeadHB.Size = Vector3.new(1.175 * 15, 1.175 * 15, 1.175 * 15)
-                                v.Character.lol3.OutlineColor = Color3.fromRGB(0, 0, 255)
+								v.Character.lol3.OutlineColor = Color3.fromRGB(0, 0, 255)
 							else
 								ch.Adornee = v.Character
 								ch.Parent = v.Character
@@ -224,7 +224,7 @@ local function FindNearestPlayer()
 	return Target
 end
 UIS.InputBegan:Connect(function(Input)
-	if Input.UserInputType == Enum.UserInputType.MouseButton2 and _G.aimlock == true then
+	if Input.KeyCode == Enum.KeyCode.X and _G.aimlock == true then
 		Holding = true
 		Active = true
 		Lock = true
@@ -239,7 +239,7 @@ UIS.InputBegan:Connect(function(Input)
 	end
 end)
 UIS.InputEnded:Connect(function(Input)
-	if Input.UserInputType == Enum.UserInputType.MouseButton2 then
+	if Input.KeyCode == Enum.KeyCode.X then
 		Holding = false Active = false Lock = false
 	end
 end)
