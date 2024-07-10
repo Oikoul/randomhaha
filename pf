@@ -75,9 +75,6 @@ UIS.InputEnded:Connect(function(i)
 		if l.Text ~= "" then
 			local cmd = l.Text:split(" ")
 			if cmd[1] and cmd[2] then
-				if cmd[1] == "hb" then
-					m = cmd[2]
-				end
 				if cmd[1] == "target" then
 					for _, v in pairs(game.Players:GetPlayers()) do
 						if cmd[2] == v.Name then
@@ -188,7 +185,7 @@ local Holding = false
 local Active = false
 local Lock = false
 local Epitaph = .04 
-
+local TweenService = game:GetService("TweenService")
 
 _G.Sensitivity = 0
 _G.CircleSides = 64
@@ -235,8 +232,7 @@ UIS.InputBegan:Connect(function(Input)
 			local The_Enemy = FindNearestPlayer()
 			while Holding and _G.aimlock == true and The_Enemy.Humanoid.Health > 0 do task.wait(.0000000001)
 				if Lock and The_Enemy ~= nil then
-					local Future = The_Enemy.Head.CFrame + (The_Enemy.Head.Velocity * Epitaph)
-					MyView.CFrame = CFrame.lookAt(MyView.CFrame.Position, Future.Position)
+					TweenService:Create(MyView, TweenInfo.new(0, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(MyView.CFrame.Position, The_Enemy.Head.Position)}):Play()
 				end
 			end
 		end
