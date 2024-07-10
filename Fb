@@ -5,6 +5,102 @@
     -F4 teleportuotis i virsu ir isjungti tp
     -F5 fling
 ]]
+local Noclipping = nil
+local RunService = game:GetService("RunService")
+local Clipa = true
+local speaker = game:GetService('Players').LocalPlayer
+local flinging = false
+local a = 0
+local b = 0
+local c = 1.75
+function getRoot(char)
+	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
+	return rootPart
+end
+function randomString()
+	local length = math.random(10,20)
+	local array = {}
+	for i = 1, length do
+		array[i] = string.char(math.random(32, 126))
+	end
+	return table.concat(array)
+end
+local function noclip()
+	Clipa = false
+	Noclipping = true
+	wait(0.1)
+	local function NoclipLoop()
+		if Clipa == false and speaker.Character ~= nil then
+			for _, child in pairs(speaker.Character:GetDescendants()) do
+				if child:IsA("BasePart") and child.CanCollide == true  then
+					child.CanCollide = false
+				end
+			end
+		end
+	end
+	Noclipping = RunService.Stepped:Connect(NoclipLoop)
+end
+local function Clip()
+	if Noclipping then
+		Noclipping:Disconnect()
+	end
+	Clipa = true
+end
+local function unfling()
+	Clip()
+	if flingDied then
+		flingDied:Disconnect()
+	end
+	flinging = false
+	wait(.1)
+	local speakerChar = speaker.Character
+	if not speakerChar or not getRoot(speakerChar) then return end
+	for i,v in pairs(getRoot(speakerChar):GetChildren()) do
+		if v.ClassName == 'BodyAngularVelocity' then
+			v:Destroy()
+		end
+	end
+	for _, child in pairs(speakerChar:GetDescendants()) do
+		if child.ClassName == "Part" or child.ClassName == "MeshPart" then
+			child.CustomPhysicalProperties = PhysicalProperties.new(0.7, 0.3, 0.5)
+		end
+	end
+end
+local function fling()
+	flinging = false
+	for _, child in pairs(speaker.Character:GetDescendants()) do
+		if child:IsA("BasePart") then
+			child.CustomPhysicalProperties = PhysicalProperties.new(math.huge, 0.3, 0.5)
+		end
+	end
+	noclip()
+	wait(.1)
+	local bambam = Instance.new("BodyAngularVelocity")
+	bambam.Name = randomString()
+	bambam.Parent = getRoot(speaker.Character)
+	bambam.AngularVelocity = Vector3.new(0,99999,0)
+	bambam.MaxTorque = Vector3.new(0,math.huge,0)
+	bambam.P = math.huge
+	local Char = speaker.Character:GetChildren()
+	for i, v in next, Char do
+		if v:IsA("BasePart") then
+			v.CanCollide = false
+			v.Massless = true
+			v.Velocity = Vector3.new(0, 0, 0)
+		end
+	end
+	flinging = true
+	local function flingDiedF()
+		unfling()
+	end
+	flingDied = speaker.Character:FindFirstChildOfClass('Humanoid').Died:Connect(flingDiedF)
+	repeat
+		bambam.AngularVelocity = Vector3.new(0,99999,0)
+		wait(.2)
+		bambam.AngularVelocity = Vector3.new(0,0,0)
+		wait(.1)
+	until flinging == false
+end
 local UIS = game:GetService("UserInputService")
 local tp = false
 local target = nil
@@ -12,7 +108,7 @@ local plrtbl = {}
 local plr = game.Players.LocalPlayer
 local currentIndex = 1
 local function esp(targ)
-    local ch = Instance.new("Highlight")
+	local ch = Instance.new("Highlight")
 	ch.OutlineColor = Color3.fromRGB(255, 0, 0)
 	ch.FillColor = Color3.fromRGB(0, 0, 0)
 	ch.OutlineTransparency = 0
@@ -23,96 +119,92 @@ local function esp(targ)
 	ch.Parent = targ.Character
 end
 local function update()
-    table.clear(plrtbl)
-    for _, v in pairs(game.Players:GetPlayers()) do
-        if v and v ~= plr then
-            table.insert(plrtbl, v)
-        end
-    end
+	table.clear(plrtbl)
+	for _, v in pairs(game.Players:GetPlayers()) do
+		if v and v ~= plr then
+			table.insert(plrtbl, v)
+		end
+	end
 end
 local function switchPLUS()
-    if target and target.Character then
-        if target.Character:FindFirstChild("lol3") then
-            target.Character:FindFirstChild("lol3"):Destroy()
-        end
-    end
-    print(plrtbl[currentIndex])
-    target = plrtbl[currentIndex]
-    currentIndex = (currentIndex % #plrtbl) + 1
-    if target and target.Character and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid").Health > 0 then
-        esp(target)
-    end
+	if target and target.Character then
+		if target.Character:FindFirstChild("lol3") then
+			target.Character:FindFirstChild("lol3"):Destroy()
+		end
+	end
+	print(plrtbl[currentIndex])
+	target = plrtbl[currentIndex]
+	currentIndex = (currentIndex % #plrtbl) + 1
+	if target and target.Character and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid").Health > 0 then
+		esp(target)
+	end
 end
 local function switchMINUS()
-    if target and target.Character then
-        if target.Character:FindFirstChild("lol3") then
-            target.Character:FindFirstChild("lol3"):Destroy()
-        end
-    end
-    print(plrtbl[currentIndex])
-    target = plrtbl[currentIndex]
-    currentIndex = (currentIndex % #plrtbl) - 1
-    if target and target.Character and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid").Health > 0 then
-        esp(target)
-    end
+	if target and target.Character then
+		if target.Character:FindFirstChild("lol3") then
+			target.Character:FindFirstChild("lol3"):Destroy()
+		end
+	end
+	print(plrtbl[currentIndex])
+	target = plrtbl[currentIndex]
+	currentIndex = (currentIndex % #plrtbl) - 1
+	if target and target.Character and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid").Health > 0 then
+		esp(target)
+	end
 end
 spawn(function()
-    while true do
-        update()
-        wait(60)
-    end
+	while true do
+		update()
+		wait(60)
+	end
 end)
 spawn(function()
-    while true do
-        if tp == true and target ~= nil and target.Character then
-            if target.Character:FindFirstChild("lol3") ~= nil then
-	            if plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character:FindFirstChild("Humanoid") and plr.Character:FindFirstChild("Humanoid").Health > 0 then
-	                plr.Character.HumanoidRootPart.CFrame = target.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1.75)
-                end
-            else
-	            esp(target)
-            end
-        end
-        game:GetService("RunService").Heartbeat:Wait()
-    end
+	while true do
+		if tp == true and target ~= nil and target.Character then
+			if target.Character:FindFirstChild("lol3") ~= nil then
+				if plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character:FindFirstChild("Humanoid") and plr.Character:FindFirstChild("Humanoid").Health > 0 and target and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
+					plr.Character.HumanoidRootPart.CFrame = target.Character.HumanoidRootPart.CFrame * CFrame.new(a, b, c)
+				end
+			else
+				esp(target)
+			end
+		end
+		game:GetService("RunService").Heartbeat:Wait()
+	end
 end)
 UIS.InputEnded:Connect(function(i)
 	if i.KeyCode == Enum.KeyCode.F1 then
-        if tp == false then
-            tp = true
-        else
-            tp = false
-        end
-    end
-    if i.KeyCode == Enum.KeyCode.PageDown then
-        switchMINUS()
-    end
-    if i.KeyCode == Enum.KeyCode.PageUp then
-        switchPLUS()
-    end
-    if i.KeyCode == Enum.KeyCode.F4 then
-        tp = false
-        plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame + Vector3.new(0, 300, 0)
-    end
-    if i.KeyCode == Enum.KeyCode.F5 then
-        if fling then
-            fling = false
-            if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyThrust") then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.BodyThrust:Destroy()
-            end
-        else
-            fling = true
-            for i,v in next, game:GetService("Players").LocalPlayer.Character:GetDescendants() do
-		if v:IsA("BasePart") and v.Name ~="HumanoidRootPart" then 
-		     game:GetService("RunService").Heartbeat:connect(function()
-			v.Velocity = Vector3.new(-30,0,0)
-		     end)
+		if tp == false then
+			tp = true
+		else
+			tp = false
 		end
-            end
-            local bt = Instance.new("BodyThrust")
-	    bt.Force = Vector3.new(50000, 50000, 50000)
-	    bt.Location = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-	    bt.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
-         end
-     end
+	end
+	if i.KeyCode == Enum.KeyCode.PageDown then
+		switchMINUS()
+	end
+	if i.KeyCode == Enum.KeyCode.PageUp then
+		switchPLUS()
+	end
+	if i.KeyCode == Enum.KeyCode.F4 then
+		tp = false
+		plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame + Vector3.new(0, 300, 0)
+	end
+	if i.KeyCode == Enum.KeyCode.F5 then
+		if flinging then
+			a = 0
+			b = 0
+			c = 1.75
+			unfling()
+			plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame + Vector3.new(0, 300, 0)
+			plr.Character.HumanoidRootPart.Anchored = true
+			wait(6)
+			plr.Character.HumanoidRootPart.Anchored = false
+		else
+			a = 1
+			b = 1
+			c = 1
+			fling()
+		end
+	end
 end)
