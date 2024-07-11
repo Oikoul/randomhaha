@@ -231,8 +231,9 @@ UIS.InputBegan:Connect(function(Input)
 		if Active then
 			local The_Enemy = FindNearestPlayer()
 			while Holding and _G.aimlock == true and The_Enemy.Humanoid.Health > 0 do task.wait(.0000000001)
-				if Lock and The_Enemy ~= nil then
-					TweenService:Create(MyView, TweenInfo.new(0, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(MyView.CFrame.Position, The_Enemy.Head.Position)}):Play()
+				if Lock and The_Enemy ~= nil and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Head") ~= nil then
+					--TweenService:Create(MyView, TweenInfo.new(0, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFrame.new(MyView.CFrame.Position, The_Enemy.Head.Position)}):Play()
+					MyView.CFrame = CFrame.new(LocalPlayer.Character:FindFirstChild("Head"), The_Enemy.Head.Position)
 				end
 			end
 		end
