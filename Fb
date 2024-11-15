@@ -208,3 +208,120 @@ UIS.InputEnded:Connect(function(i)
 		end
 	end
 end)
+
+----------------------------------------------------------------
+local UIS = game:GetService("UserInputService")
+local tp = false
+local target = nil
+local plrtbl = {}
+local plr = game.Players.LocalPlayer
+local currentIndex = 1
+local blockablemoves = {"Light Kick", "Guzan", "Jewels Of Light", "Fire Fist", "Fire Gun", "Pillar", "Beam", "Major eruption", "Meteor Volcano", "Pressure Cannon", "Sumo Thrust Barrage", "Fullbright", "Fujiazami", "Phoenix Inferno", "Bluebird", "Cupid's Arrows", "Blossom Wind", "Island Shake", "Launch", "Planetary Devastation", "Dragon Breath", "Tatsumaki", "Jet Gatling", "Ice Hail", "Absolute Zero", "Hound Blaze", "Magma Rain", "Scorching Fist", "Supernova", "Piercing Shine", "Photon Storm", "Heavenly Descent", "Chloro Frenzy", "Venom Road", "Poison Geyser", "Grilled Dough", "Lotus Dough Combo", "Anemone", "Lightning Palm", "Claw Barrage", "Wreckage", "Hurricane Shock", "Neo Red Hawk", "Roc Gatling", "Dawn Rocket", "Mole Pistol Combo", "Inferno Breath", "Enthral Grasp", "Zeus Meadow", "Crimson Pillar", "Anti Quake", "Black Hole Path", "Primal Rage", "Arctic Breath", "Hallowed Cuts"}
+local function esp(targ)
+	local ch = Instance.new("Highlight")
+	ch.OutlineColor = Color3.fromRGB(0, 0, 0)
+	ch.FillColor = Color3.fromRGB(0, 0, 0)
+	ch.OutlineTransparency = 0
+	ch.FillTransparency = 1
+	ch.Name = "lol3"
+	ch.Enabled = true
+	ch.Adornee = targ.Character
+	ch.Parent = targ.Character
+	local bil = Instance.new("BillboardGui")
+	bil.ExtentsOffsetWorldSpace = Vector3.new(0, 15, 0)
+	bil.Parent = targ.Character:FindFirstChild("HumanoidRootPart")
+	local text = Instance.new("TextLabel")
+	text.BackgroundTransparency = 1
+	text.Text = ""
+	text.Parent = bil
+end
+local function update()
+	table.clear(plrtbl)
+	for _, v in pairs(game.Players:GetPlayers()) do
+		if v and v ~= plr then
+			table.insert(plrtbl, v)
+		end
+	end
+end
+local function switchPLUS()
+	if target and target.Character then
+		if target.Character:FindFirstChild("lol3") then
+			target.Character:FindFirstChild("lol3"):Destroy()
+		end
+	end
+	print(plrtbl[currentIndex])
+	target = plrtbl[currentIndex]
+	currentIndex = (currentIndex % #plrtbl) + 1
+	if target and target.Character and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid").Health > 0 then
+		esp(target)
+	end
+end
+local function switchMINUS()
+	if target and target.Character then
+		if target.Character:FindFirstChild("lol3") then
+			target.Character:FindFirstChild("lol3"):Destroy()
+		end
+	end
+	print(plrtbl[currentIndex])
+	target = plrtbl[currentIndex]
+	currentIndex = (currentIndex % #plrtbl) - 1
+	if target and target.Character and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid").Health > 0 then
+		esp(target)
+	end
+end
+spawn(function()
+	while true do
+		update()
+		wait(60)
+	end
+end)
+spawn(function()
+	while true do
+		if target ~= nil and target.Character then
+			if target.Character:FindFirstChild("lol3") ~= nil then
+				if target and target.Character and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("Humanoid").Health > 0 then
+					local move = nil
+					for _, n in pairs(target.Character:GetChildren()) do
+						if n.ClassName == "Tool"then
+							move = n.Name
+						end
+					end
+					if move then
+						for _, v in pairs(blockablemoves) do
+							if move == v then
+								if target.Character:FindFirstChild("lol3") ~= nil then
+									target.Character:FindFirstChild("lol3").OutlineColor = Color3.fromRGB(0, 255, 0)
+									target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").Text = v
+									target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").TextColor3 = Color3.fromRGB(0, 255, 0)
+								end
+							else
+								if target.Character:FindFirstChild("lol3") ~= nil then
+									target.Character:FindFirstChild("lol3").OutlineColor = Color3.fromRGB(255, 0, 0)
+									target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").Text = v
+									target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").TextColor3 = Color3.fromRGB(255, 0, 0)
+								end
+							end
+						end
+					else
+						if target.Character:FindFirstChild("lol3") and target.Character:FindFirstChild("BillboardGui") and target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel") then
+							target.Character:FindFirstChild("lol3").OutlineColor = Color3.fromRGB(0, 0, 0)
+							target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").Text = ""
+							target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").TextColor3 = Color3.fromRGB(0, 0, 0)
+						end
+					end
+				end
+			else
+				esp(target)
+			end
+		end
+		wait()
+	end
+end)
+UIS.InputEnded:Connect(function(i)
+	if i.KeyCode == Enum.KeyCode.PageDown then
+		switchMINUS()
+	end
+	if i.KeyCode == Enum.KeyCode.PageUp then
+		switchPLUS()
+	end
+end)
