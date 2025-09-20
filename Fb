@@ -1,327 +1,745 @@
---[[
-    Controls: 
-    -F1 ijungti ir isjungti tp
-    -PageUp ir PageDown keisti targetus
-    -F4 teleportuotis i virsu ir isjungti tp
-    -F5 fling
-]]
-local Noclipping = nil
-local RunService = game:GetService("RunService")
-local Clipa = true
-local speaker = game:GetService('Players').LocalPlayer
-local flinging = false
-local a = 0
-local b = 0
-local c = 1.75
-function getRoot(char)
-	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
-	return rootPart
-end
-function randomString()
-	local length = math.random(10,20)
-	local array = {}
-	for i = 1, length do
-		array[i] = string.char(math.random(32, 126))
-	end
-	return table.concat(array)
-end
-local function noclip()
-	Clipa = false
-	Noclipping = true
-	wait(0.1)
-	local function NoclipLoop()
-		if Clipa == false and speaker.Character ~= nil then
-			for _, child in pairs(speaker.Character:GetDescendants()) do
-				if child:IsA("BasePart") and child.CanCollide == true  then
-					child.CanCollide = false
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local Chams = Instance.new("TextButton")
+local Names = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+local TextLabel_2 = Instance.new("TextLabel")
+local TargetClosests = Instance.new("TextButton")
+local Mouse = Instance.new("TextButton")
+local Target = Instance.new("TextLabel")
+local Plus = Instance.new("TextButton")
+local Minus = Instance.new("TextButton")
+local TextLabel_3 = Instance.new("TextLabel")
+local PathsSteps = Instance.new("TextLabel")
+local Steps = Instance.new("TextLabel")
+local Plus_2 = Instance.new("TextButton")
+local Minus_2 = Instance.new("TextButton")
+local PathsInterval = Instance.new("TextLabel")
+local Interval = Instance.new("TextLabel")
+local Plus_3 = Instance.new("TextButton")
+local Minus_3 = Instance.new("TextButton")
+local Pred = Instance.new("TextButton")
+
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BackgroundTransparency = 0.200
+Frame.BorderColor3 = Color3.fromRGB(255, 0, 0)
+Frame.BorderSizePixel = 2
+Frame.Position = UDim2.new(0.0154800965, 0, 0.0266022459, 0)
+Frame.Size = UDim2.new(0, 434, 0, 274)
+
+Chams.Name = "Chams"
+Chams.Parent = Frame
+Chams.BackgroundColor3 = Color3.fromRGB(7, 7, 7)
+Chams.BorderColor3 = Color3.fromRGB(0, 255, 0)
+Chams.Position = UDim2.new(0.0184331797, 0, 0.0799999982, 0)
+Chams.Size = UDim2.new(0, 191, 0, 37)
+Chams.Font = Enum.Font.Highway
+Chams.Text = "Chams"
+Chams.TextColor3 = Color3.fromRGB(0, 255, 0)
+Chams.TextSize = 14.000
+Chams.TextWrapped = true
+
+Names.Name = "Names"
+Names.Parent = Frame
+Names.BackgroundColor3 = Color3.fromRGB(7, 7, 7)
+Names.BorderColor3 = Color3.fromRGB(0, 255, 0)
+Names.Position = UDim2.new(0.540000021, 0, 0.0799999982, 0)
+Names.Size = UDim2.new(0, 191, 0, 37)
+Names.Font = Enum.Font.Highway
+Names.Text = "Move's Names"
+Names.TextColor3 = Color3.fromRGB(0, 255, 0)
+Names.TextSize = 14.000
+Names.TextWrapped = true
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0, 0, 0.0149999997, 0)
+TextLabel.Size = UDim2.new(0, 434, 0, 15)
+TextLabel.Font = Enum.Font.Highway
+TextLabel.Text = "<<Visuals>>"
+TextLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+TextLabel.TextSize = 14.000
+
+TextLabel_2.Parent = Frame
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Position = UDim2.new(0, 0, 0.369894654, 0)
+TextLabel_2.Size = UDim2.new(0, 434, 0, 15)
+TextLabel_2.Font = Enum.Font.Highway
+TextLabel_2.Text = "<<Controls>>"
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 0, 0)
+TextLabel_2.TextSize = 14.000
+
+TargetClosests.Name = "TargetClosests"
+TargetClosests.Parent = Frame
+TargetClosests.BackgroundColor3 = Color3.fromRGB(7, 7, 7)
+TargetClosests.BorderColor3 = Color3.fromRGB(255, 0, 0)
+TargetClosests.Position = UDim2.new(0.0184331797, 0, 0.430830836, 0)
+TargetClosests.Size = UDim2.new(0, 191, 0, 37)
+TargetClosests.Font = Enum.Font.Highway
+TargetClosests.Text = "Target the nearest player"
+TargetClosests.TextColor3 = Color3.fromRGB(255, 0, 0)
+TargetClosests.TextSize = 14.000
+TargetClosests.TextWrapped = true
+
+Mouse.Name = "Mouse"
+Mouse.Parent = Frame
+Mouse.BackgroundColor3 = Color3.fromRGB(7, 7, 7)
+Mouse.BorderColor3 = Color3.fromRGB(255, 0, 0)
+Mouse.Position = UDim2.new(0.539999962, 0, 0.427181214, 0)
+Mouse.Size = UDim2.new(0, 191, 0, 37)
+Mouse.Font = Enum.Font.Highway
+Mouse.Text = "Select a target by right clicking near the player"
+Mouse.TextColor3 = Color3.fromRGB(255, 0, 0)
+Mouse.TextSize = 14.000
+Mouse.TextWrapped = true
+
+Target.Name = "Target"
+Target.Parent = Frame
+Target.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Target.BorderColor3 = Color3.fromRGB(255, 0, 0)
+Target.Position = UDim2.new(0.370967746, 0, 0.653284669, 0)
+Target.Size = UDim2.new(0, 112, 0, 27)
+Target.Font = Enum.Font.Highway
+Target.Text = ""
+Target.TextColor3 = Color3.fromRGB(255, 0, 0)
+Target.TextSize = 14.000
+
+Plus.Name = "Plus"
+Plus.Parent = Target
+Plus.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Plus.BorderColor3 = Color3.fromRGB(255, 0, 0)
+Plus.Position = UDim2.new(1, 0, 0, 0)
+Plus.Size = UDim2.new(0, 29, 0, 27)
+Plus.Font = Enum.Font.Highway
+Plus.Text = "->"
+Plus.TextColor3 = Color3.fromRGB(255, 0, 0)
+Plus.TextSize = 14.000
+
+Minus.Name = "Minus"
+Minus.Parent = Target
+Minus.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Minus.BorderColor3 = Color3.fromRGB(255, 0, 0)
+Minus.Position = UDim2.new(-0.258928567, 0, 0, 0)
+Minus.Size = UDim2.new(0, 29, 0, 27)
+Minus.Font = Enum.Font.Highway
+Minus.Text = "<-"
+Minus.TextColor3 = Color3.fromRGB(255, 0, 0)
+Minus.TextSize = 14.000
+
+TextLabel_3.Parent = Frame
+TextLabel_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_3.Position = UDim2.new(0.320276499, 0, 0.592299223, 0)
+TextLabel_3.Size = UDim2.new(0, 155, 0, 14)
+TextLabel_3.Font = Enum.Font.Highway
+TextLabel_3.Text = "Target:"
+TextLabel_3.TextColor3 = Color3.fromRGB(255, 0, 0)
+TextLabel_3.TextSize = 14.000
+
+PathsSteps.Name = "PathsSteps"
+PathsSteps.Parent = Frame
+PathsSteps.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+PathsSteps.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PathsSteps.Position = UDim2.new(0.059907835, 0, 0.776569366, 0)
+PathsSteps.Size = UDim2.new(0, 155, 0, 14)
+PathsSteps.Font = Enum.Font.Highway
+PathsSteps.Text = "Path's steps:"
+PathsSteps.TextColor3 = Color3.fromRGB(255, 0, 0)
+PathsSteps.TextSize = 14.000
+
+Steps.Name = "Steps"
+Steps.Parent = Frame
+Steps.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Steps.BorderColor3 = Color3.fromRGB(255, 0, 0)
+Steps.Position = UDim2.new(0.110599078, 0, 0.832116783, 0)
+Steps.Size = UDim2.new(0, 112, 0, 27)
+Steps.Font = Enum.Font.Highway
+Steps.Text = "5"
+Steps.TextColor3 = Color3.fromRGB(255, 0, 0)
+Steps.TextSize = 14.000
+
+Plus_2.Name = "Plus"
+Plus_2.Parent = Steps
+Plus_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Plus_2.BorderColor3 = Color3.fromRGB(255, 0, 0)
+Plus_2.Position = UDim2.new(1, 0, 0, 0)
+Plus_2.Size = UDim2.new(0, 29, 0, 27)
+Plus_2.Font = Enum.Font.Highway
+Plus_2.Text = "+"
+Plus_2.TextColor3 = Color3.fromRGB(255, 0, 0)
+Plus_2.TextSize = 14.000
+
+Minus_2.Name = "Minus"
+Minus_2.Parent = Steps
+Minus_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Minus_2.BorderColor3 = Color3.fromRGB(255, 0, 0)
+Minus_2.Position = UDim2.new(-0.258928567, 0, 0, 0)
+Minus_2.Size = UDim2.new(0, 29, 0, 27)
+Minus_2.Font = Enum.Font.Highway
+Minus_2.Text = "-"
+Minus_2.TextColor3 = Color3.fromRGB(255, 0, 0)
+Minus_2.TextSize = 14.000
+
+PathsInterval.Name = "PathsInterval"
+PathsInterval.Parent = Frame
+PathsInterval.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+PathsInterval.BorderColor3 = Color3.fromRGB(0, 0, 0)
+PathsInterval.Position = UDim2.new(0.580645144, 0, 0.776569366, 0)
+PathsInterval.Size = UDim2.new(0, 155, 0, 14)
+PathsInterval.Font = Enum.Font.Highway
+PathsInterval.Text = "Path's interval:"
+PathsInterval.TextColor3 = Color3.fromRGB(255, 0, 0)
+PathsInterval.TextSize = 14.000
+
+Interval.Name = "Interval"
+Interval.Parent = Frame
+Interval.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Interval.BorderColor3 = Color3.fromRGB(255, 0, 0)
+Interval.Position = UDim2.new(0.631336391, 0, 0.832116783, 0)
+Interval.Size = UDim2.new(0, 112, 0, 27)
+Interval.Font = Enum.Font.Highway
+Interval.Text = "0.20"
+Interval.TextColor3 = Color3.fromRGB(255, 0, 0)
+Interval.TextSize = 14.000
+
+Plus_3.Name = "Plus"
+Plus_3.Parent = Interval
+Plus_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Plus_3.BorderColor3 = Color3.fromRGB(255, 0, 0)
+Plus_3.Position = UDim2.new(1, 0, 0, 0)
+Plus_3.Size = UDim2.new(0, 29, 0, 27)
+Plus_3.Font = Enum.Font.Highway
+Plus_3.Text = "+"
+Plus_3.TextColor3 = Color3.fromRGB(255, 0, 0)
+Plus_3.TextSize = 14.000
+
+Minus_3.Name = "Minus"
+Minus_3.Parent = Interval
+Minus_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Minus_3.BorderColor3 = Color3.fromRGB(255, 0, 0)
+Minus_3.Position = UDim2.new(-0.258928567, 0, 0, 0)
+Minus_3.Size = UDim2.new(0, 29, 0, 27)
+Minus_3.Font = Enum.Font.Highway
+Minus_3.Text = "-"
+Minus_3.TextColor3 = Color3.fromRGB(255, 0, 0)
+Minus_3.TextSize = 14.000
+
+Pred.Name = "Pred"
+Pred.Parent = Frame
+Pred.BackgroundColor3 = Color3.fromRGB(7, 7, 7)
+Pred.BorderColor3 = Color3.fromRGB(255, 0, 0)
+Pred.Position = UDim2.new(0.0184331797, 0, 0.233284667, 0)
+Pred.Size = UDim2.new(0, 191, 0, 37)
+Pred.Font = Enum.Font.Highway
+Pred.Text = "Predict enemy's ragdol path"
+Pred.TextColor3 = Color3.fromRGB(255, 0, 0)
+Pred.TextSize = 14.000
+Pred.TextWrapped = true
+
+local UIS = game:GetService("UserInputService")
+	local target = nil
+	local plrtbl = {}
+	local plr = game.Players.LocalPlayer
+	local currentIndex = 1
+	local blockablemoves = {"Light Kick", "Guzan", "Jewels Of Light", "Fire Fist", "Fire Gun", "Pillar", "Beam", "Major eruption", "Meteor Volcano", "Pressure Cannon", "Sumo Thrust Barrage", "Fullbright", "Fujiazami", "Phoenix Inferno", "Bluebird", "Cupid's Arrows", "Blossom Wind", "Island Shake", "Launch", "Planetary Devastation", "Dragon Breath", "Tatsumaki", "Jet Gatling", "Ice Hail", "Absolute Zero", "Hound Blaze", "Magma Rain", "Scorching Fist", "Supernova", "Piercing Shine", "Photon Storm", "Heavenly Descent", "Chloro Frenzy", "Venom Road", "Poison Geyser", "Grilled Dough", "Lotus Dough Combo", "Anemone", "Lightning Palm", "Claw Barrage", "Wreckage", "Hurricane Shock", "Neo Red Hawk", "Roc Gatling", "Dawn Rocket", "Mole Pistol Combo", "Inferno Breath", "Enthral Grasp", "Zeus Meadow", "Crimson Pillar", "Anti Quake", "Black Hole Path", "Primal Rage", "Arctic Breath", "Hallowed Cuts", "Elastic Lasso", "Blazing Storm", "Finger Pistol Barrage", "Infinity Drive"}
+		local m = plr:GetMouse()
+		local names = true
+		local chams = true
+		local predict = false
+		local closest = false
+		local mousemode = false
+		local trajectoryFolder = nil
+		local steps = 5
+		local interval = 0.20
+		local dist = math.huge
+		local RunService = game:GetService("RunService")
+
+			for _, v in pairs(game.Players:GetPlayers()) do
+				if v ~= plr and v.Character and v.Character:FindFirstChild("Humanoid") and v.Character:FindFirstChild("Humanoid").Health > 0 and v.Character:FindFirstChild("HumanoidRootPart") and plr.Character and plr.Character:FindFirstChild("Humanoid") and plr.Character:FindFirstChild("Humanoid").Health > 0 and plr.Character:FindFirstChild("HumanoidRootPart") and (plr.Character:FindFirstChild("HumanoidRootPart").Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude < dist then
+					target = v
+					dist = (plr.Character:FindFirstChild("HumanoidRootPart").Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude
 				end
 			end
+			if target then
+				Target.Text = target.Name
+			end
+			local function showPath(velocity)
+				if target and target.Character and target.Character:FindFirstChild("HumanoidRootPart") and predict then
+					if not trajectoryFolder then
+					trajectoryFolder = Instance.new("Folder")
+		trajectoryFolder.Name = "RagdollTrajectories"
+		trajectoryFolder.Parent = workspace
 		end
+		local position = target.Character:FindFirstChild("HumanoidRootPart").Position
+			local gravity = workspace.Gravity
+			local currentVelocity = velocity
+
+			for i = 1, steps do
+				local part = Instance.new("Part")
+					part.Size = Vector3.new(0.5, 0.5, 0.5)
+					part.Shape = Enum.PartType.Ball
+					part.Anchored = true
+					part.CanCollide = false
+					part.Material = Enum.Material.SmoothPlastic
+					part.Color = Color3.fromRGB(255, 0, 0)
+					position = position + (currentVelocity * interval)
+					currentVelocity = currentVelocity + Vector3.new(0, -gravity * interval, 0)
+					part.Position = position
+					part.Parent = trajectoryFolder
+					end
+					end
+			end
+
+			local function checkRagdollState()
+				if target and target.Character and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("HumanoidRootPart") and predict then
+					local isRagdolled = target.Character:FindFirstChild("Humanoid"):GetAttribute("IsRagdolled")
+
+						if isRagdolled then
+	if isRagdolled ~= 0 then
+	local velocity = target.Character:FindFirstChild("HumanoidRootPart").AssemblyLinearVelocity
+		showPath(velocity)
+		else
+		if trajectoryFolder then
+	trajectoryFolder:Destroy()
+	trajectoryFolder = nil
 	end
-	Noclipping = RunService.Stepped:Connect(NoclipLoop)
+	end
+	end
+	end
 end
-local function Clip()
-	if Noclipping then
-		Noclipping:Disconnect()
-	end
-	Clipa = true
-end
-local function unfling()
-	Clip()
-	if flingDied then
-		flingDied:Disconnect()
-	end
-	flinging = false
-	wait(.1)
-	local speakerChar = speaker.Character
-	if not speakerChar or not getRoot(speakerChar) then return end
-	for i,v in pairs(getRoot(speakerChar):GetChildren()) do
-		if v.ClassName == 'BodyAngularVelocity' then
-			v:Destroy()
-		end
-	end
-	for _, child in pairs(speakerChar:GetDescendants()) do
-		if child.ClassName == "Part" or child.ClassName == "MeshPart" then
-			child.CustomPhysicalProperties = PhysicalProperties.new(0.7, 0.3, 0.5)
-		end
-	end
-end
-local function fling()
-	flinging = false
-	for _, child in pairs(speaker.Character:GetDescendants()) do
-		if child:IsA("BasePart") then
-			child.CustomPhysicalProperties = PhysicalProperties.new(math.huge, 0.3, 0.5)
-		end
-	end
-	noclip()
-	wait(.1)
-	local bambam = Instance.new("BodyAngularVelocity")
-	bambam.Name = randomString()
-	bambam.Parent = getRoot(speaker.Character)
-	bambam.AngularVelocity = Vector3.new(0,99999,0)
-	bambam.MaxTorque = Vector3.new(0,math.huge,0)
-	bambam.P = math.huge
-	local Char = speaker.Character:GetChildren()
-	for i, v in next, Char do
-		if v:IsA("BasePart") then
-			v.CanCollide = false
-			v.Massless = true
-			v.Velocity = Vector3.new(0, 0, 0)
-		end
-	end
-	flinging = true
-	local function flingDiedF()
-		unfling()
-	end
-	flingDied = speaker.Character:FindFirstChildOfClass('Humanoid').Died:Connect(flingDiedF)
-	repeat
-		bambam.AngularVelocity = Vector3.new(0,99999,0)
-		wait(.2)
-		bambam.AngularVelocity = Vector3.new(0,0,0)
-		wait(.1)
-	until flinging == false
-end
-local UIS = game:GetService("UserInputService")
-local tp = false
-local target = nil
-local plrtbl = {}
-local plr = game.Players.LocalPlayer
-local currentIndex = 1
 local function esp(targ)
-	local ch = Instance.new("Highlight")
-	ch.OutlineColor = Color3.fromRGB(255, 0, 0)
-	ch.FillColor = Color3.fromRGB(0, 0, 0)
-	ch.OutlineTransparency = 0
-	ch.FillTransparency = 1
-	ch.Name = "lol3"
-	ch.Enabled = true
-	ch.Adornee = targ.Character
-	ch.Parent = targ.Character
+	if chams then
+	if target and target.Character and target.Character:FindFirstChild("lol3") then
+		target.Character:FindFirstChild("lol3"):Destroy()
+			end
+			local ch = Instance.new("Highlight")
+				ch.OutlineColor = Color3.fromRGB(0, 0, 0)
+				ch.FillColor = Color3.fromRGB(0, 0, 0)
+				ch.OutlineTransparency = 0
+				ch.FillTransparency = 1
+				ch.Name = "lol3"
+				ch.Enabled = true
+				ch.Adornee = targ.Character
+				ch.Parent = targ.Character
+				end
+				if names then
+	if target and target.Character and target.Character:FindFirstChild("BillboardGui") and target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel") then
+		target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel"):Destroy()
+			end
+			if target and target.Character and target.Character:FindFirstChild("BillboardGui") then
+				target.Character:FindFirstChild("BillboardGui"):Destroy()
+					end
+					if target and target.Character and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("Humanoid").Health > 0 and target.Character:FindFirstChild("Head") then
+						local billboardGui = Instance.new("BillboardGui")
+							billboardGui.Adornee = target.Character:FindFirstChild("Head")
+								billboardGui.Size = UDim2.new(0, 100, 0, 50)
+								billboardGui.StudsOffset = Vector3.new(0, 7, 0)
+								billboardGui.Parent = target.Character
+								local label = Instance.new("TextLabel")
+									label.Size = UDim2.new(1, 0, 1, 0)
+									label.BackgroundTransparency = 1
+									label.Text = ""
+									label.TextColor3 = Color3.new(1, 1, 1)
+									label.TextScaled = true
+									label.Parent = billboardGui
+									end
+									end
 end
 local function update()
 	table.clear(plrtbl)
 	for _, v in pairs(game.Players:GetPlayers()) do
 		if v and v ~= plr then
-			table.insert(plrtbl, v)
+	table.insert(plrtbl, v)
+	end
+	end
+	for _, v in pairs(game.Players:GetPlayers()) do
+		if v and v ~= plr and v ~= target and v.Character then
+	for _, n in pairs(v.Character:GetChildren()) do
+		if v ~= plr and v ~= target and n and n.Name == "lol3" or n.Name == "BillboardGui" then
+		n:Destroy()
+		end
+		end
+		end
 		end
 	end
-end
-local function switchPLUS()
-	if target and target.Character then
-		if target.Character:FindFirstChild("lol3") then
-			target.Character:FindFirstChild("lol3"):Destroy()
-		end
-	end
-	print(plrtbl[currentIndex])
-	target = plrtbl[currentIndex]
-	currentIndex = (currentIndex % #plrtbl) + 1
-	if target and target.Character and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid").Health > 0 then
-		esp(target)
-	end
+	local function switchPLUS()
+		if target and target.Character then
+	if target and target.Character and target.Character:FindFirstChild("lol3") then
+		target.Character:FindFirstChild("lol3"):Destroy()
+			end
+			if target and target.Character and target.Character:FindFirstChild("BillboardGui") and target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel") then
+				target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel"):Destroy()
+					end
+					if target and target.Character and target.Character:FindFirstChild("BillboardGui") then
+						target.Character:FindFirstChild("BillboardGui"):Destroy()
+							end
+							end
+							print(plrtbl[currentIndex])
+							target = plrtbl[currentIndex]
+							currentIndex = (currentIndex % #plrtbl) + 1
+							Target.Text = target.Name
+							if target and target.Character and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid").Health > 0 then
+								esp(target)
+								end
 end
 local function switchMINUS()
 	if target and target.Character then
-		if target.Character:FindFirstChild("lol3") then
-			target.Character:FindFirstChild("lol3"):Destroy()
-		end
-	end
-	print(plrtbl[currentIndex])
-	target = plrtbl[currentIndex]
-	currentIndex = (currentIndex % #plrtbl) - 1
-	if target and target.Character and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid").Health > 0 then
-		esp(target)
-	end
+	if target and target.Character and target.Character:FindFirstChild("lol3") then
+		target.Character:FindFirstChild("lol3"):Destroy()
+			end
+			if target and target.Character and target.Character:FindFirstChild("BillboardGui") and target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel") then
+				target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel"):Destroy()
+					end
+					if target and target.Character and target.Character:FindFirstChild("BillboardGui") then
+						target.Character:FindFirstChild("BillboardGui"):Destroy()
+							end
+							end
+							print(plrtbl[currentIndex])
+							target = plrtbl[currentIndex]
+							currentIndex = (currentIndex % #plrtbl) - 1
+							Target.Text = target.Name
+							if target and target.Character and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid").Health > 0 then
+								esp(target)
+								end
 end
+local shadow = Instance.new("Part")
+	shadow.Size = Vector3.new(1, 5, 5)
+	shadow.Shape = Enum.PartType.Cylinder
+	shadow.Anchored = true
+	shadow.CanCollide = false
+	shadow.Material = Enum.Material.SmoothPlastic
+	shadow.Color = Color3.fromRGB(255, 0, 0)
+	shadow.Transparency = 0.25
+	shadow.Name = "PlayerShadow"
+	shadow.Parent = workspace
+	local function getGroundY(position)
+		local origin = position + Vector3.new(0, 5, 0)
+		local direction = Vector3.new(0, -400, 0)
+		local raycastParams = RaycastParams.new()
+		raycastParams.FilterDescendantsInstances = {shadow, target.Character}
+		raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+
+		local result = workspace:Raycast(origin, direction, raycastParams)
+		if result then
+	return result.Position.Y
+	end
+	return nil
+end
+local function checkPlayerState(character)
+	if character and character:FindFirstChild("Humanoid") and character.Humanoid.Health > 0 then
+		if character.HumanoidRootPart.Position.Y < workspace.FallenPartsDestroyHeight then
+	return false
+	end
+	return true
+	end
+	return false
+end
+
+Pred.MouseButton1Up:Connect(function()
+	if predict then
+	predict = false
+	wait(.1)
+	if trajectoryFolder then
+	trajectoryFolder:Destroy()
+	trajectoryFolder = nil
+	end
+	Pred.TextColor3 = Color3.fromRGB(255, 0, 0)
+	Pred.BorderColor3 = Color3.fromRGB(255, 0, 0)
+	else
+	predict = true
+	Pred.TextColor3 = Color3.fromRGB(0, 255, 0)
+	Pred.BorderColor3 = Color3.fromRGB(0, 255, 0)
+	end
+end)
+Chams.MouseButton1Up:Connect(function()
+	if chams then
+	chams = false
+	if target and target.Character and target.Character:FindFirstChild("lol3") then
+		target.Character:FindFirstChild("lol3"):Destroy()
+			end
+			Chams.TextColor3 = Color3.fromRGB(255, 0, 0)
+			Chams.BorderColor3 = Color3.fromRGB(255, 0, 0)
+			else
+			chams = true
+			Chams.TextColor3 = Color3.fromRGB(0, 255, 0)
+			Chams.BorderColor3 = Color3.fromRGB(0, 255, 0)
+			end
+end)
+Mouse.MouseButton1Up:Connect(function()
+	if mousemode then
+	mousemode = false
+	Mouse.TextColor3 = Color3.fromRGB(255, 0, 0)
+	Mouse.BorderColor3 = Color3.fromRGB(255, 0, 0)
+	else
+	mousemode = true
+	closest = false
+	TargetClosests.TextColor3 = Color3.fromRGB(255, 0, 0)
+	TargetClosests.BorderColor3 = Color3.fromRGB(255, 0, 0)
+	Mouse.TextColor3 = Color3.fromRGB(0, 255, 0)
+	Mouse.BorderColor3 = Color3.fromRGB(0, 255, 0)
+	end
+end)
+Names.MouseButton1Up:Connect(function()
+	if names then
+	names = false
+	if target and target.Character and target.Character:FindFirstChild("BillboardGui") and target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel") then
+		target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel"):Destroy()
+			end
+			if target and target.Character and target.Character:FindFirstChild("BillboardGui") then
+				target.Character:FindFirstChild("BillboardGui"):Destroy()
+					end
+					Names.TextColor3 = Color3.fromRGB(255, 0, 0)
+					Names.BorderColor3 = Color3.fromRGB(255, 0, 0)
+					else
+					names = true
+					Names.TextColor3 = Color3.fromRGB(0, 255, 0)
+					Names.BorderColor3 = Color3.fromRGB(0, 255, 0)
+					end
+end)
+TargetClosests.MouseButton1Up:Connect(function()
+	if closest then
+	closest = false
+	TargetClosests.TextColor3 = Color3.fromRGB(255, 0, 0)
+	TargetClosests.BorderColor3 = Color3.fromRGB(255, 0, 0)
+	else
+	closest = true
+	TargetClosests.TextColor3 = Color3.fromRGB(0, 255, 0)
+	TargetClosests.BorderColor3 = Color3.fromRGB(0, 255, 0)
+	mousemode = false
+	Mouse.TextColor3 = Color3.fromRGB(255, 0, 0)
+	Mouse.BorderColor3 = Color3.fromRGB(255, 0, 0)
+	end
+end)
+Plus.MouseButton1Up:Connect(function()
+	mousemode = false
+	closest = false
+	if target and target.Character and target.Character:FindFirstChild("lol3") then
+		target.Character:FindFirstChild("lol3"):Destroy()
+			end
+			if target and target.Character and target.Character:FindFirstChild("BillboardGui") and target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel") then
+				target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel"):Destroy()
+					end
+					if target and target.Character and target.Character:FindFirstChild("BillboardGui") then
+						target.Character:FindFirstChild("BillboardGui"):Destroy()
+							end
+							Mouse.TextColor3 = Color3.fromRGB(255, 0, 0)
+							Mouse.BorderColor3 = Color3.fromRGB(255, 0, 0)
+							TargetClosests.TextColor3 = Color3.fromRGB(255, 0, 0)
+							TargetClosests.BorderColor3 = Color3.fromRGB(255, 0, 0)
+							wait()
+							switchPLUS()
+end)
+Minus.MouseButton1Up:Connect(function()
+	mousemode = false
+	closest = false
+	if target and target.Character and target.Character:FindFirstChild("lol3") then
+		target.Character:FindFirstChild("lol3"):Destroy()
+			end
+			if target and target.Character and target.Character:FindFirstChild("BillboardGui") and target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel") then
+				target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel"):Destroy()
+					end
+					if target and target.Character and target.Character:FindFirstChild("BillboardGui") then
+						target.Character:FindFirstChild("BillboardGui"):Destroy()
+							end
+							Mouse.TextColor3 = Color3.fromRGB(255, 0, 0)
+							Mouse.BorderColor3 = Color3.fromRGB(255, 0, 0)
+							TargetClosests.TextColor3 = Color3.fromRGB(255, 0, 0)
+							TargetClosests.BorderColor3 = Color3.fromRGB(255, 0, 0)
+							wait()
+							switchMINUS()
+end)
+Plus_2.MouseButton1Up:Connect(function()
+	steps += 5
+	Steps.Text = steps
+end)
+Minus_2.MouseButton1Up:Connect(function()
+	if steps > 5 then
+	steps -= 5
+	Steps.Text = steps
+	end
+end)
+Plus_3.MouseButton1Up:Connect(function()
+	interval += 0.01
+	Interval.Text = string.format("%.2f", interval)
+end)
+
+Minus_3.MouseButton1Up:Connect(function()
+	if interval > 0.01 then
+	interval -= 0.01
+	Interval.Text = string.format("%.2f", interval)
+		end
+end)
+m.Button2Down:Connect(function()
+	if mousemode and m.Hit then
+	for _, v in pairs(game.Players:GetPlayers()) do
+		if v ~= plr and v.Character and v.Character:FindFirstChild("Humanoid") and v.Character:FindFirstChild("Humanoid").Health > 0 and v.Character:FindFirstChild("HumanoidRootPart") and (v.Character:FindFirstChild("HumanoidRootPart").Position - m.Hit.Position).Magnitude < 25 then
+			target = v
+			Target.Text = target.Name
+			if v ~= target then
+	if target and target.Character and target.Character:FindFirstChild("lol3") then
+		target.Character:FindFirstChild("lol3"):Destroy()
+			end
+			if target and target.Character and target.Character:FindFirstChild("BillboardGui") and target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel") then
+				target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel"):Destroy()
+					end
+					if target and target.Character and target.Character:FindFirstChild("BillboardGui") then
+						target.Character:FindFirstChild("BillboardGui"):Destroy()
+							end
+							end
+							end
+							end
+							end
+end)
+spawn(function()
+	while true do
+		for i = 255, 0, -2.5 do game.CoreGui.ScreenGui.Frame.BorderColor3 = Color3.fromRGB(i, 0, 0) wait() end
+		wait(1)
+		for i = 0, 255, 2.5 do game.CoreGui.ScreenGui.Frame.BorderColor3 = Color3.fromRGB(i, 0, 0) wait() end
+		wait(1)
+		end
+	end)
 spawn(function()
 	while true do
 		update()
-		wait(60)
-	end
-end)
+		wait(1)
+		end
+	end)
 spawn(function()
 	while true do
-		if tp == true and target ~= nil and target.Character then
-			if target.Character:FindFirstChild("lol3") ~= nil then
-				if plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character:FindFirstChild("Humanoid") and plr.Character:FindFirstChild("Humanoid").Health > 0 and target and target.Character and target.Character:FindFirstChild("HumanoidRootPart") then
-					plr.Character.HumanoidRootPart.CFrame = target.Character.HumanoidRootPart.CFrame * CFrame.new(a, b, c)
-				end
-			else
-				esp(target)
+		if closest then
+	local distance = math.huge
+	for _, v in pairs(game.Players:GetPlayers()) do
+		if v ~= plr and v.Character and v.Character:FindFirstChild("Humanoid") and v.Character:FindFirstChild("Humanoid").Health > 0 and v.Character:FindFirstChild("HumanoidRootPart") and plr.Character and plr.Character:FindFirstChild("Humanoid") and plr.Character:FindFirstChild("Humanoid").Health > 0 and plr.Character:FindFirstChild("HumanoidRootPart") and (plr.Character:FindFirstChild("HumanoidRootPart").Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude < distance then
+			target = v
+			distance = (plr.Character:FindFirstChild("HumanoidRootPart").Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude
+				Target.Text = target.Name
+				if v ~= target then
+	if target and target.Character and target.Character:FindFirstChild("lol3") then
+		target.Character:FindFirstChild("lol3"):Destroy()
 			end
-		end
-		game:GetService("RunService").Heartbeat:Wait()
-	end
+			if target and target.Character and target.Character:FindFirstChild("BillboardGui") and target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel") then
+				target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel"):Destroy()
+					end
+					if target and target.Character and target.Character:FindFirstChild("BillboardGui") then
+						target.Character:FindFirstChild("BillboardGui"):Destroy()
+							end
+							end
+							end
+							end
+							esp(target)
+							end
+							if target ~= nil and target.Character then
+	if target.Character:FindFirstChild("lol3") ~= nil then
+		if target and target.Character and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("Humanoid").Health > 0 then
+			local move = nil
+			for _, n in pairs(target.Character:GetChildren()) do
+				if n.ClassName == "Tool"then
+				move = n.Name
+				end
+				end
+				if move then
+	local bool = false
+	for _, v in pairs(blockablemoves) do
+		if move == v then
+	if target.Character:FindFirstChild("lol3") and target.Character and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("BillboardGui") and target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel") then
+		target.Character:FindFirstChild("lol3").OutlineColor = Color3.fromRGB(0, 255, 0)
+			target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").Text = v
+				target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").TextColor3 = Color3.fromRGB(0, 255, 0)
+					bool = true
+					end
+					end
+					end
+					if bool == false and target.Character:FindFirstChild("lol3") and target.Character and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("BillboardGui") and target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel") then
+						target.Character:FindFirstChild("lol3").OutlineColor = Color3.fromRGB(255, 0, 0)
+							target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").Text = move
+								target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").TextColor3 = Color3.fromRGB(255, 0, 0)
+									end
+									else
+									if target.Character:FindFirstChild("lol3") and target.Character and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("BillboardGui") and target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel") then
+										target.Character:FindFirstChild("lol3").OutlineColor = Color3.fromRGB(0, 0, 0)
+											target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").Text = ""
+												target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").TextColor3 = Color3.fromRGB(0, 0, 0)
+													end
+													end
+													end
+													else
+													esp(target)
+													end
+													end
+													wait()
+													end
 end)
-UIS.InputEnded:Connect(function(i)
-	if i.KeyCode == Enum.KeyCode.F1 then
-		if tp == false then
-			tp = true
-		else
-			tp = false
-		end
+
+RunService.RenderStepped:Connect(function()
+	local character = target.Character
+	if checkPlayerState(character) then
+	local pos = character.HumanoidRootPart.Position
+	local groundY = getGroundY(pos)
+	if groundY and chams then
+	local shadowPos = Vector3.new(pos.X, groundY + 0.025, pos.Z)
+	shadow.CFrame = CFrame.new(shadowPos) * CFrame.Angles(0, 0, math.rad(90))
+	shadow.Transparency = 0.25
+	else
+	shadow.Transparency = 1
 	end
-	if i.KeyCode == Enum.KeyCode.PageDown then
-		switchMINUS()
-	end
-	if i.KeyCode == Enum.KeyCode.PageUp then
-		switchPLUS()
-	end
-	if i.KeyCode == Enum.KeyCode.F4 then
-		tp = false
-		plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame + Vector3.new(0, 300, 0)
-	end
-	if i.KeyCode == Enum.KeyCode.F5 then
-		if flinging then
-			a = 0
-			b = 0
-			c = 1.75
-			unfling()
-			plr.Character.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame + Vector3.new(0, 300, 0)
-			plr.Character.HumanoidRootPart.Anchored = true
-			wait(6)
-			plr.Character.HumanoidRootPart.Anchored = false
-		else
-			a = 1
-			b = 1
-			c = 1
-			fling()
-		end
+	else
+	shadow.Transparency = 1
 	end
 end)
 
-----------------------------------------------------------------
-local UIS = game:GetService("UserInputService")
-local tp = false
-local target = nil
-local plrtbl = {}
-local plr = game.Players.LocalPlayer
-local currentIndex = 1
-local blockablemoves = {"Light Kick", "Guzan", "Jewels Of Light", "Fire Fist", "Fire Gun", "Pillar", "Beam", "Major eruption", "Meteor Volcano", "Pressure Cannon", "Sumo Thrust Barrage", "Fullbright", "Fujiazami", "Phoenix Inferno", "Bluebird", "Cupid's Arrows", "Blossom Wind", "Island Shake", "Launch", "Planetary Devastation", "Dragon Breath", "Tatsumaki", "Jet Gatling", "Ice Hail", "Absolute Zero", "Hound Blaze", "Magma Rain", "Scorching Fist", "Supernova", "Piercing Shine", "Photon Storm", "Heavenly Descent", "Chloro Frenzy", "Venom Road", "Poison Geyser", "Grilled Dough", "Lotus Dough Combo", "Anemone", "Lightning Palm", "Claw Barrage", "Wreckage", "Hurricane Shock", "Neo Red Hawk", "Roc Gatling", "Dawn Rocket", "Mole Pistol Combo", "Inferno Breath", "Enthral Grasp", "Zeus Meadow", "Crimson Pillar", "Anti Quake", "Black Hole Path", "Primal Rage", "Arctic Breath", "Hallowed Cuts"}
-local function esp(targ)
-	local ch = Instance.new("Highlight")
-	ch.OutlineColor = Color3.fromRGB(0, 0, 0)
-	ch.FillColor = Color3.fromRGB(0, 0, 0)
-	ch.OutlineTransparency = 0
-	ch.FillTransparency = 1
-	ch.Name = "lol3"
-	ch.Enabled = true
-	ch.Adornee = targ.Character
-	ch.Parent = targ.Character
-	local bil = Instance.new("BillboardGui")
-	bil.ExtentsOffsetWorldSpace = Vector3.new(0, 15, 0)
-	bil.Parent = targ.Character:FindFirstChild("HumanoidRootPart")
-	local text = Instance.new("TextLabel")
-	text.BackgroundTransparency = 1
-	text.Text = ""
-	text.Parent = bil
-end
-local function update()
-	table.clear(plrtbl)
-	for _, v in pairs(game.Players:GetPlayers()) do
-		if v and v ~= plr then
-			table.insert(plrtbl, v)
-		end
-	end
-end
-local function switchPLUS()
-	if target and target.Character then
-		if target.Character:FindFirstChild("lol3") then
-			target.Character:FindFirstChild("lol3"):Destroy()
-		end
-	end
-	print(plrtbl[currentIndex])
-	target = plrtbl[currentIndex]
-	currentIndex = (currentIndex % #plrtbl) + 1
-	if target and target.Character and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid").Health > 0 then
-		esp(target)
-	end
-end
-local function switchMINUS()
-	if target and target.Character then
-		if target.Character:FindFirstChild("lol3") then
-			target.Character:FindFirstChild("lol3"):Destroy()
-		end
-	end
-	print(plrtbl[currentIndex])
-	target = plrtbl[currentIndex]
-	currentIndex = (currentIndex % #plrtbl) - 1
-	if target and target.Character and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid").Health > 0 then
-		esp(target)
-	end
-end
+
 spawn(function()
-	while true do
-		update()
-		wait(60)
-	end
-end)
-spawn(function()
-	while true do
-		if target ~= nil and target.Character then
-			if target.Character:FindFirstChild("lol3") ~= nil then
-				if target and target.Character and target.Character:FindFirstChild("HumanoidRootPart") and target.Character:FindFirstChild("Humanoid") and target.Character:FindFirstChild("Humanoid").Health > 0 then
-					local move = nil
-					for _, n in pairs(target.Character:GetChildren()) do
-						if n.ClassName == "Tool"then
-							move = n.Name
-						end
-					end
-					if move then
-						for _, v in pairs(blockablemoves) do
-							if move == v then
-								if target.Character:FindFirstChild("lol3") ~= nil then
-									target.Character:FindFirstChild("lol3").OutlineColor = Color3.fromRGB(0, 255, 0)
-									target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").Text = v
-									target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").TextColor3 = Color3.fromRGB(0, 255, 0)
-								end
-							else
-								if target.Character:FindFirstChild("lol3") ~= nil then
-									target.Character:FindFirstChild("lol3").OutlineColor = Color3.fromRGB(255, 0, 0)
-									target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").Text = v
-									target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").TextColor3 = Color3.fromRGB(255, 0, 0)
-								end
-							end
-						end
-					else
-						if target.Character:FindFirstChild("lol3") and target.Character:FindFirstChild("BillboardGui") and target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel") then
-							target.Character:FindFirstChild("lol3").OutlineColor = Color3.fromRGB(0, 0, 0)
-							target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").Text = ""
-							target.Character:FindFirstChild("BillboardGui"):FindFirstChild("TextLabel").TextColor3 = Color3.fromRGB(0, 0, 0)
-						end
-					end
-				end
-			else
-				esp(target)
-			end
-		end
-		wait()
-	end
+	game:GetService("RunService").Heartbeat:Connect(function()
+		checkRagdollState()
+		end)
 end)
 UIS.InputEnded:Connect(function(i)
-	if i.KeyCode == Enum.KeyCode.PageDown then
-		switchMINUS()
+	if i.KeyCode == Enum.KeyCode.Minus then
+	game.CoreGui.ScreenGui.Frame.Visible = false
 	end
-	if i.KeyCode == Enum.KeyCode.PageUp then
-		switchPLUS()
+	if i.KeyCode == Enum.KeyCode.Equals then
+	game.CoreGui.ScreenGui.Frame.Visible = true
+	end
+end)
+local UIS = game:GetService('UserInputService')
+local frame = Frame
+local dragToggle = nil
+local dragSpeed = 0.25
+local dragStart = nil
+local startPos = nil
+
+local function updateInput(input)
+	local delta = input.Position - dragStart
+	local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+		startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+end
+
+frame.InputBegan:Connect(function(input)
+	if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+	dragToggle = true
+	dragStart = input.Position
+	startPos = frame.Position
+	input.Changed:Connect(function()
+		if input.UserInputState == Enum.UserInputState.End then
+	dragToggle = false
+	end
+	end)
+	end
+	end)
+
+	UIS.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+	if dragToggle then
+	updateInput(input)
+	end
 	end
 end)
